@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Phone, Search, Menu } from "lucide-react";
 import SideBar from "./side_bar";
-// import logo from "./rechi_logo.png";
+import rechiLogo from "../assets/rechi_logo.png";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,24 +10,15 @@ export default function Navbar() {
     <>
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 h-16 sm:h-20 border-b border-gray-200 bg-white">
-        <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6 md:px-10 lg:px-12">
+        <div className="mx-auto flex h-full max-w-[1440px] items-corner justify-between px-4 sm:px-6 md:px-10 lg:px-12">
 
           {/* Brand */}
           <a href="/" className="flex items-center gap-0 min-w-0">
-            
-            {/* Logo - bigger + stronger crop */}
-            <div className="h-12 sm:h-14 md:h-16 overflow-hidden shrink-0">
-              <img
-                src={logo}
-                alt="Rechi Logo"
-                className="h-full w-auto object-contain object-left"
-                style={{ 
-                  transform: "scale(1.35)",           // bigger logo
-                  transformOrigin: "left center",
-                  marginRight: "-28px"                // stronger right crop
-                }}
-              />
-            </div>
+            <img
+              src={rechiLogo}
+              alt="Rechi Construction Logo"
+              className="h-10 w-10 object-contain sm:h-12 sm:w-12 md:h-14 md:w-14"
+            />
 
             {/* Company Name */}
             <div className="leading-none min-w-0 -ml-1">

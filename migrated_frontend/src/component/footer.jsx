@@ -90,16 +90,8 @@ function ContactItem({ icon: Icon, title, children }) {
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden text-white">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${footerBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+      {/* Background Decorative Layer */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_top_left,_rgba(250,204,21,0.12),_transparent_45%)]" />
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/70 z-0" />

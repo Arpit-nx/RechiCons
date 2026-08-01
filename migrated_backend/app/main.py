@@ -7,6 +7,13 @@ from app.api.v1.enquiries import router as enquiries_router
 from app.api.v1.media import router as media_router
 from app.api.v1.projects import router as projects_router
 from app.api.v1.services import router as services_router
+from app.api.v1.project_asset import router as project_assets_router
+
+from app.api.v1.public.projects import router as public_projects_router
+from app.api.v1.public.company import router as public_company_router
+from app.api.v1.public.categories import router as public_categories_router
+from app.api.v1.public.services import router as public_services_router
+from app.api.v1.public.enquiries import router as public_enquiries_router
 from contextlib import asynccontextmanager
 from app.db.init_db import init_db
 
@@ -30,6 +37,21 @@ app.include_router(enquiries_router, prefix="/api/v1")
 app.include_router(media_router, prefix="/api/v1")
 app.include_router(projects_router, prefix="/api/v1")
 app.include_router(services_router, prefix="/api/v1")
+app.include_router(project_assets_router, prefix="/api/v1")
+
+app.include_router(public_projects_router, prefix="/api/v1")
+app.include_router(public_company_router, prefix="/api/v1")
+app.include_router(public_categories_router, prefix="/api/v1")
+app.include_router(public_services_router, prefix="/api/v1")
+app.include_router(public_enquiries_router, prefix="/api/v1")
+
+from fastapi.staticfiles import StaticFiles
+
+app.mount(
+    "/uploads",
+    StaticFiles(directory="app/uploads"),
+    name="uploads",
+)
 
 @app.get("/health")
 def health_check():

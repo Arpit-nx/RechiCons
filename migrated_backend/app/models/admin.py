@@ -3,7 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
 
-
+#Admin DTO for legacy admin_login table
 class Admin(Base):
     """
     SQLAlchemy model for the legacy `admin_login` table.

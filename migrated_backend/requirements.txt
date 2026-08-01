@@ -21,3 +21,5 @@ FastAPI-Mail
 PyMySQL
 
 python-jose[cryptography]
+
+python-slugify

@@ -7,7 +7,7 @@ from app.db.base import Base
 
 from enum import Enum as PyEnum
 
-
+#User Base DTO for users table
 class UserRole(str, PyEnum):
     ADMIN = "admin"
     EDITOR = "editor"

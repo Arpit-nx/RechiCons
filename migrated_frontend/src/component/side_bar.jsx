@@ -17,20 +17,7 @@ const menuItems = [
   },
   {
     title: "Project",
-    children: [
-      {
-        title: "Completed Project",
-        link: "/projects/completed",
-      },
-      {
-        title: "Ongoing Project",
-        link: "/projects/ongoing",
-      },
-      {
-        title: "Upcoming Project",
-        link: "/projects/upcoming",
-      },
-    ],
+    link: "/project",
   },
   {
     title: "Other Services",
@@ -44,6 +31,10 @@ const menuItems = [
     title: "Contact Us",
     link: "/contact",
   },
+  {
+    title: "Admin login",
+    link: "/admin/login",
+  }
 ];
 
 export default function SideBar({
@@ -105,7 +96,7 @@ export default function SideBar({
         aria-modal="true"
         aria-label="Main navigation"
         className={`fixed right-0 top-0 z-50 h-screen
-        w-full max-w-[670px]
+        w-full max-w-[240px]
         overflow-hidden
         border-l border-white/10
         bg-[rgba(18,18,18,0.55)]

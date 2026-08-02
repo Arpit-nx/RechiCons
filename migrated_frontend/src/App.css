@@ -4,21 +4,296 @@
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #111827;
-  background-color: #ffffff;
+  color: #4f2b12;
+  background-color: #f7f6ee;
+  --text-black: #0b0a08;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --accent: #9a5b1a;
+  --accent-strong: #7a3d10;
+  --accent-soft: #f4e1c5;
+  --surface: #fff8ef;
+  --text: #4f2b12;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #ffffff;
+  /* Smooth blend: dark top -> warm golden-brown bottom with radial halo */
+  background-image:
+    linear-gradient(to bottom, rgba(45,30,18,0.86) 0%, rgba(80,48,28,0.78) 12%, rgba(120,65,28,0.70) 28%, rgba(160,90,36,0.60) 50%, rgba(200,110,48,0.50) 72%, #9a5b1a 100%),
+    radial-gradient(820px 420px at 50% 18%, rgba(250,200,100,0.98), rgba(250,200,100,0.56) 14%, rgba(0,0,0,0) 40%);
+  background-color: #2a1507;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  color: var(--text-black);
 }
 
 #root {
   min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Premium visual refinements */
+.font-display {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+:root {
+  --radius: 16px;
+  --soft-shadow: 0 18px 40px rgba(11,12,14,0.28);
+  --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+/* Golden-brown premium palette */
+:root {
+  --bg-900: #0b0a08; /* very dark brown/near-black */
+  --bg-800: #1a120b; /* deep brown */
+  --gold-600: #b8862b;
+  --gold-500: #d3ad64;
+  --gold-300: #ffd28b;
+  --sand-50: #f6efe6;
+  --text-900: #efe7dd;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.6rem 1.4rem;
+  font-weight: 700;
+  color: #0b0a08; /* ensure button text is visible (black) by default */
+  background: linear-gradient(90deg, var(--accent-strong), var(--accent));
+  box-shadow: 0 10px 30px rgba(122,61,16,0.18), inset 0 -2px 0 rgba(255,255,255,0.02);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 45px rgba(122,61,16,0.22);
+}
+
+.card-elevated {
+  background: var(--glass-bg);
+  border: none;
+  border-radius: var(--radius);
+  padding: 1rem;
+  backdrop-filter: blur(6px) saturate(120%);
+  box-shadow: var(--soft-shadow);
+  transition: transform 0.32s cubic-bezier(.2,.9,.2,1), box-shadow 0.32s;
+}
+.card-elevated:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(11,12,14,0.32);
+}
+
+/* Premium spacing and heading rhythm */
+h1, h2, h3, h4 {
+  letter-spacing: 0.005em;
+  margin-top: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+body {
+  line-height: 1.7;
+}
+
+/* Page background: soft cream with a subtle warm vignette (uses user's requested pale tone) */
+body {
+  background: linear-gradient(180deg, #fbf9ef 0%, #f6f2e6 35%, #efe8d6 100%);
+  color: var(--text-black);
+}
+
+/* Shimmer micro-interaction for primary buttons */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--radius) / 2);
+  box-shadow: 0 10px 30px rgba(42,28,15,0.18);
+  border: none;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -35%;
+  width: 70%;
+  height: 240%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.02) 100%);
+  transform: rotate(25deg) translateX(-120%);
+  transition: transform 0.9s cubic-bezier(.2,.9,.2,1);
+}
+.btn-primary:hover::after {
+  transform: rotate(25deg) translateX(120%);
+}
+
+/* Gold-themed primary button */
+.btn-primary {
+  background: linear-gradient(90deg, rgba(211,173,100,0.06), rgba(211,173,100,0.02));
+  color: #0b0a08; /* keep default text dark for visibility */
+  border: 1px solid rgba(211,173,100,0.12);
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+}
+.btn-primary:hover {
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-600));
+  color: #0b0a08;
+  transform: translateY(-2px);
+}
+
+/* Force button text to remain dark even if other rules override */
+.btn-primary, .btn-primary * {
+  color: #0b0a08 !important;
+}
+
+/* Timeline / milestone tag: gold → brown gradient with black text for contrast */
+.timeline-tag {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--gold-500), var(--accent-strong));
+  color: #0b0a08;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(11,12,14,0.18);
+}
+
+/* Full milestone / timeline card style: golden → brown gradient with black text */
+.timeline-card {
+  /* professional two-stop gradient: warm cream -> warm taupe */
+  background: linear-gradient(180deg, #fbf7ec 0%, #e7d9c0 100%);
+  color: #0b0a08;
+  border: 1px solid rgba(11,12,14,0.06);
+  box-shadow: 0 14px 34px rgba(11,12,14,0.08);
+}
+.timeline-card h3, .timeline-card p, .timeline-card span {
+  color: #0b0a08;
+}
+
+/* Cursor torch: circular radial light that follows the cursor */
+#cursor-torch {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.04s linear;
+  background: radial-gradient(circle at center, rgba(255,250,220,0.95) 0%, rgba(255,235,160,0.42) 28%, rgba(200,125,45,0.18) 52%, rgba(0,0,0,0) 72%);
+  mix-blend-mode: lighten;
+  filter: blur(6px) saturate(1.05);
+  will-change: transform;
+}
+
+/* Reduce torch size on small screens */
+@media (max-width: 640px) {
+  #cursor-torch {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* Slightly smaller, brighter torch when hovering interactive elements */
+button:hover ~ #cursor-torch,
+a:hover ~ #cursor-torch,
+.btn-primary:hover ~ #cursor-torch {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle at center, rgba(255,255,230,0.98) 0%, rgba(255,235,160,0.45) 30%, rgba(200,125,45,0.22) 55%, rgba(0,0,0,0) 72%);
+}
+
+/* Slightly larger hero quote card for presence */
+.hero-quote {
+  min-width: 20rem;
+  border-radius: calc(var(--radius) - 4px);
+  border: none;
+}
+
+/* Ensure the hero quote tagline is pure white and legible */
+/* Make hero quote light so black text reads on golden background */
+.hero-quote {
+  background: rgba(255,245,230,0.14);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+}
+.hero-quote .font-display {
+  color: var(--gold-500) !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.hero-quote p + p {
+  color: rgba(0,0,0,0.7) !important;
+}
+
+/* Section headings in gold for premium look */
+.font-display {
+  color: var(--text-black);
+}
+
+/* Stats band: warm cards */
+.stats-card {
+  background: rgba(20,12,8,0.46) !important;
+}
+
+/* Hide helper geometric floating shapes if present */
+.floating-shape, .floating-shapes, .FloatingShapes {
+  display: none !important;
+}
+
+/* Make section cards and grids feel softer */
+.section-card, .grid-card, .feature-card {
+  border-radius: calc(var(--radius) - 6px);
+  box-shadow: 0 14px 34px rgba(11,12,14,0.16);
+  border: none;
+}
+
+/* Pillar cards (Mission / Vision / Core Values) — equal height */
+.pillar-card {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Slightly darker pillar cards for better contrast on golden background */
+.card-elevated.pillar-card {
+  background: linear-gradient(180deg, rgba(20,12,8,0.36), rgba(20,12,8,0.28));
+  border: 1px solid rgba(0,0,0,0.18);
+  box-shadow: 0 22px 48px rgba(0,0,0,0.28);
+}
+
+/* Hover-brighten utility for interactive areas */
+.hover-bright {
+  transition: filter 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+}
+.hover-bright:hover {
+  filter: brightness(1.12) saturate(1.06);
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgba(0,0,0,0.16);
+}
+
+/* Apply hover-brighten to common interactive elements */
+.card-elevated, .btn-primary, .feature-card, .group, .stats-card {
+  will-change: transform, filter;
+}
+.card-elevated:hover, .btn-primary:hover, .feature-card:hover, .group:hover {
+  filter: brightness(1.08);
 }

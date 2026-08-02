@@ -27,10 +27,7 @@ const menuItems = [
     title: "Enquiry",
     link: "/enquire",
   },
-  {
-    title: "Contact Us",
-    link: "/contact",
-  },
+  
   {
     title: "Admin login",
     link: "/admin/login",

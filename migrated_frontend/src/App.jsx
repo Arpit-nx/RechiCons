@@ -3,22 +3,27 @@ import SideBar from "./component/side_bar.jsx";   // already used inside Navbar,
 import Footer from "./component/footer.jsx";
 import Home from "./pages/home.jsx";
 import About from "./pages/about.jsx";
-import CursorTorch from "./component/CursorTorch";
+import { Contact } from "lucide-react";
+// import CursorTorch from "./component/CursorTorch";
+import { useCallback, useState } from "react";
 
 function App() {
+  const [showChrome, setShowChrome] = useState(false);
+  const handleSplashEnd = useCallback(() => {
+    setShowChrome(true);
+  }, []);
+
   return (
     <>
       {/* Navbar (includes SideBar inside it) */}
-      <Navbar />
+      <Navbar isVisible={showChrome} />
 
-      {/* Cursor torch effect */}
-      <CursorTorch />
 
       {/* ===== Main Content Area ===== */}
       <main className="min-h-screen">
         {/* Put your page content here */}
         {/* <Home/> */}
-        <About/>
+        <Home onSplashEnd={handleSplashEnd} />
       </main>
 
       {/* Footer */}

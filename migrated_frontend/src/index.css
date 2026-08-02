@@ -10,6 +10,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --accent: #9a5b1a;
+  --accent-strong: #7a3d10;
+  --accent-soft: #f4e1c5;
+  --surface: #fff8ef;
+  --text: #4f2b12;
 }
 
 body {
@@ -21,4 +26,15 @@ body {
 
 #root {
   min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }

@@ -20,10 +20,10 @@ import {
   Wrench,
 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { projects } from '../data/projects'
-import { services } from '../data/services'
-import { about, company, contact, strengths } from '../data/site'
-import { img } from '../lib/images'
+import { projects } from './data/projects'
+import { services } from './data/services'
+import { about, company, contact, strengths } from './data/site'
+import { img } from './lib/images'
 
 const ease = [0.16, 1, 0.3, 1]
 
@@ -31,24 +31,6 @@ const completedCount = projects.filter((p) => p.category === 'completed').length
 const ongoingCount = projects.filter((p) => p.category === 'ongoing').length
 const upcomingCount = projects.filter((p) => p.category === 'upcoming').length
 const yearsActive = new Date().getFullYear() - Number(company.founded)
-
-/* ---------------------------------- decor --------------------------------- */
-
-function FloatingShapes({ variant = 'dark' }) {
-  const ring = variant === 'dark' ? 'border-gold-400/25' : 'border-gold-600/20'
-  const glow = variant === 'dark' ? 'bg-gold-400/10' : 'bg-gold-500/10'
-  const dot = variant === 'dark' ? 'bg-gold-300/50' : 'bg-gold-600/40'
-
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className={`absolute -top-24 -right-16 h-72 w-72 rounded-full border ${ring} animate-spin-slow`} />
-      <div className={`absolute top-1/3 -left-24 h-64 w-64 rounded-full ${glow} blur-3xl animate-float-slower`} />
-      <div className={`absolute bottom-10 right-[18%] h-24 w-24 rotate-45 border ${ring} animate-float-slow`} />
-      <div className={`absolute top-20 left-[22%] h-2.5 w-2.5 rounded-full ${dot} animate-float-slow`} />
-      <div className={`absolute bottom-1/4 left-[10%] h-16 w-16 rounded-full border ${ring} animate-float-slower`} />
-    </div>
-  )
-}
 
 /* -------------------------------- headings -------------------------------- */
 
@@ -127,13 +109,12 @@ function WelcomeHero() {
   const aboutImg = img('site/about.jpg')
 
   return (
-    <section className="relative overflow-hidden bg-ink-950 pb-32 pt-28 sm:pb-40 sm:pt-36">
+    <section className="relative overflow-hidden pb-32 pt-28 sm:pb-40 sm:pt-36">
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_-10%,rgba(211,173,100,0.18),transparent),radial-gradient(ellipse_60%_50%_at_100%_10%,rgba(211,173,100,0.10),transparent)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_80%60%_at_20%-10%,rgba(211,173,100,0.14),transparent),radial-gradient(ellipse_60%_50%_at_100%_10%,rgba(211,173,100,0.08),transparent)]"
       />
-      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(10,11,13,0.9))]" />
-      <FloatingShapes variant="dark" />
+      {/* removed dark overlay to prevent covering lower sections */}
 
       <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <div>
@@ -152,7 +133,7 @@ function WelcomeHero() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="text-balance mt-6 font-display text-4xl font-medium leading-[1.08] text-sand-50 sm:text-5xl lg:text-6xl"
+            className="text-balance mt-6 font-display text-4xl font-medium leading-[1.08] text-ink-950 sm:text-5xl lg:text-6xl"
           >
             Welcome to Rechi Construction
           </motion.h1>
@@ -162,7 +143,7 @@ function WelcomeHero() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="mt-6 max-w-xl text-base leading-relaxed text-sand-200/75 sm:text-lg"
+            className="mt-6 max-w-xl text-base leading-relaxed text-ink-700 sm:text-lg"
           >
             {about.intro}
           </motion.p>
@@ -172,7 +153,7 @@ function WelcomeHero() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="mt-4 max-w-xl text-sm leading-relaxed text-sand-200/60"
+            className="mt-4 max-w-xl text-sm leading-relaxed text-ink-600"
           >
             {about.extended}
           </motion.p>
@@ -186,11 +167,12 @@ function WelcomeHero() {
           >
             <a
               href={`mailto:${contact.emailPrimary}`}
-              className="group inline-flex items-center gap-2 rounded-full bg-gold-400 px-6 py-3 text-sm font-semibold text-ink-950 transition-all duration-300 hover:bg-gold-300 hover:shadow-[0_10px_30px_-8px_rgba(211,173,100,0.6)]"
+              className="btn-primary"
             >
               Enquire About a Project
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300" />
             </a>
+
             <div className="flex items-center gap-2 text-sm text-sand-200/70">
               <ShieldCheck className="h-4 w-4 text-gold-400" strokeWidth={1.75} />
               Govt.-Authorised Contractor
@@ -204,26 +186,30 @@ function WelcomeHero() {
           transition={{ duration: 1.1, ease, delay: 0.3 }}
           className="relative"
         >
-          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)]">
-            <img
-              src={aboutImg}
-              alt="A Rechi Construction residential development in Kolkata"
-              className="h-[420px] w-full object-cover sm:h-[480px]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-950/50 via-transparent to-transparent" />
-          </div>
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-white/8 shadow-[0_28px_60px_-20px_rgba(0,0,0,0.08)]">
+                <img
+                  src={aboutImg}
+                  alt="A Rechi Construction residential development in Kolkata"
+                  className="h-105 w-full object-cover sm:h-120"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-transparent via-transparent to-transparent" />
+              </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.9, ease }}
-            className="absolute -bottom-8 -left-6 w-64 rounded-2xl border border-white/10 bg-ink-900/80 p-5 shadow-2xl backdrop-blur-xl sm:-left-10"
-          >
-            <p className="font-display text-lg italic leading-snug text-sand-50">&ldquo;{company.tagline}&rdquo;</p>
-            <p className="mt-2 text-xs uppercase tracking-wider text-gold-300/80">
-              &mdash; {company.director}, Director
-            </p>
-          </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.9, ease }}
+                className="absolute z-30 -bottom-12 left-6 w-80 hero-quote rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl sm:left-10"
+                style={{ textShadow: '0 1px 2px rgba(0,0,0,0.06)' }}
+              >
+                <p className="font-display text-lg font-semibold leading-snug text-ink-950">“{company.tagline}”</p>
+                <p className="mt-2 text-xs uppercase tracking-wider text-ink-700 font-medium">
+                  — {company.director}, Director
+                </p>
+              </motion.div>
+            </div>
+
         </motion.div>
       </div>
     </section>
@@ -234,9 +220,9 @@ function WelcomeHero() {
 
 const stats = [
   { icon: CalendarCheck, value: yearsActive, suffix: '+', label: 'Years of Trust', sub: `Since ${company.founded}` },
-  { icon: Building2, value: completedCount, suffix: '', label: 'Completed Developments', sub: 'Delivered across Kolkata' },
-  { icon: HardHat, value: ongoingCount + upcomingCount, suffix: '', label: 'In the Pipeline', sub: 'Ongoing & upcoming' },
-  { icon: Wrench, value: services.length, suffix: '', label: 'End-to-End Services', sub: 'From land to handover' },
+  { icon: Building2, value: 7, suffix: '', label: 'Completed Developments', sub: 'Delivered across Kolkata' },
+  { icon: HardHat, value: 2, suffix: '', label: 'Ongoing Sites', sub: 'Active construction sites' },
+  { icon: PencilRuler, value: 4, suffix: '', label: 'Upcoming Projects', sub: 'Planned developments' },
 ]
 
 function StatsBand() {
@@ -287,7 +273,7 @@ const pillarVariants = {
 
 function MissionVisionValues() {
   return (
-    <section className="relative bg-sand-50 py-24 sm:py-32">
+    <section className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Our Foundation"
@@ -298,14 +284,14 @@ function MissionVisionValues() {
           className="mx-auto"
         />
 
-        <div className="relative mt-16 grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-0">
+        <div className="relative mt-16 grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-0 items-stretch">
           <div
             aria-hidden="true"
-            className="absolute inset-y-0 left-1/3 hidden w-px bg-gradient-to-b from-transparent via-sand-300 to-transparent lg:block"
+            className="absolute inset-y-0 left-1/3 hidden w-px bg-linear-to-b from-transparent via-sand-300 to-transparent lg:block"
           />
           <div
             aria-hidden="true"
-            className="absolute inset-y-0 left-2/3 hidden w-px bg-gradient-to-b from-transparent via-sand-300 to-transparent lg:block"
+            className="absolute inset-y-0 left-2/3 hidden w-px bg-linear-to-b from-transparent via-sand-300 to-transparent lg:block"
           />
 
           {pillars.map(({ index, icon: Icon, title, text }, i) => (
@@ -316,16 +302,18 @@ function MissionVisionValues() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: '-80px' }}
-              className="group px-4 lg:px-10"
+              className="group px-4 lg:px-10 h-full"
             >
-              <div className="flex items-center gap-3">
-                <span className="font-display text-sm text-gold-600/70">{index}</span>
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gold-500/10 text-gold-600 transition-colors duration-500 group-hover:bg-gold-500 group-hover:text-white">
-                  <Icon className="h-5 w-5" strokeWidth={1.75} />
-                </span>
+              <div className="card-elevated pillar-card p-6">
+                <div className="flex items-center gap-3">
+                  <span className="font-display text-sm text-gold-600/70">{index}</span>
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gold-500/10 text-gold-600 transition-colors duration-500 group-hover:bg-gold-500 group-hover:text-white">
+                    <Icon className="h-5 w-5" strokeWidth={1.75} />
+                  </span>
+                </div>
+                <h3 className="mt-6 font-display text-2xl font-medium text-ink-950 sm:text-3xl">{title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-ink-600 sm:text-base">{text}</p>
               </div>
-              <h3 className="mt-6 font-display text-2xl font-medium text-ink-950 sm:text-3xl">{title}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-ink-600 sm:text-base">{text}</p>
             </motion.article>
           ))}
         </div>
@@ -341,7 +329,6 @@ const strengthIcons = [Users, Layers, BadgeCheck, Clock4, PencilRuler, Smile]
 function StrengthsGrid() {
   return (
     <section className="relative overflow-hidden bg-ink-950 py-24 sm:py-32">
-      <FloatingShapes variant="dark" />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Why Rechi"
@@ -362,7 +349,7 @@ function StrengthsGrid() {
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.8, delay: (i % 3) * 0.1, ease }}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-sm transition-all duration-500 hover:border-gold-400/40 hover:bg-white/[0.06]"
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/3 p-7 backdrop-blur-sm transition-all duration-500 hover:border-gold-400/40 hover:bg-white/6"
               >
                 <Icon
                   className="h-6 w-6 text-gold-400 transition-transform duration-500 group-hover:-rotate-3 group-hover:scale-110"
@@ -370,7 +357,7 @@ function StrengthsGrid() {
                 />
                 <h3 className="mt-5 font-display text-lg font-medium text-sand-50">{strength.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-sand-200/65">{strength.description}</p>
-                <span className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-gold-400 to-transparent transition-all duration-700 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-linear-to-r from-gold-400 to-transparent transition-all duration-700 group-hover:w-full" />
               </motion.div>
             )
           })}
@@ -424,7 +411,7 @@ function Timeline() {
         <div className="relative mt-20">
           <div
             aria-hidden="true"
-            className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-sand-300 to-transparent lg:block"
+            className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-linear-to-b from-transparent via-sand-300 to-transparent lg:block"
           />
 
           <div className="space-y-10 lg:space-y-0">
@@ -445,16 +432,16 @@ function Timeline() {
                     className={fromLeft ? 'lg:col-start-1 lg:pr-8 lg:text-right' : 'lg:col-start-2 lg:pl-8'}
                   >
                     <div
-                      className={`group rounded-2xl border border-sand-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg ${fromLeft ? 'lg:ml-auto' : ''}`}
+                      className={`group rounded-2xl timeline-card p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg ${fromLeft ? 'lg:ml-auto' : ''}`}
                     >
                       <div className={`flex items-center gap-3 ${fromLeft ? 'lg:flex-row-reverse' : ''}`}>
                         <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-500/10 text-gold-600">
                           <Icon className="h-5 w-5" strokeWidth={1.75} />
                         </span>
-                        <span className="text-xs font-semibold uppercase tracking-widest text-gold-600">{m.tag}</span>
+                        <span className="timeline-tag text-xs font-semibold uppercase tracking-widest">{m.tag}</span>
                       </div>
                       <h3 className="mt-4 font-display text-xl font-medium text-ink-950">{m.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-ink-600">{m.description}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-ink-950">{m.description}</p>
                     </div>
                   </motion.div>
                 </div>
@@ -475,8 +462,7 @@ function ClosingCTA() {
   return (
     <section className="relative isolate overflow-hidden bg-ink-950 py-24 sm:py-32">
       <img src={bgImg} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-20" />
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/95 to-ink-950/80" />
-      <FloatingShapes variant="dark" />
+      <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-ink-950 via-ink-950/95 to-ink-950/80" />
 
       <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
         <motion.span
@@ -518,10 +504,10 @@ function ClosingCTA() {
         >
           <a
             href={`mailto:${contact.emailPrimary}`}
-            className="group inline-flex items-center gap-2 rounded-full bg-gold-400 px-6 py-3 text-sm font-semibold text-ink-950 transition-all duration-300 hover:bg-gold-300 hover:shadow-[0_10px_30px_-8px_rgba(211,173,100,0.6)]"
+            className="btn-primary"
           >
             Enquire Now
-            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-300" />
           </a>
           <a
             href={`tel:${contact.phoneRaw}`}

@@ -38,12 +38,12 @@ export default function Navbar() {
           fixed top-0 left-0 right-0 z-50
           h-16 sm:h-20
 
-          bg-white/95
+          bg-[#f8efe2]/95
           backdrop-blur-xl
 
-          border-b border-white/40
+          border-b border-[#c88b45]/30
 
-          shadow-[0_18px_45px_rgba(15,23,42,0.12),0_6px_16px_rgba(15,23,42,0.08)]
+          shadow-[0_18px_45px_rgba(95,53,20,0.16),0_6px_16px_rgba(95,53,20,0.10)]
 
           transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)]
           ${visible ? "translate-y-0" : "-translate-y-full"}
@@ -52,10 +52,10 @@ export default function Navbar() {
         <div className="mx-auto flex h-full max-w-[1540px] items-center justify-between px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16">
 
           {/* ================= LOGO ================= */}
-          <a
-            href="/"
-            className="flex items-center min-w-0 select-none"
-          >
+            <a
+              href="/"
+              className="flex items-center min-w-0 select-none"
+            >
             <div className="relative flex h-14 w-14 sm:h-16 sm:w-16 md:h-[4.7rem] md:w-[4.7rem] items-center justify-center overflow-hidden">
               <img
                 src={rechiLogo}
@@ -65,16 +65,16 @@ export default function Navbar() {
             </div>
 
             {/* Stronger crop – pulls text closer to the logo */}
-            <div className="-ml-2 sm:-ml-3 leading-none">
+              <div className="-ml-2 sm:-ml-3 leading-none">
               <span
-                className="block text-[15px] sm:text-[17px] md:text-[19px] font-bold tracking-[0.18em] text-[#202020]"
+                className="block text-[15px] sm:text-[17px] md:text-[19px] font-bold tracking-[0.14em] text-[#6f3e14]"
                 style={{ fontFamily: "Montserrat, sans-serif" }}
               >
                 RECHI
               </span>
 
               <span
-                className="block mt-[2px] text-[15px] sm:text-[17px] md:text-[19px] font-bold tracking-[0.18em] text-[#202020]"
+                className="block mt-[2px] text-[15px] sm:text-[17px] md:text-[19px] font-semibold tracking-[0.12em] text-[#6f3e14]"
                 style={{ fontFamily: "Montserrat, sans-serif" }}
               >
                 CONSTRUCTION
@@ -87,7 +87,7 @@ export default function Navbar() {
             {/* ================= PHONE ================= */}
             <a
               href="tel:+919999999999"
-              className="group flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-black hover:bg-black hover:text-white hover:shadow-2xl"
+              className="group flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-[#d5a56d] bg-[#fff4e1] text-[#7a3d10] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#9a5b1a] hover:bg-[#9a5b1a] hover:text-[#fff8ef] hover:shadow-2xl"
             >
               <Phone
                 size={18}
@@ -102,7 +102,7 @@ export default function Navbar() {
             {/* ================= SEARCH ================= */}
             <button
               onClick={() => alert("Search clicked")}
-              className="group flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-black hover:bg-black hover:text-white hover:shadow-2xl"
+              className="group flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-[#d5a56d] bg-[#fff4e1] text-[#7a3d10] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#9a5b1a] hover:bg-[#9a5b1a] hover:text-[#fff8ef] hover:shadow-2xl"
             >
               <Search
                 size={18}
@@ -117,7 +117,7 @@ export default function Navbar() {
             {/* ================= MENU ================= */}
             <button
               onClick={() => setMenuOpen(true)}
-              className="group flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-black hover:bg-black hover:text-white hover:shadow-2xl"
+              className="group flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-[#d5a56d] bg-[#fff4e1] text-[#7a3d10] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#9a5b1a] hover:bg-[#9a5b1a] hover:text-[#fff8ef] hover:shadow-2xl"
             >
               <Menu
                 size={20}

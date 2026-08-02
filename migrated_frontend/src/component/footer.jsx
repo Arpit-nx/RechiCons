@@ -40,10 +40,10 @@ const features = [
 function FooterTitle({ children }) {
   return (
     <div className="mb-7">
-      <h3 className="text-xl md:text-2xl font-bold text-white">
+      <h3 className="text-xl md:text-2xl font-bold text-[#fff7eb]">
         {children}
       </h3>
-      <div className="mt-3 w-14 h-1 bg-yellow-500 rounded-full"></div>
+      <div className="mt-3 w-14 h-1 bg-[#c9862d] rounded-full"></div>
     </div>
   );
 }
@@ -55,11 +55,11 @@ function FooterLinks({ links }) {
         <li key={item}>
           <a
             href="#"
-            className="group flex items-center gap-2.5 text-gray-300 transition hover:text-yellow-400"
+            className="group flex items-center gap-2.5 text-[#ebd7b8] transition hover:text-[#ffd28b]"
           >
             <ChevronRight
               size={15}
-              className="text-yellow-500 group-hover:translate-x-1 transition"
+              className="text-[#c9862d] group-hover:translate-x-1 transition"
             />
             <span className="text-[15px]">{item}</span>
           </a>
@@ -72,14 +72,14 @@ function FooterLinks({ links }) {
 function ContactItem({ icon: Icon, title, children }) {
   return (
     <div className="flex items-start gap-3.5">
-      <div className="w-10 h-10 rounded-full bg-[#1f1f1f] flex items-center justify-center flex-shrink-0">
-        <Icon size={16} className="text-yellow-500" />
+      <div className="w-10 h-10 rounded-full bg-[#7a3d10]/80 flex items-center justify-center flex-shrink-0">
+        <Icon size={16} className="text-[#ffd28b]" />
       </div>
       <div>
-        <p className="uppercase text-[11px] tracking-widest text-gray-400 mb-1">
+        <p className="uppercase text-[11px] tracking-widest text-[#d9b98a] mb-1">
           {title}
         </p>
-        <div className="text-gray-300 text-[15px] leading-6">
+        <div className="text-[#f4e1c5] text-[15px] leading-6">
           {children}
         </div>
       </div>
@@ -89,12 +89,12 @@ function ContactItem({ icon: Icon, title, children }) {
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden text-white">
+    <footer className="relative overflow-hidden text-[#fff8ef]">
       {/* Background Decorative Layer */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_top_left,_rgba(250,204,21,0.12),_transparent_45%)]" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_top_left,_rgba(201,134,45,0.18),_transparent_45%)]" />
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/70 z-0" />
+      <div className="absolute inset-0 bg-[#3f220f]/90 z-0" />
 
       {/* Content */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 pt-14 pb-8">
@@ -108,9 +108,9 @@ export default function Footer() {
               Construction
             </h2>
 
-            <div className="w-16 h-1 bg-yellow-500 rounded-full mt-4 mb-5"></div>
+            <div className="w-16 h-1 bg-[#c9862d] rounded-full mt-4 mb-5"></div>
 
-            <p className="text-gray-300 leading-7 text-[15px] max-w-[340px]">
+            <p className="text-[#f2dfc0] leading-7 text-[15px] max-w-[340px]">
               Rechi Construction (P) Ltd. delivers premium residential,
               commercial, industrial and infrastructure projects with quality
               workmanship, innovation, integrity and timely completion.
@@ -119,8 +119,8 @@ export default function Footer() {
             <div className="mt-7 space-y-2.5">
               {features.map((item) => (
                 <div key={item} className="flex items-center gap-2.5">
-                  <ChevronRight size={15} className="text-yellow-500 shrink-0" />
-                  <span className="text-gray-200 text-[15px]">{item}</span>
+                  <ChevronRight size={15} className="text-[#c9862d] shrink-0" />
+                  <span className="text-[#f2dfc0] text-[15px]">{item}</span>
                 </div>
               ))}
             </div>
@@ -144,10 +144,10 @@ export default function Footer() {
 
             <div className="space-y-5">
               <ContactItem icon={MapPin} title="Office">
-                <p className="font-semibold text-white">
+                <p className="font-semibold text-[#fff7eb]">
                   Rechi Construction (P) Ltd.
                 </p>
-                <p className="text-gray-300">
+                <p className="text-[#f2dfc0]">
                   220 (Formerly 213)
                   <br />
                   Dum Dum Park
@@ -165,7 +165,7 @@ export default function Footer() {
               <ContactItem icon={Phone} title="Phone">
                 <a
                   href="tel:+919051800151"
-                  className="hover:text-yellow-400 transition"
+                  className="hover:text-[#ffd28b] transition"
                 >
                   +91 90518 00151
                 </a>
@@ -174,13 +174,13 @@ export default function Footer() {
               <ContactItem icon={Mail} title="Email">
                 <a
                   href="mailto:rechiconstruction@yahoo.in"
-                  className="block hover:text-yellow-400 transition"
+                  className="block hover:text-[#ffd28b] transition"
                 >
                   rechiconstruction@yahoo.in
                 </a>
                 <a
                   href="mailto:info@rechiconstruction.in"
-                  className="block hover:text-yellow-400 transition"
+                  className="block hover:text-[#ffd28b] transition"
                 >
                   info@rechiconstruction.in
                 </a>
@@ -191,7 +191,7 @@ export default function Footer() {
                   href="https://www.rechiconstruction.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-yellow-400 transition"
+                  className="hover:text-[#ffd28b] transition"
                 >
                   www.rechiconstruction.in
                 </a>
@@ -209,7 +209,7 @@ export default function Footer() {
                 <a
                   key={i}
                   href={href}
-                  className="w-10 h-10 rounded-full bg-[#1f1f1f] border border-gray-700 hover:bg-yellow-500 hover:text-black transition duration-300 flex items-center justify-center"
+                  className="w-10 h-10 rounded-full bg-[#7a3d10]/80 border border-[#a76624] hover:bg-[#c9862d] hover:text-[#2b1406] transition duration-300 flex items-center justify-center"
                 >
                   <Icon size={16} />
                 </a>
@@ -219,9 +219,9 @@ export default function Footer() {
         </div>
 
         {/* ==================== Bottom Bar ==================== */}
-        <div className="border-t border-gray-700/80 mt-12 pt-6">
+        <div className="border-t border-[#8f5a2c]/70 mt-12 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-400 text-center md:text-left">
+            <p className="text-sm text-[#d6b07d] text-center md:text-left">
               © {new Date().getFullYear()} Rechi Construction (P) Ltd. All
               Rights Reserved.
             </p>
@@ -232,7 +232,7 @@ export default function Footer() {
                   <a
                     key={item}
                     href="#"
-                    className="text-gray-400 hover:text-yellow-400 transition"
+                    className="text-[#d6b07d] hover:text-[#ffd28b] transition"
                   >
                     {item}
                   </a>

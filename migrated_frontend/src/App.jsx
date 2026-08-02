@@ -1,6 +1,9 @@
 import Navbar from "./component/nav_bar.jsx";
 import SideBar from "./component/side_bar.jsx";   // already used inside Navbar, but imported if needed
 import Footer from "./component/footer.jsx";
+import Home from "./pages/home.jsx";
+import About from "./pages/about.jsx";
+import CursorTorch from "./component/CursorTorch";
 
 function App() {
   return (
@@ -8,15 +11,14 @@ function App() {
       {/* Navbar (includes SideBar inside it) */}
       <Navbar />
 
+      {/* Cursor torch effect */}
+      <CursorTorch />
+
       {/* ===== Main Content Area ===== */}
       <main className="min-h-screen">
         {/* Put your page content here */}
-        <div className="max-w-[1400px] mx-auto px-4 py-20">
-          <h1 className="text-3xl font-bold">Welcome to Rechi Construction</h1>
-          <p className="mt-4 text-gray-600">
-            Your main page content goes here...
-          </p>
-        </div>
+        {/* <Home/> */}
+        <About/>
       </main>
 
       {/* Footer */}

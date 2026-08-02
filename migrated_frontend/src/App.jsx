@@ -3,6 +3,7 @@ import SideBar from "./component/side_bar.jsx";
 import Footer from "./component/footer.jsx";
 import Home from "./pages/home.jsx";
 import About from "./pages/about.jsx";
+import EnquiryPage from "./pages/EnquiryPage.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       {/* ===== Main Content Area ===== */}
       <main className="min-h-screen">
         <About />
+        {/* <EnquiryPage /> */}
       </main>
 
       {/* Footer */}

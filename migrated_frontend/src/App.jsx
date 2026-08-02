@@ -8,6 +8,7 @@ import { Contact } from "lucide-react";
 // import CursorTorch from "./component/CursorTorch";
 import { useCallback, useState } from "react";
 import EnquiryPage from "./pages/EnquiryPage.jsx";
+import Projects from "./pages/projects.jsx";
 
 function App() {
   const [showChrome, setShowChrome] = useState(false);
@@ -28,6 +29,9 @@ function App() {
         <Home onSplashEnd={handleSplashEnd} />
         <About />
         {/* <EnquiryPage /> */}
+        {/* <AdminLogin></AdminLogin>
+        <Home /> */}
+        <Projects/>
       </main>
 
       {/* Footer */}

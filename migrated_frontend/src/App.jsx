@@ -1,9 +1,10 @@
 import Navbar from "./component/nav_bar.jsx";
-import SideBar from "./component/side_bar.jsx";   // already used inside Navbar, but imported if needed
+import SideBar from "./component/side_bar.jsx";
 import Footer from "./component/footer.jsx";
 import Home from "./pages/home.jsx";
 import About from "./pages/about.jsx";
 import CursorTorch from "./component/CursorTorch";
+import About from "./pages/about.jsx";
 
 function App() {
   return (
@@ -16,9 +17,7 @@ function App() {
 
       {/* ===== Main Content Area ===== */}
       <main className="min-h-screen">
-        {/* Put your page content here */}
-        {/* <Home/> */}
-        <About/>
+        <About />
       </main>
 
       {/* Footer */}

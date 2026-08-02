@@ -524,6 +524,7 @@ function ClosingCTA() {
 
 /* ----------------------------------- page ------------------------------------ */
 
+
 export default function About() {
   return (
     <section id="about" aria-label="About Rechi Construction" className="relative bg-sand-50">

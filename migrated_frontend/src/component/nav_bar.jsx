@@ -3,7 +3,7 @@ import { Phone, Search, Menu } from "lucide-react";
 import SideBar from "./side_bar";
 import rechiLogo from "../assets/rechi_logo.png";
 
-export default function Navbar() {
+export default function Navbar({ isVisible = true }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -46,7 +46,7 @@ export default function Navbar() {
           shadow-[0_18px_45px_rgba(95,53,20,0.16),0_6px_16px_rgba(95,53,20,0.10)]
 
           transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)]
-          ${visible ? "translate-y-0" : "-translate-y-full"}
+          ${isVisible && visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"}
         `}
       >
         <div className="mx-auto flex h-full max-w-[1540px] items-center justify-between px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16">

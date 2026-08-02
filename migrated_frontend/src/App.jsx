@@ -1,5 +1,5 @@
 import Navbar from "./component/nav_bar.jsx";
-import SideBar from "./component/side_bar.jsx";   // already used inside Navbar, but imported if needed
+import SideBar from "./component/side_bar.jsx";
 import Footer from "./component/footer.jsx";
 import Home from "./pages/home.jsx";
 import About from "./pages/about.jsx";
@@ -24,6 +24,7 @@ function App() {
         {/* Put your page content here */}
         {/* <Home/> */}
         <Home onSplashEnd={handleSplashEnd} />
+        <About />
       </main>
 
       {/* Footer */}

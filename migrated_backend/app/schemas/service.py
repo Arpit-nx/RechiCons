@@ -33,13 +33,13 @@ class ServiceResponse(ServiceBase):
 
     id: int
 
-    slug: str
+    slug: str | None = None
 
-    image_path: str | None
+    image_path: str | None = None
 
-    created_at: datetime
+    created_at: datetime | None = None
 
-    updated_at: datetime
+    updated_at: datetime | None = None
 
     model_config = ConfigDict(
         from_attributes=True

@@ -1,54 +1,54 @@
-from fastapi import APIRouter, Depends, HTTPException
-
-from sqlalchemy.orm import Session
-
-from app.db.session import get_db
-
-from app.services.project_service import ProjectService
+from fastapi import (
+    APIRouter,
+    HTTPException,
+)
 
 from app.schemas.project import (
     PublicProjectCard,
     PublicProjectDetail,
 )
 
+from app.services.project_service import ProjectService
+
+
 router = APIRouter(
-
     prefix="/public/projects",
-
     tags=["Public Projects"],
 )
+
+service = ProjectService()
+
+
+# ==========================================================
+# Public Project Listing
+# ==========================================================
 
 @router.get(
     "",
     response_model=list[PublicProjectCard],
 )
-def homepage_projects(
-
-    db: Session = Depends(get_db),
-
-):
-
-    service = ProjectService(db)
+def list_public_projects():
 
     return service.get_public_projects()
+
+
+# ==========================================================
+# Public Project Detail
+# ==========================================================
 
 @router.get(
     "/{slug}",
     response_model=PublicProjectDetail,
 )
-def property_details(
-
+def get_public_project(
     slug: str,
-
-    db: Session = Depends(get_db),
-
 ):
-
-    service = ProjectService(db)
 
     try:
 
-        return service.get_public_project(slug)
+        return service.get_public_project(
+            slug,
+        )
 
     except ValueError as e:
 

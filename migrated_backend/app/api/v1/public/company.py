@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, HTTPException, status
+# from sqlalchemy.orm import Session
 
-from app.db.session import get_db
+# from app.db.session import get_db
 
 from app.services.company_service import CompanyService
 
@@ -15,23 +15,17 @@ router = APIRouter(
 
 )
 
-@router.get(
-    "",
-    response_model=CompanyResponse,
-)
-def get_company(
-    db: Session = Depends(get_db),
-):
+@router.get("",response_model=CompanyResponse,)
+def get_company():
 
-    service = CompanyService(db)
+    service = CompanyService()
 
     company = service.get_company()
 
-    if company is None:
-
+    if not company:
         raise HTTPException(
-            status_code=404,
-            detail="Company profile not found.",
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Company profile not found."
         )
 
     return company

@@ -59,3 +59,25 @@ class CreateUserRequest(BaseModel):
     password: str = Field(..., min_length=8)
 
     role: str = "admin"
+
+class AuthUserRecord(BaseModel):
+
+    id: int
+
+    username: str
+
+    email: str
+
+    password: str
+
+    role: str
+
+    is_active: bool
+
+    created_at: datetime | None = None
+
+    updated_at: datetime | None = None
+
+    model_config = ConfigDict(
+        from_attributes=True
+    )

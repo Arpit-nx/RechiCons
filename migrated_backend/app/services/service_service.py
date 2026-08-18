@@ -1,5 +1,5 @@
-from sqlalchemy.orm import Session
-
+# from sqlalchemy.orm import Session
+from app.repository.service_repository import ServiceRepository
 from app.models.service import Service
 from app.schemas.service import (
     ServiceCreate,
@@ -10,30 +10,25 @@ from app.utils.slug import generate_slug
 
 class ServiceService:
 
-    def __init__(self, db: Session):
-        self.db = db
+    def __init__(self):
+        self.repo = ServiceRepository()
 
     def create_service(
         self,
         payload: ServiceCreate,
     ):
 
-        slug = self._generate_unique_slug(
-            payload.title
-        )
+        data = payload.model_dump()
 
-        service = Service(
-            **payload.model_dump(),
-            slug=slug,
-        )
+        data["slug"] = generate_slug(data["title"])
 
-        self.db.add(service)
+        if data.get("display_order") is None:
+            data["display_order"] = 0
 
-        self.db.commit()
+        if data.get("is_active") is None:
+            data["is_active"] = True
 
-        self.db.refresh(service)
-
-        return service
+        return self.repo.create_service(data)
 
     def _generate_unique_slug(
         self,
@@ -64,77 +59,67 @@ class ServiceService:
         payload: ServiceUpdate,
     ):
 
-        service = (
-            self.db.query(Service)
-            .filter(Service.id == service_id)
-            .first()
-        )
-
+        service = self.repo.get_service(
+                    service_id,
+                )
+        
         if service is None:
-
             raise ValueError(
                 "Service not found."
             )
 
-        update_data = payload.model_dump(
+        data = payload.model_dump(
             exclude_none=True,
             exclude_unset=True,
         )
 
-        if (
-            "title" in update_data
-            and update_data["title"] != service.title
-        ):
+        if "title" in data:
 
-            service.slug = self._generate_unique_slug(
-                update_data["title"]
+            data["slug"] = generate_slug(
+                data["title"]
             )
 
-        for key, value in update_data.items():
+        # if self.repo.exists_by_name(
+        #     data["title"]
+        # ):
+        #     raise ValueError(
+        #         "Service already exists."
+        #     )
 
-            setattr(
-                service,
-                key,
-                value,
-            )
-
-        self.db.commit()
-
-        self.db.refresh(service)
-
-        return service
+        return self.repo.update_service(
+            service_id,
+            data,
+        )
 
     def delete_service(
         self,
         service_id: int,
     ):
 
-        service = (
-            self.db.query(Service)
-            .filter(Service.id == service_id)
-            .first()
-        )
-
-        if service is None:
-
+        if self.repo.get_category(service_id) is None:
             raise ValueError(
                 "Service not found."
             )
 
-        self.db.delete(service)
+        self.repo.delete_category(
+            service_id,
+        )
 
-        self.db.commit()
+        return {
+            "message": "Service deleted successfully."
+        }
 
     def get_service(
         self,
         service_id: int,
     ):
 
-        return (
-            self.db.query(Service)
-            .filter(Service.id == service_id)
-            .first()
-        )
+        service = self.repo.get_service(service_id)
+
+        if service is None:
+            raise ValueError("Service not found.")
+
+        return service
 
     def get_service_by_slug(
         self,
@@ -149,34 +134,18 @@ class ServiceService:
 
     def list_services(self):
 
-        return (
-            self.db.query(Service)
-            .order_by(Service.display_order)
-            .all()
-        )
+        return self.repo.list_services()
 
     def get_public_services(self):
 
-        return (
-            self.db.query(Service)
-            .filter(Service.is_active == True)
-            .order_by(Service.display_order)
-            .all()
-        )
+        return self.repo.active_services()
 
     def get_public_service(
         self,
         slug: str,
     ):
 
-        service = (
-            self.db.query(Service)
-            .filter(
-                Service.slug == slug,
-                Service.is_active == True,
-            )
-            .first()
-        )
+        service = self.repo.find_by_slug(slug)
 
         if service is None:
 

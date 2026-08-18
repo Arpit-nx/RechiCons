@@ -1,5 +1,3 @@
-from sqlalchemy.orm import Session
-
 from app.models.company import Company
 from app.schemas.company import (
     CompanyCreate,
@@ -7,10 +5,15 @@ from app.schemas.company import (
 )
 
 
+from app.repository.company_repository import (
+    CompanyRepository,
+)
+
 class CompanyService:
 
-    def __init__(self, db: Session):
-        self.db = db
+    def __init__(self):
+
+        self.repo = CompanyRepository()
 
     # ==========================================================
     # Get Company Details
@@ -18,10 +21,7 @@ class CompanyService:
 
     def get_company(self) -> Company | None:
         
-        return (
-            self.db.query(Company)
-            .first()
-        )
+        return self.repo.get_company()
 
     # ==========================================================
     # Create Company
@@ -31,26 +31,17 @@ class CompanyService:
     def create_company(
         self,
         payload: CompanyCreate,
-    ) -> Company:
+    ):
 
-        company = self.get_company()
+        if self.repo.get_company():
 
-        if company:
             raise ValueError(
                 "Company profile already initialized."
             )
 
-        company = Company(
-            **payload.model_dump()
+        return self.repo.create_company(
+            payload
         )
-
-        self.db.add(company)
-
-        self.db.commit()
-
-        self.db.refresh(company)
-
-        return company
 
     # ==========================================================
     # Update Company
@@ -62,24 +53,9 @@ class CompanyService:
         payload: CompanyUpdate,
     ):
 
-        company = (
-            self.db.query(Company)
-            .filter(Company.id == company_id)
-            .first()
-        )
+        if self.repo.find_by_id(company_id) is None:
+            raise ValueError(
+                "Company not found."
+            )
 
-        if company is None:
-            raise ValueError("Company not found.")
-
-        update_data = payload.model_dump(
-            exclude_none=True,
-            exclude_unset=True
-        )
-
-        for key, value in update_data.items():
-            setattr(company, key, value)
-
-        self.db.commit()
-        self.db.refresh(company)
-
-        return company
+        return self.repo.update_company(company_id, payload,)

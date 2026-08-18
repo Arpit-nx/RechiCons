@@ -23,3 +23,5 @@ PyMySQL
 python-jose[cryptography]
 
 python-slugify
+
+openpyxl

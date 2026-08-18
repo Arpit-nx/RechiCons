@@ -4,9 +4,9 @@ from fastapi import (
     HTTPException,
 )
 
-from sqlalchemy.orm import Session
+# from sqlalchemy.orm import Session
 
-from app.db.session import get_db
+# from app.db.session import get_db
 
 from app.services.service_service import ServiceService
 
@@ -21,6 +21,8 @@ router = APIRouter(
     tags=["Services"],
 )
 
+service = ServiceService()
+
 @router.post(
     "",
     response_model=ServiceResponse,
@@ -28,10 +30,7 @@ router = APIRouter(
 )
 def create_service(
     payload: ServiceCreate,
-    db: Session = Depends(get_db),
 ):
-
-    service = ServiceService(db)
 
     try:
 
@@ -48,11 +47,7 @@ def create_service(
     "",
     response_model=list[ServiceResponse],
 )
-def list_services(
-    db: Session = Depends(get_db),
-):
-
-    service = ServiceService(db)
+def list_services():
 
     return service.list_services()
 
@@ -62,10 +57,7 @@ def list_services(
 )
 def get_service(
     service_id: int,
-    db: Session = Depends(get_db),
 ):
-
-    service = ServiceService(db)
 
     result = service.get_service(service_id)
 
@@ -85,10 +77,7 @@ def get_service(
 def update_service(
     service_id: int,
     payload: ServiceUpdate,
-    db: Session = Depends(get_db),
 ):
-
-    service = ServiceService(db)
 
     try:
 
@@ -109,10 +98,7 @@ def update_service(
 )
 def delete_service(
     service_id: int,
-    db: Session = Depends(get_db),
 ):
-
-    service = ServiceService(db)
 
     try:
 

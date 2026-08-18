@@ -8,7 +8,12 @@ class CategoryBase(BaseModel):
 
 
 class CategoryCreate(CategoryBase):
-    pass
+
+    slug: str | None = None
+
+    display_order: int | None = None
+
+    is_active: bool | None = None
 
 
 class CategoryUpdate(BaseModel):
@@ -24,15 +29,15 @@ class CategoryResponse(CategoryBase):
 
     id: int
 
-    slug: str
+    slug: str | None = None
 
-    display_order: int
+    display_order: int | None = None
 
-    is_active: bool
+    is_active: bool | None = None
 
-    created_at: datetime
+    created_at: datetime | None = None
 
-    updated_at: datetime
+    updated_at: datetime | None = None
 
     model_config = ConfigDict(
         from_attributes=True

@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
-from app.db.session import get_db
+from fastapi import APIRouter, HTTPException, status
+# from sqlalchemy.orm import Session
+# from app.db.session import get_db
 from app.schemas.company import (
     CompanyCreate,
     CompanyUpdate,
@@ -13,14 +13,14 @@ router = APIRouter(
     tags=["Company"],
 )
 
+service = CompanyService()
+
 # ==========================================================
 # Get Company
 # ==========================================================
 
 @router.get("",response_model=CompanyResponse,)
-def get_company(db: Session = Depends(get_db),):
-
-    service = CompanyService(db)
+def get_company():
 
     company = service.get_company()
 
@@ -40,10 +40,8 @@ def get_company(db: Session = Depends(get_db),):
 @router.post("",response_model=CompanyResponse,status_code=status.HTTP_201_CREATED,)
 def create_company(
     payload: CompanyCreate,
-    db: Session = Depends(get_db),
+    # db: Session = Depends(get_db),
 ):
-
-    service = CompanyService(db)
 
     try:
         return service.create_company(payload)
@@ -63,10 +61,8 @@ def create_company(
 def update_company(
     company_id: int,
     payload: CompanyUpdate,
-    db: Session = Depends(get_db),
+    # db: Session = Depends(get_db),
 ):
-
-    service = CompanyService(db)
 
     try:
         return service.update_company(

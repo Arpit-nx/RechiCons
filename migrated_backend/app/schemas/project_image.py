@@ -9,7 +9,7 @@ class ProjectImageResponse(BaseModel):
 
     image_type: str
 
-    sort_order: int
+    sort_order: int = 0
 
     model_config = ConfigDict(
         from_attributes=True

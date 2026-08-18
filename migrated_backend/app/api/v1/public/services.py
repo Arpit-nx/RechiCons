@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+# from sqlalchemy.orm import Session
 
-from app.db.session import get_db
+# from app.db.session import get_db
 from app.services.service_service import ServiceService
 
 from app.schemas.service import (
@@ -14,16 +14,13 @@ router = APIRouter(
     tags=["Public Services"],
 )
 
+service = ServiceService()
+
 @router.get(
     "",
     response_model=list[PublicServiceCard],
 )
-def get_services(
-    db: Session = Depends(get_db),
-):
-
-    service = ServiceService(db)
-
+def get_services():
     return service.get_public_services()
 
 @router.get(
@@ -32,11 +29,7 @@ def get_services(
 )
 def get_service(
     slug: str,
-    db: Session = Depends(get_db),
 ):
-
-    service = ServiceService(db)
-
     try:
 
         return service.get_public_service(slug)

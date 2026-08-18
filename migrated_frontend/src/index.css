@@ -1,26 +1,27 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  @apply bg-ivory font-body text-neutral-800 antialiased;
-}
 :root {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-ivory: #faf8f5;
+  --color-primary: #9a5b1a;
+  --color-primary-strong: #7a3d10;
+  --color-primary-soft: #f4e1c5;
+  --color-beige: #e8dcc8;
+  --color-neutral-800: #2d3748;
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  font-family: var(--font-body);
   line-height: 1.5;
   font-weight: 400;
   color: #111827;
-  background-color: #faf8f5;
+  background-color: var(--color-ivory);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --accent: #9a5b1a;
-  --accent-strong: #7a3d10;
-  --accent-soft: #f4e1c5;
+  --accent: var(--color-primary);
+  --accent-strong: var(--color-primary-strong);
+  --accent-soft: var(--color-primary-soft);
   --surface: #fff8ef;
   --text: #4f2b12;
 }
@@ -29,7 +30,15 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #faf8f5;
+  background-color: var(--color-ivory);
+  color: var(--color-neutral-800);
+  font-family: var(--font-body);
+  transition: padding-right 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  scrollbar-gutter: stable;
+}
+
+body.sidebar-open {
+  padding-right: 280px;
 }
 
 #root {

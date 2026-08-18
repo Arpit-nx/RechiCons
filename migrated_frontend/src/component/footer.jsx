@@ -14,8 +14,6 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 
-// import footerBg from "./footer-bg.png";
-
 const companyLinks = [
   "Home",
   "About Us",
@@ -99,7 +97,7 @@ export default function Footer() {
       {/* Content */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 pt-14 pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12">
-
+          
           {/* ==================== Company ==================== */}
           <div className="lg:col-span-4">
             <h2 className="text-3xl md:text-4xl font-bold leading-tight">
@@ -139,7 +137,7 @@ export default function Footer() {
           </div>
 
           {/* ==================== Locate Us ==================== */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 lg:pl-8 xl:pl-12">
             <FooterTitle>Locate Us</FooterTitle>
 
             <div className="space-y-5">
@@ -220,26 +218,9 @@ export default function Footer() {
 
         {/* ==================== Bottom Bar ==================== */}
         <div className="border-t border-[#8f5a2c]/70 mt-12 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-[#d6b07d] text-center md:text-left">
-              © {new Date().getFullYear()} Rechi Construction (P) Ltd. All
-              Rights Reserved.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-5 text-sm">
-              {["Privacy Policy", "Terms & Conditions", "Sitemap", "Contact Us"].map(
-                (item) => (
-                  <a
-                    key={item}
-                    href="#"
-                    className="text-[#d6b07d] hover:text-[#ffd28b] transition"
-                  >
-                    {item}
-                  </a>
-                )
-              )}
-            </div>
-          </div>
+          <p className="text-sm text-[#d6b07d] text-center leading-relaxed">
+            Copyright © {new Date().getFullYear()} and All Right Reserved by Rechi Construction. Website developed by TEAM LOGIC.
+          </p>
         </div>
       </div>
     </footer>

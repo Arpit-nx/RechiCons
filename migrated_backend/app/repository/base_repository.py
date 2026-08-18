@@ -260,8 +260,14 @@ class BaseRepository(ABC):
         self,
         record: dict | None,
     ):
-
         if record is None:
+            return None
+
+        # Ignore completely empty records
+        if all(
+            value is None or value == ""
+            for value in record.values()
+        ):
             return None
 
         if self.RESPONSE_MODEL is None:
@@ -271,18 +277,16 @@ class BaseRepository(ABC):
             record
         )
 
-    def map_records(
-        self,
-        records: list,
-    ):
+    def map_records(self, records):
+        result = []
 
-        return [
+        for record in records:
+            mapped = self.map_record(record)
 
-            self.map_record(record)
+            if mapped is not None:
+                result.append(mapped)
 
-            for record in records
-
-        ]
+        return result
 
     #Normalization function for variable payloads.
     def normalize(

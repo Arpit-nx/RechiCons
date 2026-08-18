@@ -1,42 +1,29 @@
 import Navbar from "./component/nav_bar.jsx";
-import SideBar from "./component/side_bar.jsx";
 import Footer from "./component/footer.jsx";
-import AdminLogin from "./pages/adminLogin.jsx";
 import Home from "./pages/home.jsx";
 import About from "./pages/about.jsx";
-import { Contact } from "lucide-react";
-// import CursorTorch from "./component/CursorTorch";
+import OtherServices from "./pages/otherservise.jsx";  // import About
 import { useCallback, useState } from "react";
-import EnquiryPage from "./pages/EnquiryPage.jsx";
-import Projects from "./pages/projects.jsx";
+import Contect from "./pages/contect.jsx";
 
 function App() {
-  const [showChrome, setShowChrome] = useState(false);
-  const handleSplashEnd = useCallback(() => {
-    setShowChrome(true);
-  }, []);
-
   return (
-    <>
-      {/* Navbar (includes SideBar inside it) */}
-      <Navbar isVisible={showChrome} />
+    <div className="min-h-screen bg-[#fff8ef]">
 
+      {/* Fixed Navbar */}
+      <div className="fixed top-0 left-0 right-0 z-[9999]">
+        <Navbar isVisible={true} />
+      </div>
 
-      {/* ===== Main Content Area ===== */}
-      <main className="min-h-screen">
-        {/* Put your page content here */}
-        {/* <Home/> */}
-        <Home onSplashEnd={handleSplashEnd} />
-        <About />
-        {/* <EnquiryPage /> */}
-        {/* <AdminLogin></AdminLogin>
-        <Home /> */}
-        <Projects/>
+      {/* Main Page */}
+      <main>
+        <Contect />
       </main>
 
       {/* Footer */}
       <Footer />
-    </>
+
+    </div>
   );
 }
 

@@ -2,6 +2,11 @@
 export default {
   theme: {
     colors: {
+      ivory: '#faf8f5',
+      primary: '#9a5b1a',
+      'primary-strong': '#7a3d10',
+      'primary-soft': '#f4e1c5',
+      beige: '#e8dcc8',
       gold: {
         300: '#d4af37',
         400: '#d4a574',
@@ -19,12 +24,16 @@ export default {
         900: '#1a202c',
         950: '#0a0b0d',
       },
+      neutral: {
+        800: '#2d3748',
+      },
       white: '#ffffff',
       transparent: 'transparent',
       currentColor: 'currentColor',
     },
     fontFamily: {
-      display: ['system-ui', 'sans-serif'],
+      body: ['Inter', 'system-ui', 'sans-serif'],
+      display: ['"Playfair Display"', 'Georgia', 'serif'],
       sans: ['Inter', 'system-ui', 'sans-serif'],
     },
     animation: {

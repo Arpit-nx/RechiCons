@@ -13,11 +13,11 @@ export default function HeroSlide({ slide }) {
       {/* Text */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center text-white px-6">
-          <h1 className="text-4xl md:text-6xl font-bold">
+          <h1 className="hero-title text-4xl md:text-6xl font-bold">
             {slide.title}
           </h1>
 
-          <p className="mt-5 text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="hero-subtitle mt-5 text-lg md:text-xl max-w-2xl mx-auto">
             {slide.subtitle}
           </p>
         </div>

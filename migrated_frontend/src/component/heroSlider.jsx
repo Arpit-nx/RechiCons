@@ -18,7 +18,7 @@ export default function HeroSlider() {
 
   return (
     <div className="relative overflow-hidden">
-      <HeroSlide slide={slide} />
+      <HeroSlide  key={activeIndex} slide={slide} />
 
       <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
         {ProjectSlides.map((_, index) => (

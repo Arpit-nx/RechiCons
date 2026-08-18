@@ -615,6 +615,39 @@ a:hover ~ #cursor-torch,
   }
 }
 
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title {
+  animation: slideDown 0.8s ease-out forwards;
+}
+
+.hero-subtitle {
+  animation: slideUp 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
 @keyframes homeLogoDrop {
   0% {
     opacity: 0;

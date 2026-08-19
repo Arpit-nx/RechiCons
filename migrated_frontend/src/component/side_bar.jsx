@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { X, Plus, Minus, ChevronRight } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const menuItems = [
   { title: "Home", link: "/" },
@@ -13,25 +14,35 @@ const menuItems = [
 export default function SideBar({
   menuOpen,
   setMenuOpen,
-  currentPath = "/",
 }) {
   const [activeMenu, setActiveMenu] = useState(null);
+
+  // Get current URL from React Router
+  const location = useLocation();
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
     setActiveMenu(null);
   }, [setMenuOpen]);
 
+  // Current page
+  const isCurrentPage = (link) => {
+    return location.pathname === link;
+  };
+
+  // Lock body scroll when sidebar is open
   useEffect(() => {
     if (!menuOpen) {
       setActiveMenu(null);
+
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
       document.body.classList.remove("sidebar-open");
+
       return;
     }
 
-    // Calculate scrollbar width so the page doesn't jump
+    // Calculate scrollbar width
     const scrollbarWidth =
       window.innerWidth - document.documentElement.clientWidth;
 
@@ -46,30 +57,44 @@ export default function SideBar({
     };
   }, [menuOpen]);
 
+  // Escape key closes sidebar
   useEffect(() => {
     if (!menuOpen) return;
+
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") closeMenu();
+      if (e.key === "Escape") {
+        closeMenu();
+      }
     };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [menuOpen, closeMenu]);
 
-  const currentMenu = menuItems.find((item) => item.title === activeMenu);
-  const isCurrentPage = (link) => currentPath === link;
+  const currentMenu = menuItems.find(
+    (item) => item.title === activeMenu
+  );
 
   return (
     <>
-      {/* Overlay */}
+      {/* =========================
+          OVERLAY
+      ========================== */}
       <div
         onClick={closeMenu}
-        className={`fixed inset-0 z-40 transition-all duration-700 ${menuOpen
-            ? "opacity-100 visible bg-black/40 backdrop-blur-[6px]"
-            : "opacity-0 invisible pointer-events-none"
-          }`}
+        className={`fixed inset-0 z-40 transition-all duration-700 ${
+          menuOpen
+            ? "visible bg-black/40 opacity-100 backdrop-blur-[6px]"
+            : "invisible pointer-events-none opacity-0"
+        }`}
       />
 
-      {/* Sidebar */}
+      {/* =========================
+          SIDEBAR
+      ========================== */}
       <aside
         role="dialog"
         aria-modal="true"
@@ -82,11 +107,18 @@ export default function SideBar({
           backdrop-blur-3xl
           backdrop-saturate-150
           shadow-[-20px_0_60px_rgba(0,0,0,0.45)]
-          transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
-          ${menuOpen ? "translate-x-0" : "translate-x-full"}
+          transition-transform duration-700
+          ease-[cubic-bezier(0.22,1,0.36,1)]
+          ${
+            menuOpen
+              ? "translate-x-0"
+              : "translate-x-full"
+          }
         `}
       >
-        {/* Subtle noise texture overlay */}
+        {/* =========================
+            NOISE TEXTURE
+        ========================== */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
           style={{
@@ -97,7 +129,9 @@ export default function SideBar({
         {/* Soft top light */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/[0.04] to-transparent" />
 
-        {/* Header */}
+        {/* =========================
+            HEADER
+        ========================== */}
         <div className="relative flex h-[88px] items-center border-b border-white/[0.07] px-8">
           <button
             onClick={closeMenu}
@@ -110,194 +144,105 @@ export default function SideBar({
                 className="text-white/80 transition-all duration-500 group-hover:rotate-90 group-hover:text-[#e8d48b]"
               />
             </span>
+
             <span className="text-[15px] font-light tracking-[0.15em] text-white/70 transition-colors duration-300 group-hover:text-white">
               CLOSE
             </span>
           </button>
         </div>
 
-        {/* Content */}
+        {/* =========================
+            CONTENT
+        ========================== */}
         <div className="relative flex h-[calc(100%-88px)]">
+
           {/* LEFT COLUMN */}
           <div className="w-full shrink-0 px-6 py-10">
             <nav aria-label="Primary" className="space-y-1.5">
+
               {menuItems.map((item, index) => {
-                const opened = activeMenu === item.title;
-                const active = item.link ? isCurrentPage(item.link) : false;
+                const active = isCurrentPage(item.link);
 
-                return item.children ? (
-                  <button
+                return (
+                  <Link
                     key={item.title}
-                    onClick={() => setActiveMenu(opened ? null : item.title)}
-                    aria-expanded={opened}
-                    className={`group relative flex w-full items-center justify-between
-                      rounded-2xl px-5 py-3.5 transition-all duration-400
-                      ${opened
-                        ? "bg-white/[0.07]"
-                        : "hover:bg-white/[0.04]"
-                      }
-                    `}
-                    style={{
-                      transitionDelay: menuOpen ? `${index * 40}ms` : "0ms",
-                    }}
-                  >
-                    {/* Gold accent bar on active/open */}
-                    <span
-                      className={`absolute left-0 top-1/2 h-6 w-[2px] -translate-y-1/2 rounded-full bg-[#c9a227] transition-all duration-400 ${opened ? "opacity-100" : "opacity-0"
-                        }`}
-                    />
-
-                    <span
-                      className={`text-[17px] font-light tracking-wide transition-all duration-300 ${opened
-                          ? "translate-x-1 text-white"
-                          : "text-white/75 group-hover:translate-x-1 group-hover:text-white"
-                        }`}
-                    >
-                      {item.title}
-                    </span>
-
-                    {opened ? (
-                      <Minus
-                        size={15}
-                        strokeWidth={2}
-                        className="text-[#e8d48b] transition-transform duration-300"
-                      />
-                    ) : (
-                      <Plus
-                        size={15}
-                        strokeWidth={2}
-                        className="text-white/40 transition-all duration-300 group-hover:text-white/70"
-                      />
-                    )}
-                  </button>
-                ) : (
-                  <a
-                    key={item.title}
-                    href={item.link}
+                    to={item.link}
                     onClick={closeMenu}
-                    className={`group relative flex items-center rounded-2xl px-5 py-3.5
-                      transition-all duration-400
-                      ${active
+                    style={{
+                      transitionDelay: menuOpen
+                        ? `${index * 40}ms`
+                        : "0ms",
+                    }}
+                    className={`group relative flex w-full items-center rounded-2xl px-5 py-3.5 transition-all duration-400 ${
+                      active
                         ? "bg-white/[0.07]"
                         : "hover:bg-white/[0.04]"
-                      }
-                    `}
+                    }`}
                   >
                     {/* Gold accent bar */}
                     <span
-                      className={`absolute left-0 top-1/2 h-6 w-[2px] -translate-y-1/2 rounded-full bg-[#c9a227] transition-all duration-400 ${active ? "opacity-100 scale-y-100" : "opacity-0 scale-y-50"
-                        }`}
+                      className={`absolute left-0 top-1/2 h-6 w-[2px] -translate-y-1/2 rounded-full bg-[#c9a227] transition-all duration-400 ${
+                        active
+                          ? "scale-y-100 opacity-100"
+                          : "scale-y-50 opacity-0"
+                      }`}
                     />
 
+                    {/* Menu title */}
                     <span
-                      className={`text-[17px] font-light tracking-wide transition-all duration-300 ${active
+                      className={`text-[17px] font-light tracking-wide transition-all duration-300 ${
+                        active
                           ? "translate-x-1 text-white"
                           : "text-white/75 group-hover:translate-x-1 group-hover:text-white"
-                        }`}
+                      }`}
                     >
                       {item.title}
                     </span>
 
-                    {/* Subtle arrow on hover for non-active */}
+                    {/* Arrow */}
                     {!active && (
                       <ChevronRight
                         size={14}
-                        className="ml-auto opacity-0 -translate-x-1 text-white/30 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0"
+                        className="ml-auto -translate-x-1 text-white/30 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
                       />
                     )}
-                  </a>
+                  </Link>
                 );
               })}
+
             </nav>
 
-            {/* Bottom branding accent */}
+            {/* =========================
+                BOTTOM BRANDING
+            ========================== */}
             <div className="absolute bottom-10 left-0 right-0 px-8">
               <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-              <p className="mt-5 text-center text-[11px] font-light tracking-[0.25em] text-white/25 uppercase">
+
+              <p className="mt-5 text-center text-[11px] font-light uppercase tracking-[0.25em] text-white/25">
                 Rechi Construction
               </p>
             </div>
           </div>
-
-          {/* Divider (only when submenu exists) */}
-          {currentMenu && (
-            <div className="w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-          )}
-
-          {/* RIGHT COLUMN */}
-          <div className="relative flex-1 overflow-hidden">
-            {currentMenu ? (
-              <div className="absolute inset-0 flex flex-col">
-                <div className="flex-1 overflow-y-auto px-6 pt-8 pb-10">
-                  {currentMenu.children.map((child, index) => {
-                    const childActive = isCurrentPage(child.link);
-
-                    return (
-                      <a
-                        key={child.title}
-                        href={child.link}
-                        onClick={closeMenu}
-                        style={{
-                          animation: `slideItem 0.5s cubic-bezier(0.22,1,0.36,1) ${index * 0.06
-                            }s forwards`,
-                          opacity: 0,
-                        }}
-                        className={`group mb-2 flex items-center justify-between
-                          rounded-xl px-4 py-3.5 transition-all duration-300
-                          ${childActive
-                            ? "bg-white/[0.06]"
-                            : "hover:bg-white/[0.04]"
-                          }
-                        `}
-                      >
-                        <span
-                          className={`text-[15px] font-light tracking-wide transition-all duration-300 ${childActive
-                              ? "translate-x-1 text-[#e8d48b]"
-                              : "text-white/70 group-hover:translate-x-1.5 group-hover:text-white"
-                            }`}
-                        >
-                          {child.title}
-                        </span>
-
-                        <ChevronRight
-                          size={15}
-                          className={`transition-all duration-300 ${childActive
-                              ? "text-[#c9a227] translate-x-0.5"
-                              : "text-white/25 group-hover:text-white/50 group-hover:translate-x-1"
-                            }`}
-                        />
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            ) : null}
-          </div>
         </div>
       </aside>
 
+      {/* =========================
+          CUSTOM SCROLLBAR
+      ========================== */}
       <style>{`
-        @keyframes slideItem {
-          from {
-            opacity: 0;
-            transform: translateX(16px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
         aside *::-webkit-scrollbar {
           width: 3px;
         }
+
         aside *::-webkit-scrollbar-track {
           background: transparent;
         }
+
         aside *::-webkit-scrollbar-thumb {
           background: rgba(201, 162, 39, 0.25);
           border-radius: 999px;
         }
+
         aside *::-webkit-scrollbar-thumb:hover {
           background: rgba(201, 162, 39, 0.45);
         }

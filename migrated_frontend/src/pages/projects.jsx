@@ -1,10 +1,13 @@
 import HeroSlider from "../component/heroSlider";
+import ManiVerticals from "../component/maniVerticals";
 
 export default function Projects() {
   return (
     <>
       {/* Hero Section */}
       <HeroSlider />
+
+      <ManiVerticals />
 
       {/* Content Section */}
       <section className="max-w-7xl mx-auto px-6 py-20">

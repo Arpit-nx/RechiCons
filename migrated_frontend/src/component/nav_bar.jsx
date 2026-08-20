@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Phone, Search, Menu } from "lucide-react";
 import SideBar from "./side_bar";
 import rechiLogo from "../assets/rechi_logo.png";
-
+import { Link } from "react-router-dom";
 export default function Navbar({ isVisible = true }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -86,19 +86,20 @@ export default function Navbar({ isVisible = true }) {
           {/* ================= RIGHT SIDE ICONS ================= */}
           <div className="flex items-center gap-3 sm:gap-4">
             {/* ================= PHONE ================= */}
-            <a
-              href="tel:+919999999999"
-              className="group flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-[#d5a56d] bg-[#fff4e1] text-[#7a3d10] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#9a5b1a] hover:bg-[#9a5b1a] hover:text-[#fff8ef] hover:shadow-2xl"
-            >
-              <Phone
-                size={18}
-                className="sm:hidden transition-transform duration-300 group-hover:scale-110"
-              />
-              <Phone
-                size={20}
-                className="hidden sm:block transition-transform duration-300 group-hover:scale-110"
-              />
-            </a>
+            <Link
+  to="/enquire"
+  className="group flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-[#d5a56d] bg-[#fff4e1] text-[#7a3d10] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#9a5b1a] hover:bg-[#9a5b1a] hover:text-[#fff8ef] hover:shadow-2xl"
+>
+  <Phone
+    size={18}
+    className="sm:hidden transition-transform duration-300 group-hover:scale-110"
+  />
+
+  <Phone
+    size={20}
+    className="hidden sm:block transition-transform duration-300 group-hover:scale-110"
+  />
+</Link>
 
 
 

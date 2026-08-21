@@ -118,6 +118,19 @@ export default function Home({ onSplashEnd }) {
   const slides = [project1, project2, project3]
   const aboutImg = img("site/about.jpg")
 
+  /* --- Hide Scrollbar while Splash is visible --- */
+  useEffect(() => {
+    if (showSplash) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [showSplash])
+
   /* --- Splash Screen Control --- */
   useEffect(() => {
     const hideSplashTimer = window.setTimeout(() => {
@@ -222,7 +235,12 @@ export default function Home({ onSplashEnd }) {
         >
           <div className="home-splash__halo" />
           <div className="home-splash__card">
-            <img src={rechiLogo} alt="Rechi Construction" className="home-splash__logo" />
+            {/* Expanded logo dimensions for prominent visual hierarchy */}
+            <img 
+              src={rechiLogo} 
+              alt="Rechi Construction" 
+              className="home-splash__logo h-24 sm:h-32 md:h-36 w-auto object-contain mx-auto mb-2" 
+            />
             <div className="home-splash__brand">
               <span className="home-splash__title" aria-label="Rechi Construction">
                 <span className="home-splash__title-part home-splash__title-part--left">Rechi</span>

@@ -1,5 +1,6 @@
 import HeroSlider from "../component/heroSlider";
 import ManiVerticals from "../component/maniVerticals";
+import ProjectsSection from "../component/projectsection";
 
 export default function Projects() {
   return (
@@ -7,18 +8,11 @@ export default function Projects() {
       {/* Hero Section */}
       <HeroSlider />
 
+      {/* Mani Verticals - Card Swap Section */}
       <ManiVerticals />
 
-      {/* Content Section */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
-        <h2 className="text-4xl font-bold">
-          Our Projects
-        </h2>
-
-        <p className="mt-6 text-gray-600 leading-8">
-          Project details will be added here later.
-        </p>
-      </section>
+      {/* Company Projects */}
+      <ProjectsSection />
     </>
   );
 }

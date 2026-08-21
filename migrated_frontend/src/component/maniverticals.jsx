@@ -123,28 +123,7 @@ export default function ManiVerticals() {
             md:top-14
           "
         >
-          <p
-            className="
-              text-sm
-              uppercase
-              tracking-[0.3em]
-              text-black/50
-            "
-          >
-            Our Business
-          </p>
-
-          <h2
-            className="
-              mt-2
-              text-4xl
-              font-bold
-              text-black
-              md:text-6xl
-            "
-          >
-            Mani Verticals
-          </h2>
+          
         </div>
 
         {/* =========================

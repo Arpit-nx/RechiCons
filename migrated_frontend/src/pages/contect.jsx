@@ -5,12 +5,11 @@ import {
   Phone,
   Mail,
   Clock,
-  ExternalLink,
   ArrowUpRight,
 } from "lucide-react"
 
 /* -------------------------------------------------------------------------- */
-/*                            ANIMATION VARIANTS                              */
+/*                              ANIMATION VARIANTS                            */
 /* -------------------------------------------------------------------------- */
 
 const ease = [0.16, 1, 0.3, 1]
@@ -20,22 +19,40 @@ const fadeUp = {
   show: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, delay: i * 0.1, ease },
+    transition: {
+      duration: 0.8,
+      delay: i * 0.1,
+      ease,
+    },
   }),
 }
 
 const headingContainer = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
 }
 
 const headingItem = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease,
+    },
+  },
 }
 
 /* -------------------------------------------------------------------------- */
-/*                              HELPER COMPONENTS                             */
+/*                              HELPER COMPONENT                              */
 /* -------------------------------------------------------------------------- */
 
 function SectionHeading({
@@ -47,17 +64,28 @@ function SectionHeading({
   className = "",
 }) {
   const isCenter = align === "center"
-  const heading = tone === "dark" ? "text-amber-50" : "text-gray-900"
-  const body = tone === "dark" ? "text-amber-100/75" : "text-gray-600"
-  const eyebrowColor = tone === "dark" ? "text-amber-400" : "text-amber-600"
+
+  const heading =
+    tone === "dark" ? "text-amber-50" : "text-gray-900"
+
+  const body =
+    tone === "dark" ? "text-amber-100/75" : "text-gray-600"
+
+  const eyebrowColor =
+    tone === "dark" ? "text-amber-400" : "text-amber-600"
 
   return (
     <motion.div
       variants={headingContainer}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-100px" }}
-      className={`max-w-2xl ${isCenter ? "mx-auto text-center" : ""} ${className}`}
+      viewport={{
+        once: true,
+        margin: "-100px",
+      }}
+      className={`w-full max-w-3xl ${
+        isCenter ? "mx-auto text-center" : ""
+      } ${className}`}
     >
       <motion.span
         variants={headingItem}
@@ -67,17 +95,21 @@ function SectionHeading({
       >
         <span className="h-px w-8 bg-current" />
         {eyebrow}
+        {/* Always show right line when centered for proper alignment */}
+        <span className={`h-px w-8 bg-current ${isCenter ? "" : "md:hidden"}`} />
       </motion.span>
+
       <motion.h2
         variants={headingItem}
-        className={`text-balance mt-4 font-display text-3xl font-medium leading-[1.1] sm:text-4xl md:text-5xl ${heading}`}
+        className={`mt-4 font-display text-3xl font-medium leading-tight sm:text-4xl md:text-5xl lg:text-6xl ${heading}`}
       >
         {title}
       </motion.h2>
+
       {description && (
         <motion.p
           variants={headingItem}
-          className={`mt-5 text-base leading-relaxed sm:text-lg ${body}`}
+          className={`mx-auto mt-5 max-w-2xl text-sm leading-relaxed sm:text-base md:text-lg ${body}`}
         >
           {description}
         </motion.p>
@@ -111,14 +143,20 @@ export default function ContactUs() {
     {
       icon: Phone,
       title: "Phone Number",
-      details: ["+91 90518 00151", "+91 79802 94424"],
+      details: [
+        "+91 90518 00151",
+        "+91 79802 94424",
+      ],
       linkText: "Call Us Now",
       linkUrl: "tel:+919051800151",
     },
     {
       icon: Mail,
       title: "Email Us",
-      details: ["rechiconstruction@yahoo.in", "info@rechiconstruction.in"],
+      details: [
+        "rechiconstruction@yahoo.in",
+        "info@rechiconstruction.in",
+      ],
       linkText: "Send Mail",
       linkUrl: "mailto:rechiconstruction@yahoo.in",
     },
@@ -135,16 +173,16 @@ export default function ContactUs() {
   ]
 
   return (
-    <div className="contact-shell w-full min-h-screen bg-[#fbf8f3] text-gray-900 overflow-x-hidden pt-20 pb-20">
-      
-      {/* 1. HERO BANNER */}
-      <section className="relative overflow-hidden bg-[#fbf8f3] pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-gray-200/60">
+    <div className="contact-shell min-h-screen w-full overflow-x-hidden bg-[#fbf8f3] pb-12 pt-10 text-gray-900 sm:pb-16 sm:pt-12 lg:pb-20">
+
+      {/* HERO */}
+      <section className="relative overflow-hidden border-b border-gray-200/60 bg-[#fbf8f3] px-4 pb-10 pt-6 sm:px-6 sm:pb-14 sm:pt-8 md:pb-16 lg:px-8 lg:pb-20 lg:pt-10">
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(211,173,100,0.18),transparent)]"
         />
 
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="relative mx-auto flex w-full max-w-7xl justify-center">
           <SectionHeading
             eyebrow="Get In Touch"
             title="Contact Us"
@@ -154,97 +192,99 @@ export default function ContactUs() {
         </div>
       </section>
 
-      {/* 2. CONTACT DETAILS & MAP SECTION */}
-      <section className="relative py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
-            
-            {/* Left Column: Contact Cards */}
-            <div className="lg:col-span-5 space-y-6">
-              <motion.h3
+      {/* CONTACT DETAILS + MAP */}
+      <section className="relative px-4 py-10 sm:px-6 sm:py-16 md:py-20 lg:px-8 lg:py-24">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-12 lg:items-stretch lg:gap-12">
+
+            {/* LEFT - CONTACT CARDS */}
+            <div className="lg:col-span-5">
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="font-display text-2xl font-semibold text-gray-900 mb-6"
+                transition={{ duration: 0.7, ease }}
+                className="mb-6 sm:mb-8"
               >
-                Reach Out Directly
-              </motion.h3>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-amber-600">
+                  Contact Information
+                </p>
 
-              {contactCards.map((card, i) => {
-                const Icon = card.icon
-                return (
-                  <motion.div
-                    key={card.title}
-                    custom={i}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-50px" }}
-                    variants={fadeUp}
-                    className="group rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
-                  >
-                    <div className="flex items-start gap-4">
-                      <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 transition-colors duration-500 group-hover:bg-amber-500 group-hover:text-white">
-                        <Icon className="h-6 w-6" strokeWidth={1.75} />
-                      </span>
+                <h3 className="font-display text-2xl font-semibold leading-tight text-gray-900 sm:text-3xl">
+                  Reach Out Directly
+                </h3>
+              </motion.div>
 
-                      <div className="flex-1">
-                        <h4 className="font-display text-lg font-medium text-gray-900">
-                          {card.title}
-                        </h4>
+              <div className="space-y-4 sm:space-y-5">
+                {contactCards.map((card, i) => {
+                  const Icon = card.icon
 
-                        <div className="mt-2 space-y-1 text-sm text-gray-600 leading-relaxed">
-                          {card.details.map((detail, idx) => (
-                            <p key={idx}>{detail}</p>
-                          ))}
+                  return (
+                    <motion.div
+                      key={card.title}
+                      custom={i}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true, margin: "-50px" }}
+                      variants={fadeUp}
+                      className="group w-full rounded-2xl border border-gray-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-5 md:p-6"
+                    >
+                      <div className="flex items-start gap-3 sm:gap-4">
+                        <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 transition-colors duration-500 group-hover:bg-amber-500 group-hover:text-white sm:h-12 sm:w-12">
+                          <Icon
+                            className="h-5 w-5 sm:h-6 sm:w-6"
+                            strokeWidth={1.75}
+                          />
+                        </span>
+
+                        <div className="min-w-0 flex-1">
+                          <h4 className="font-display text-base font-semibold text-gray-900 sm:text-lg">
+                            {card.title}
+                          </h4>
+
+                          <div className="mt-1.5 space-y-1 text-xs leading-relaxed text-gray-600 sm:mt-2 sm:text-sm">
+                            {card.details.map((detail, idx) => (
+                              <p key={idx} className="break-words">
+                                {detail}
+                              </p>
+                            ))}
+                          </div>
+
+                          {card.linkUrl && (
+                            <a
+                              href={card.linkUrl}
+                              target={
+                                card.linkUrl.startsWith("http")
+                                  ? "_blank"
+                                  : "_self"
+                              }
+                              rel="noopener noreferrer"
+                              className="mt-2.5 inline-flex max-w-full items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-600 transition-colors hover:text-amber-700 sm:mt-3 sm:text-xs"
+                            >
+                              <span className="truncate">
+                                {card.linkText}
+                              </span>
+                              <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
+                            </a>
+                          )}
                         </div>
-
-                        {card.linkUrl && (
-                          <a
-                            href={card.linkUrl}
-                            target={card.linkUrl.startsWith("http") ? "_blank" : "_self"}
-                            rel="noopener noreferrer"
-                            className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-600 hover:text-amber-700 transition-colors"
-                          >
-                            {card.linkText}
-                            <ArrowUpRight className="h-3.5 w-3.5" />
-                          </a>
-                        )}
                       </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
+                    </motion.div>
+                  )
+                })}
+              </div>
             </div>
 
-            {/* Right Column: Google Map */}
+            {/* RIGHT - GOOGLE MAP */}
             <div className="lg:col-span-7">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.9, ease }}
-                className="relative h-full min-h-[480px] rounded-3xl border border-white/80 bg-white p-3 shadow-xl overflow-hidden flex flex-col"
+                className="h-full w-full overflow-hidden rounded-2xl border border-gray-100 bg-white p-2 shadow-xl sm:rounded-3xl sm:p-3"
               >
-                <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-amber-600" />
-                    <span className="font-display text-base font-semibold text-gray-900">
-                      Locate Us
-                    </span>
-                  </div>
-
-                  <a
-                    href={googleMapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-md bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700 hover:bg-amber-100 transition-colors"
-                  >
-                    Open in Google Maps
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                </div>
-
-                <div className="relative w-full flex-1 min-h-[420px] rounded-2xl overflow-hidden mt-2">
+                <div className="relative h-[340px] w-full overflow-hidden rounded-xl sm:h-[420px] sm:rounded-2xl md:h-[470px] lg:h-full lg:min-h-[520px]">
                   <iframe
                     title="RECHI CONSTRUCTION Location"
                     src={mapEmbedIframeSrc}
@@ -263,7 +303,6 @@ export default function ContactUs() {
           </div>
         </div>
       </section>
-
     </div>
   )
 }

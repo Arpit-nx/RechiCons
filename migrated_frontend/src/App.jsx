@@ -1,3 +1,37 @@
+// import { BrowserRouter } from "react-router-dom";
+// import Navbar from "./component/nav_bar.jsx";
+// import Footer from "./component/footer.jsx";
+// import AnandiApartment from "./pages/anandi_appartment.jsx";
+// import AnandiVilla from "./pages/anandi_villa.jsx";
+// import AnandiPark from "./pages/anandi_park.jsx";
+// import Anandiresidency from "./pages/anandi_residency.jsx";
+// import AnandiVillaPhase2 from "./pages/anandi_villa2.jsx";
+// import SantiBhawan from "./pages/santi_bhawan.jsx";
+// import AnandiSunrise from "./pages/anandi_sunrise.jsx";
+// import AnandiPalace from "./pages/anandi_palace.jsx";
+// import Anandvista from "./pages/anadi_vista.jsx";
+// import AnandiGarden from "./pages/anandi_garden.jsx";
+// import AnandiGreenView from "./pages/anandi_green_view.jsx";
+
+// export default function App() {
+//   return (
+//     <BrowserRouter>
+//       <div className="min-h-screen bg-[#fff8ef]">
+//         <div className="fixed left-0 right-0 top-0 z-[9999]">
+//           <Navbar isVisible={true} />
+//         </div>
+
+//         <main className="pt-20">
+//           <AnandiGreenView />
+//         </main>
+
+//         <Footer />
+//       </div>
+//     </BrowserRouter>
+//   );
+// }
+
+
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 

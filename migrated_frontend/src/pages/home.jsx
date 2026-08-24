@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import {
@@ -118,16 +119,21 @@ export default function Home({ onSplashEnd }) {
   const slides = [project1, project2, project3]
   const aboutImg = img("site/about.jpg")
 
-  /* --- Hide Scrollbar while Splash is visible --- */
+  /* --- Hide Scrollbar while Splash is visible (safe version) --- */
   useEffect(() => {
     if (showSplash) {
       document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = ""
+      // only clear if sidebar is not open
+      if (!document.body.classList.contains("sidebar-open")) {
+        document.body.style.overflow = ""
+      }
     }
 
     return () => {
-      document.body.style.overflow = ""
+      if (!document.body.classList.contains("sidebar-open")) {
+        document.body.style.overflow = ""
+      }
     }
   }, [showSplash])
 
@@ -546,3 +552,5 @@ export default function Home({ onSplashEnd }) {
     </div>
   )
 }
+
+

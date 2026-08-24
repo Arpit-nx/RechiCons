@@ -1,5 +1,5 @@
-import { useEffect, useState, useCallback } from "react";
-import { X, Plus, Minus, ChevronRight } from "lucide-react";
+import { useEffect, useCallback } from "react";
+import { X, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const menuItems = [
@@ -15,17 +15,12 @@ export default function SideBar({
   menuOpen,
   setMenuOpen,
 }) {
-  const [activeMenu, setActiveMenu] = useState(null);
-
-  // Get current URL from React Router
   const location = useLocation();
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
-    setActiveMenu(null);
   }, [setMenuOpen]);
 
-  // Current page
   const isCurrentPage = (link) => {
     return location.pathname === link;
   };
@@ -33,16 +28,12 @@ export default function SideBar({
   // Lock body scroll when sidebar is open
   useEffect(() => {
     if (!menuOpen) {
-      setActiveMenu(null);
-
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
       document.body.classList.remove("sidebar-open");
-
       return;
     }
 
-    // Calculate scrollbar width
     const scrollbarWidth =
       window.innerWidth - document.documentElement.clientWidth;
 
@@ -73,10 +64,6 @@ export default function SideBar({
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen, closeMenu]);
-
-  const currentMenu = menuItems.find(
-    (item) => item.title === activeMenu
-  );
 
   return (
     <>
@@ -155,11 +142,9 @@ export default function SideBar({
             CONTENT
         ========================== */}
         <div className="relative flex h-[calc(100%-88px)]">
-
           {/* LEFT COLUMN */}
           <div className="w-full shrink-0 px-6 py-10">
             <nav aria-label="Primary" className="space-y-1.5">
-
               {menuItems.map((item, index) => {
                 const active = isCurrentPage(item.link);
 
@@ -209,7 +194,6 @@ export default function SideBar({
                   </Link>
                 );
               })}
-
             </nav>
 
             {/* =========================

@@ -5,35 +5,40 @@ import project3 from "../assets/project-imgs/rechi3.jpeg";
 export const projects = [
   {
     id: 1,
-    name: 'Anandi Enclave',
-    category: 'completed',
-    location: 'Bablatala, Kolkata',
+    name: "Anandi Enclave",
+    category: "completed",
+    location: "Bablatala, Kolkata",
+    slug: "anandi-enclave",
   },
   {
     id: 2,
-    name: 'Anandi Heights',
-    category: 'completed',
-    location: 'Rajarhat, Kolkata',
+    name: "Anandi Garden",
+    category: "completed",
+    location: "Rajarhat, Kolkata",
+    slug: "anandi-garden",
   },
   {
     id: 3,
-    name: 'Anandi Park',
-    category: 'completed',
-    location: 'Dum Dum Park, Kolkata',
+    name: "Anandi Park",
+    category: "completed",
+    location: "Dum Dum Park, Kolkata",
+    slug: "anandi-park",
   },
   {
     id: 4,
-    name: 'Anandi Residency',
-    category: 'ongoing',
-    location: 'New Town, Kolkata',
+    name: "Anandi Residency",
+    category: "ongoing",
+    location: "New Town, Kolkata",
+    slug: "anandi-residency",
   },
   {
     id: 5,
-    name: 'Anandi Horizon',
-    category: 'upcoming',
-    location: 'Rajarhat Extension, Kolkata',
+    name: "Anandi Green View",
+    category: "upcoming",
+    location: "Rajarhat, Kolkata",
+    slug: "anandi-green-view",
   },
-]
+];
 
 export const verticals = [
     {

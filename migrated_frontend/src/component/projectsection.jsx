@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 import ProjectCard from "./ProjectCard";
 import {projects} from "../data/projects";
@@ -192,10 +193,15 @@ export default function ProjectsSection() {
               will-change-transform
             "
           >
-            <ProjectCard
-              project={project}
-              index={index}
-            />
+            <Link
+              to={`/project/${project.slug}`}
+              className="block h-full w-full"
+            >
+              <ProjectCard
+                project={project}
+                index={index}
+              />
+            </Link>
           </div>
         ))}
       </div>

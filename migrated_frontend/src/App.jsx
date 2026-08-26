@@ -43,6 +43,7 @@ import About from "./pages/about.jsx";
 import OtherServices from "./pages/otherservise.jsx";
 import Contect from "./pages/contect.jsx";
 import Projects from "./pages/projects.jsx";
+import ProjectPage from "./pages/ProjectPage.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -98,6 +99,12 @@ function AppContent() {
             element={<Projects />}
           />
 
+          {/* Individual project */}
+          <Route
+            path="/project/:slug"
+            element={<ProjectPage />}
+          />
+          
           {/* Other Services */}
           <Route
             path="/other-services"

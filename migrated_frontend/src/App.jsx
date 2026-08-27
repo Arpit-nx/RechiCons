@@ -50,11 +50,14 @@ function AppContent() {
   const isHomePage = location.pathname === "/";
   const [showNav, setShowNav] = useState(!isHomePage);
 
+  // Scroll to top automatically on route or URL parameter changes
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     if (!isHomePage) {
       setShowNav(true);
     }
-  }, [isHomePage]);
+  }, [location.pathname, isHomePage]);
 
   const handleSplashEnd = () => {
     setShowNav(true);

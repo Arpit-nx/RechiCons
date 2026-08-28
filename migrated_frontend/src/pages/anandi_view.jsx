@@ -7,9 +7,17 @@ import SpecificationsSection from "../component/individual_project_source/Specif
 import ConnectivitySection from "../component/individual_project_source/ConnectivitySection.jsx";
 import ProjectViewSection from "../component/individual_project_source/ProjectViewSection.jsx";
 
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
-import visionImg from "../assets/project-imgs/rechi2.jpg";
-import floorPlanImg from "../assets/project-imgs/floor_plan_anandi_vista.jpeg";
+import main from "../assets/project-imgs/anandiviewmain.jpg";
+import pic1 from "../assets/project-imgs/anandiviewpic1.jpg";
+import pic2 from "../assets/project-imgs/anandiviewpic2.jpg";
+import pic3 from "../assets/project-imgs/anandiviewpic3.jpg";
+import pic4 from "../assets/project-imgs/anandiviewpic4.jpg";
+import pic5 from "../assets/project-imgs/anandiviewpic5.jpg";
+import pic6 from "../assets/project-imgs/anandiviewpic6.jpg";
+import pic7 from "../assets/project-imgs/anandiviewpic7.jpg";
+import pic8 from "../assets/project-imgs/anandiviewpic8.jpg";
+import pic9 from "../assets/project-imgs/anandiviewpic9.jpg";
+import pic10 from "../assets/project-imgs/anandiviewpic10.jpg";
 
 const projectData = {
   hero: {
@@ -17,8 +25,8 @@ const projectData = {
     title: "ANANDI VIEW",
     subtitle:
       "A well-designed residential community offering 40 exclusive 2 & 3 BHK apartments across 2 towers in Rajarhat, Kolkata.",
-    image: heroImg,
-    images: [heroImg],
+    image: main,
+    images: [main],
   },
   vision: {
     title: "Project Overview",
@@ -33,7 +41,7 @@ const projectData = {
     title: "Floor Plan & Layout",
     subtitle:
       "Thoughtfully planned layouts designed for optimal space utilization, natural air ventilation, and privacy.",
-    image: floorPlanImg,
+//     image: ,
     configurations: [
       { label: "2 BHK Unit", area: "752 – 1,017 sq.ft." },
       { label: "3 BHK Unit", area: "1,183 – 1,578 sq.ft." },
@@ -105,7 +113,7 @@ const projectData = {
   },
   projectView: {
     title: "Project View",
-    images: [heroImg, visionImg, floorPlanImg],
+    images: [main, pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10],
   },
 };
 
@@ -119,6 +127,7 @@ export default function AnandiView() {
       <SpecificationsSection data={projectData.specifications} />
       <ConnectivitySection data={projectData.connectivity} />
       <ProjectViewSection data={projectData.projectView} />
-    </main>
+   
+ </main>
   );
 }

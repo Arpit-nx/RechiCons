@@ -4,7 +4,7 @@ import ConnectivitySection from "../component/individual_project_source/Connecti
 import ComingSoonSection from "../component/individual_project_source/ComingSoonSection.jsx";
 
 // Import your asset images
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
+import heroImg from "../assets/project-imgs/anandivilla2main.jpg";
 
 const projectData = {
   hero: {

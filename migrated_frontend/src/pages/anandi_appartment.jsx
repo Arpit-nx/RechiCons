@@ -4,9 +4,15 @@ import ConnectivitySection from "../component/individual_project_source/Connecti
 import ProjectViewSection from "../component/individual_project_source/ProjectViewSection.jsx";
 import FloorPlanSection from "../component/individual_project_source/FloorPlanSection.jsx";
 import ComingSoonSection from "../component/individual_project_source/ComingSoonSection.jsx";
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
-import visionImg from "../assets/project-imgs/rechi2.jpg";
-import floorPlanImg from "../assets/project-imgs/floor_plan_anandi_vista.jpeg";
+import heroImg from "../assets/project-imgs/anandiapartmentmain.jpg";
+import floorPlanImg1 from "../assets/project-imgs/anandiapartmentfloorplan1.jpg";
+import floorPlanImg2 from "../assets/project-imgs/anandiapartmentfloorplan2.jpg";
+import floorPlanImg3 from "../assets/project-imgs/anandiapartmentfloorplan3.jpg";
+import floorPlanImg4 from "../assets/project-imgs/anandiapartmentfloorplan4.jpg";
+import pic1 from "../assets/project-imgs/anandiapartmentpic1.jpg";
+import pic2 from "../assets/project-imgs/anandiapartmentpic2.jpg";
+import pic3 from "../assets/project-imgs/anandiapartmentpic3.jpg";
+import pic4 from "../assets/project-imgs/anandiapartmentpic4.jpg";
 
 const projectData = {
   hero: {
@@ -15,25 +21,25 @@ const projectData = {
     image: heroImg,
   },
   floorPlan: {
-    title: "Floor Plan",
-    subtitle: "Layouts for Block A, Block B, and Block C",
-    image: floorPlanImg,
-    configurations: [
-      { label: "Block A - Flat A (3 BHK)", area: "1349 Sqft" },
-      { label: "Block A - Flat B (3 BHK)", area: "1372 Sqft" },
-      { label: "Block A - Flat C (2 BHK)", area: "965 Sqft" },
-      { label: "Block A - Flat D (3 BHK)", area: "1138 Sqft" },
-      { label: "Block A - Flat E (2 BHK)", area: "1046 Sqft" },
-      { label: "Block B - Flat A (3 BHK)", area: "1040 Sqft" },
-      { label: "Block B - Flat B (2 BHK)", area: "880 Sqft" },
-      { label: "Block B - Flat C (2 BHK)", area: "914 Sqft" },
-      { label: "Block B - Flat D (3 BHK)", area: "1069 Sqft" },
-      { label: "Block C - Flat A (3 BHK)", area: "833 Sqft" },
-      { label: "Block C - Flat B (2 BHK)", area: "853 Sqft" },
-      { label: "Block C - Flat C (2 BHK)", area: "841 Sqft" },
-    ],
-    note: "Saleable area specs as per architect site layout plan.",
-  },
+  title: "Floor Plan",
+  subtitle: "Layouts for Block A, Block B, and Block C",
+  images: [floorPlanImg1, floorPlanImg2, floorPlanImg3, floorPlanImg4],
+  configurations: [
+    { label: "Block A - Flat A (3 BHK)", area: "1349 Sqft" },
+    { label: "Block A - Flat B (3 BHK)", area: "1372 Sqft" },
+    { label: "Block A - Flat C (2 BHK)", area: "965 Sqft" },
+    { label: "Block A - Flat D (3 BHK)", area: "1138 Sqft" },
+    { label: "Block A - Flat E (2 BHK)", area: "1046 Sqft" },
+    { label: "Block B - Flat A (3 BHK)", area: "1040 Sqft" },
+    { label: "Block B - Flat B (2 BHK)", area: "880 Sqft" },
+    { label: "Block B - Flat C (2 BHK)", area: "914 Sqft" },
+    { label: "Block B - Flat D (3 BHK)", area: "1069 Sqft" },
+    { label: "Block C - Flat A (3 BHK)", area: "833 Sqft" },
+    { label: "Block C - Flat B (2 BHK)", area: "853 Sqft" },
+    { label: "Block C - Flat C (2 BHK)", area: "841 Sqft" },
+  ],
+  note: "Saleable area specs as per architect site layout plan.",
+},
   connectivity: {
     title: "Connectivity",
     subtitle: "106, Anandi Apartment, Saratpally, Bablatala, Rajarhat, Kolkata - 700136",
@@ -49,7 +55,10 @@ const projectData = {
     title: "Project View",
     images: [
       heroImg,
-      visionImg,
+      pic1,
+      pic2,
+      pic3,
+      pic4,
     ],
   },
 };

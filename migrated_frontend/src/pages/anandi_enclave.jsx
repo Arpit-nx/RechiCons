@@ -9,9 +9,36 @@ import ConnectivitySection from "../component/individual_project_source/Connecti
 import ProjectViewSection from "../component/individual_project_source/ProjectViewSection.jsx";
 
 // Import your asset images
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
-import visionImg from "../assets/project-imgs/rechi2.jpg";
-import floorPlanImg from "../assets/project-imgs/floor_plan_anandi_vista.jpeg";
+import heroImg from "../assets/project-imgs/anandienclavemain.jpg";
+import floorPlanImg1 from "../assets/project-imgs/anandienclavefloorplan1.jpg";
+import floorPlanImg2 from "../assets/project-imgs/anandienclavefloorplan2.png";
+import floorPlanImg3 from "../assets/project-imgs/anandienclavefloorplan3.jpg";
+import floorPlanImg4 from "../assets/project-imgs/anandienclavefloorplan4.jpg";
+import floorPlanImg5 from "../assets/project-imgs/anandienclavefloorplan5.jpg";
+import floorPlanImg6 from "../assets/project-imgs/anandienclavefloorplan6.jpg";
+import floorPlanImg7 from "../assets/project-imgs/anandienclavefloorplan7.jpg";
+import floorPlanImg8 from "../assets/project-imgs/anandienclavefloorplan8.jpg";
+import floorPlanImg9 from "../assets/project-imgs/anandienclavefloorplan9.jpg";
+import floorPlanImg10 from "../assets/project-imgs/anandienclavefloorplan10.jpg";
+import floorPlanImg11 from "../assets/project-imgs/anandienclavefloorplan11.jpg";
+import floorPlanImg12 from "../assets/project-imgs/anandienclavefloorplan12.jpg";
+import floorPlanImg13 from "../assets/project-imgs/anandienclavefloorplan13.jpg";
+import floorPlanImg14 from "../assets/project-imgs/anandienclavefloorplan14.jpg";
+import pic1 from "../assets/project-imgs/anandienclavepic1.jpg";
+import pic2 from "../assets/project-imgs/anandienclavepic2.jpg";
+import pic3 from "../assets/project-imgs/anandienclavepic3.jpg";
+import pic4 from "../assets/project-imgs/anandienclavepic4.jpg";
+import pic5 from "../assets/project-imgs/anandienclavepic5.jpg";
+import pic6 from "../assets/project-imgs/anandienclavepic6.jpg";
+import pic7 from "../assets/project-imgs/anandienclavepic7.jpg";
+import pic8 from "../assets/project-imgs/anandienclavepic8.jpg";
+import pic9 from "../assets/project-imgs/anandienclavepic9.jpg";
+import pic10 from "../assets/project-imgs/anandienclavepic10.jpg";
+import pic11 from "../assets/project-imgs/anandienclavepic11.jpg";
+import pic12 from "../assets/project-imgs/anandienclavepic12.jpg";
+import pic13 from "../assets/project-imgs/anandienclavepic13.jpg";
+import pic14 from "../assets/project-imgs/anandienclavepic14.jpg";
+
 
 const projectData = {
   hero: {
@@ -36,7 +63,7 @@ const projectData = {
     title: "Floor Plan & Layout",
     subtitle:
       "Vastu-compliant architectural planning designed for maximum natural light, ventilation, and functional space utilization.",
-    image: floorPlanImg,
+    image: [floorPlanImg1, floorPlanImg2, floorPlanImg3, floorPlanImg4, floorPlanImg5, floorPlanImg6, floorPlanImg7, floorPlanImg8, floorPlanImg9, floorPlanImg10, floorPlanImg11, floorPlanImg12, floorPlanImg13, floorPlanImg14],
     configurations: [
       { label: "3 BHK (Flat A)", area: "1,342 – 1,486 sq.ft." },
       { label: "3 BHK (Flat B)", area: "1,342 – 1,486 sq.ft." },
@@ -154,9 +181,10 @@ const projectData = {
     ],
   },
   projectView: {
-    title: "Project View",
-    images: [heroImg, visionImg, floorPlanImg],
-  },
+    title: "Project View",
+    image: [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10, pic11, pic12, pic13, pic14],
+    images: [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10, pic11, pic12, pic13, pic14],
+  },
 };
 
 export default function AnandiEnclave() {

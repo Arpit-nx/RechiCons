@@ -5,7 +5,7 @@ import AmenitiesSection from "../component/individual_project_source/AmenitiesSe
 import ComingSoonSection from "../component/individual_project_source/ComingSoonSection.jsx";
 
 // Import your asset image
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
+import heroImg from "../assets/project-imgs/anandigardenmain.jpg";
 
 const projectData = {
   hero: {

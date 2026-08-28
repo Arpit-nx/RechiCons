@@ -6,8 +6,8 @@ import ProjectViewSection from "../component/individual_project_source/ProjectVi
 import ComingSoonSection from "../component/individual_project_source/ComingSoonSection.jsx";
 
 // Import your asset images
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
-import visionImg from "../assets/project-imgs/rechi2.jpg";
+import heroImg from "../assets/project-imgs/anandigargenviewmain.jpg";
+import visionImg from "../assets/project-imgs/anandigardenviewpic.jpg";
 
 const projectData = {
   hero: {
@@ -16,6 +16,7 @@ const projectData = {
     subtitle: "Rajarhat, Kalikapur, Patharghata, Kolkata - 700135",
     primaryCta: "Residences",
     secondaryCta: "Amenities",
+    image: heroImg,
     images: [heroImg],
   },
   vision: {
@@ -42,7 +43,8 @@ const projectData = {
   projectView: {
     title: "Project View",
     subtitle: "Visual renders and layout highlights",
-    images: [heroImg, visionImg],
+    image: [visionImg],
+    images: [visionImg],
   },
 };
 

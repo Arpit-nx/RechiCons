@@ -3,7 +3,7 @@ import HeroSection from "../component/individual_project_source/HeroSection.jsx"
 import ComingSoonSection from "../component/individual_project_source/ComingSoonSection.jsx";
 
 // Import your asset image
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
+import heroImg from "../assets/project-imgs/anandisunrisemain.jpg";
 
 const projectData = {
   hero: {

@@ -9,8 +9,9 @@ import ConnectivitySection from "../component/individual_project_source/Connecti
 import ProjectViewSection from "../component/individual_project_source/ProjectViewSection.jsx";
 
 // Import your asset images
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
-import visionImg from "../assets/project-imgs/rechi2.jpg";
+import main from "../assets/project-imgs/anandivistamain.png";
+import main1 from "../assets/project-imgs/anandivistamain2.png";
+import main2 from "../assets/project-imgs/anandivistamain3.png";
 import floorPlanImg from "../assets/project-imgs/floor_plan_anandi_vista.jpeg";
 
 const projectData = {
@@ -21,7 +22,7 @@ const projectData = {
       "G+7 storied residences in the heart of Bablatala, Kolkata. Curated 2 & 3 BHK homes from 1,227 to 1,539 sq. ft.",
     primaryCta: "Residences",
     secondaryCta: "Amenities",
-    images: [heroImg],
+    images: [main],
   },
 
   vision: {
@@ -148,7 +149,7 @@ const projectData = {
   projectView: {
     title: "Project View",
     subtitle: "Visual assets showcasing the structure and layout.",
-    images: [heroImg, visionImg, floorPlanImg],
+    images: [main, main1, main2],
   },
 };
 

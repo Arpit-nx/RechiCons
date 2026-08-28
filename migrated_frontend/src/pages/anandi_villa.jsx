@@ -4,8 +4,9 @@ import ConnectivitySection from "../component/individual_project_source/Connecti
 import ProjectViewSection from "../component/individual_project_source/ProjectViewSection.jsx";
 import ComingSoonSection from "../component/individual_project_source/ComingSoonSection.jsx";
 
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
-import visionImg from "../assets/project-imgs/rechi2.jpg";
+import heroImg from "../assets/project-imgs/anandivillamain.jpg";
+import pic1 from "../assets/project-imgs/anandivillapic1.jpg";
+import pic2 from "../assets/project-imgs/anandivillapic2.jpg";
 
 const projectData = {
   hero: {
@@ -27,7 +28,7 @@ const projectData = {
   },
   projectView: {
     title: "Project View",
-    images: [visionImg, heroImg],
+    images: [pic1, pic2],
   },
 };
 

@@ -9,9 +9,11 @@
 // import SantiBhawan from "./pages/santi_bhawan.jsx";
 // import AnandiSunrise from "./pages/anandi_sunrise.jsx";
 // import AnandiPalace from "./pages/anandi_palace.jsx";
-// import Anandvista from "./pages/anadi_vista.jsx";
+// import Anandivista from "./pages/anadi_vista.jsx";
 // import AnandiGarden from "./pages/anandi_garden.jsx";
 // import AnandiGreenView from "./pages/anandi_green_view.jsx";
+// import Anandiview from "./pages/anandi_view.jsx";
+// import AnandiEnclave from "./pages/anandi_enclave.jsx";
 
 // export default function App() {
 //   return (
@@ -22,7 +24,7 @@
 //         </div>
 
 //         <main className="pt-20">
-//           <AnandiGreenView />
+//           <Anandiresidency />
 //         </main>
 
 //         <Footer />

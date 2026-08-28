@@ -5,7 +5,7 @@ import ConnectivitySection from "../component/individual_project_source/Connecti
 import ProjectViewSection from "../component/individual_project_source/ProjectViewSection.jsx";
 
 // Import your asset image
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
+import heroImg from "../assets/project-imgs/santibhawanmain.jpg";
 
 const projectData = {
   hero: {
@@ -30,10 +30,7 @@ const projectData = {
       { label: "NSCB International Airport", distance: "15 mins" },
     ],
   },
-  projectView: {
-    title: "Project View",
-    images: [heroImg],
-  },
+  
 };
 
 export default function SantiBhawan() {

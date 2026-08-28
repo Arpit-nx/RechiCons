@@ -5,7 +5,7 @@ import ProjectViewSection from "../component/individual_project_source/ProjectVi
 import ComingSoonSection from "../component/individual_project_source/ComingSoonSection.jsx";
 
 // Import your image asset here
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
+import heroImg from "../assets/project-imgs/anandiparkmain.jpg";
 
 const projectData = {
   hero: {
@@ -24,17 +24,13 @@ const projectData = {
       { label: "NSCB International Airport", distance: "20 mins" },
     ],
   },
-  projectView: {
-    title: "Project View",
-    images: [heroImg],
-  },
+  
 };
 
 export default function AnandiPark() {
   return (
     <main className="home-shell !m-0 !w-full !max-w-none !p-0 overflow-x-hidden bg-[#fbf8f3] text-gray-900 scroll-smooth snap-y snap-mandatory">
       <HeroSection hero={projectData.hero} showCtas={false} />
-      <ProjectViewSection data={projectData.projectView} />
       <ConnectivitySection data={projectData.connectivity} />
       <ComingSoonSection title="Project Details" />
 

@@ -13,7 +13,7 @@ env/
 .env.*
 
 # FastAPI / uploads
-uploads/
+# uploads/
 *.log
 
 # IDE / editor

@@ -1,28 +1,28 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
-from app.core.config import settings
+# from sqlalchemy import create_engine
+# from sqlalchemy.orm import Session, sessionmaker
+# from app.core.config import settings
 
-engine = create_engine(
-    settings.database_url,
-    echo=settings.debug,
-    pool_pre_ping=True,
-    pool_recycle=1800,
-)
+# engine = create_engine(
+#     settings.database_url,
+#     echo=settings.debug,
+#     pool_pre_ping=True,
+#     pool_recycle=1800,
+# )
 
-SessionLocal = sessionmaker(
-    bind=engine,
-    autoflush=False,
-    autocommit=False,
-    expire_on_commit=False,
-)
+# SessionLocal = sessionmaker(
+#     bind=engine,
+#     autoflush=False,
+#     autocommit=False,
+#     expire_on_commit=False,
+# )
 
 
-def get_db():
+# def get_db():
 
-    db = SessionLocal()
+#     db = SessionLocal()
 
-    try:
-        yield db
+#     try:
+#         yield db
 
-    finally:
-        db.close()
+#     finally:
+#         db.close()

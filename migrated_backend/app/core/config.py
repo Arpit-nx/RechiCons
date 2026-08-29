@@ -30,29 +30,29 @@ class Settings(BaseSettings):
     # Database
     # ==========================================================
 
-    db_server: str
-    db_name: str
-    db_driver: str = "ODBC Driver 17 for SQL Server"
+    # db_server: str
+    # db_name: str
+    # db_driver: str = "ODBC Driver 17 for SQL Server"
 
-    db_trusted_connection: str = "yes"
-    db_trust_server_certificate: str = "yes"
+    # db_trusted_connection: str = "yes"
+    # db_trust_server_certificate: str = "yes"
 
 
-    @computed_field
-    @property
-    def database_url(self) -> str:
+    # @computed_field
+    # @property
+    # def database_url(self) -> str:
 
-        params = quote_plus(
-            (
-                f"DRIVER={{{self.db_driver}}};"
-                f"SERVER={self.db_server};"
-                f"DATABASE={self.db_name};"
-                f"Trusted_Connection={self.db_trusted_connection};"
-                f"TrustServerCertificate={self.db_trust_server_certificate};"
-            )
-        )
+    #     params = quote_plus(
+    #         (
+    #             f"DRIVER={{{self.db_driver}}};"
+    #             f"SERVER={self.db_server};"
+    #             f"DATABASE={self.db_name};"
+    #             f"Trusted_Connection={self.db_trusted_connection};"
+    #             f"TrustServerCertificate={self.db_trust_server_certificate};"
+    #         )
+    #     )
 
-        return f"mssql+pyodbc:///?odbc_connect={params}"
+    #     return f"mssql+pyodbc:///?odbc_connect={params}"
     # ==========================================================
     # JWT
     # ==========================================================

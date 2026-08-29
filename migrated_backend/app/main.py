@@ -16,12 +16,12 @@ from app.api.v1.public.categories import router as public_categories_router
 from app.api.v1.public.services import router as public_services_router
 from app.api.v1.public.enquiries import router as public_enquiries_router
 from contextlib import asynccontextmanager
-from app.db.init_db import init_db
+# from app.db.init_db import init_db
 
 @asynccontextmanager
 async def lifespan(app):
 
-    init_db()
+    # init_db()
 
     yield
 

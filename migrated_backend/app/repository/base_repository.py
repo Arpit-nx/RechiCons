@@ -273,6 +273,14 @@ class BaseRepository(ABC):
         if self.RESPONSE_MODEL is None:
             return record
 
+        record = record.copy()
+
+        for column in ("created_at", "updated_at"):
+            if column in record:
+                record[column] = self._normalize_datetime(
+                    record[column]
+                )
+
         return self.RESPONSE_MODEL.model_validate(
             record
         )
@@ -305,3 +313,31 @@ class BaseRepository(ABC):
             return record.model_dump()
 
         return record
+
+    def _normalize_datetime(self, value):
+        if value is None or value == "":
+            return value
+
+        if isinstance(value, datetime):
+            return value
+
+        if isinstance(value, str):
+            value = value.strip()
+
+            # ISO format
+            try:
+                return datetime.fromisoformat(
+                    value.replace("Z", "+00:00")
+                )
+            except ValueError:
+                pass
+
+            # JavaScript Date.toString() format
+            try:
+                from email.utils import parsedate_to_datetime
+
+                return parsedate_to_datetime(value)
+            except (ValueError, TypeError):
+                pass
+
+        return value

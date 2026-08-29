@@ -142,7 +142,7 @@ export default function About() {
             variants={fadeUp}
           >
             <a
-              href="/projects"
+              href="/project" //Incorrect route name was given.... 
               className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-900 transition-colors shadow-sm"
             >
               OUR PROJECTS

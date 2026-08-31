@@ -8,7 +8,7 @@ const menuItems = [
   { title: "Project", link: "/project" },
   { title: "Other Services", link: "/other-services" },
   { title: "Enquiry", link: "/enquire" },
-  { title: "Admin login", link: "/admin/login" },
+  { title: "Admin login", link: "/login" },
 ];
 
 export default function SideBar({

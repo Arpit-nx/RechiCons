@@ -44,6 +44,9 @@ import OtherServices from "./pages/otherservise.jsx";
 import Contect from "./pages/contect.jsx";
 import Projects from "./pages/projects.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
+import AdminLogin from "./pages/adminLogin.jsx";
+import { AuthProvider } from "./context/AuthContext";
+
 
 function AppContent() {
   const location = useLocation();
@@ -67,16 +70,18 @@ function AppContent() {
       window.dispatchEvent(new Event("scroll"));
     }, 100);
   };
+  
+  const loginpath = location.pathname === "/login";
 
   return (
     <div className="min-h-screen bg-[#fff8ef]">
 
-      {/* =========================
-          NAVBAR
-      ========================== */}
+      
+      {location.pathname !== "/login" && (
       <div className="fixed left-0 right-0 top-0 z-[9999]">
         <Navbar isVisible={showNav} />
       </div>
+    )}
 
       {/* =========================
           PAGE CONTENT
@@ -119,14 +124,15 @@ function AppContent() {
             path="/enquire"
             element={<Contect />}
           />
+          <Route
+          path="/login"
+          element={<AdminLogin/>}/>
 
         </Routes>
       </main>
 
-      {/* =========================
-          FOOTER
-      ========================== */}
-      <Footer />
+      
+      {!loginpath && <Footer />}
 
     </div>
   );
@@ -135,7 +141,9 @@ function AppContent() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </BrowserRouter>
   );
 }

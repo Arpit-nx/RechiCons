@@ -1,6 +1,6 @@
 from abc import ABC
 from datetime import datetime
-
+import json
 from app.repository.workbook import WorkbookManager
 from app.repository.schema import SCHEMA
 
@@ -10,6 +10,7 @@ class BaseRepository(ABC):
     MODEL = None
     RESPONSE_MODEL = None
     CREATE_MODEL = None
+    JSON_FIELDS = set()
 
     def __init__(self):
 
@@ -199,6 +200,17 @@ class BaseRepository(ABC):
 
         return None
 
+    #Raw look-up before delete
+    def find_raw_by_id(self, record_id: int):
+        records = self.manager.read_all(self.SHEET_NAME)
+
+        for row in records:
+            if self._get_value(row, "id") == record_id:
+                return row
+
+        return None
+
+    #Delete...
     def delete(
         self,
         record_id: int,
@@ -260,6 +272,7 @@ class BaseRepository(ABC):
         self,
         record: dict | None,
     ):
+
         if record is None:
             return None
 
@@ -275,10 +288,32 @@ class BaseRepository(ABC):
 
         record = record.copy()
 
-        for column in ("created_at", "updated_at"):
-            if column in record:
-                record[column] = self._normalize_datetime(
-                    record[column]
+        # Decode JSON fields stored in workbook cells
+        for field in self.JSON_FIELDS:
+
+            if field not in record:
+                continue
+
+            value = record[field]
+
+            if isinstance(value, str):
+
+                try:
+
+                    record[field] = json.loads(value)
+
+                except json.JSONDecodeError:
+
+                    # Keep original value if it isn't JSON
+                    pass
+
+        # Normalize datetime fields
+        for field in ("created_at", "updated_at"):
+
+            if field in record:
+
+                record[field] = self._normalize_datetime(
+                    record[field]
                 )
 
         return self.RESPONSE_MODEL.model_validate(
@@ -301,9 +336,22 @@ class BaseRepository(ABC):
         self,
         payload,
     ):
-
         if hasattr(payload, "model_dump"):
-            return payload.model_dump()
+            payload = payload.model_dump()
+
+        payload = payload.copy()
+
+        for field in self.JSON_FIELDS:
+
+            if field in payload:
+
+                value = payload[field]
+
+                if isinstance(value, (list, dict)):
+                    payload[field] = json.dumps(
+                        value,
+                        ensure_ascii=False,
+                    )
 
         return payload
 

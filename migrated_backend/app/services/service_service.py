@@ -96,12 +96,12 @@ class ServiceService:
         service_id: int,
     ):
 
-        if self.repo.get_category(service_id) is None:
+        if self.repo.get_raw_service(service_id) is None:
             raise ValueError(
                 "Service not found."
             )
 
-        self.repo.delete_category(
+        self.repo.delete_service(
             service_id,
         )
 

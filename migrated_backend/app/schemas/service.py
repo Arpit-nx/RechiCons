@@ -1,13 +1,27 @@
 from datetime import datetime
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
+
+
+class ServiceContentBlock(BaseModel):
+
+    type: Literal[
+        "paragraph",
+        "bullet_list",
+        "heading",
+    ]
+
+    text: str | None = None
+
+    items: list[str] | None = None
 
 
 class ServiceBase(BaseModel):
 
     title: str
 
-    content: str
+    content: list[ServiceContentBlock]
 
     display_order: int = 0
 
@@ -22,7 +36,7 @@ class ServiceUpdate(BaseModel):
 
     title: str | None = None
 
-    content: str | None = None
+    content: list[ServiceContentBlock] | None = None
 
     display_order: int | None = None
 
@@ -33,13 +47,13 @@ class ServiceResponse(ServiceBase):
 
     id: int
 
-    slug: str | None = None
+    slug: str
 
-    image_path: str | None = None
+    image_path: str | None
 
-    created_at: datetime | None = None
+    created_at: datetime
 
-    updated_at: datetime | None = None
+    updated_at: datetime
 
     model_config = ConfigDict(
         from_attributes=True
@@ -69,7 +83,7 @@ class PublicServiceDetail(BaseModel):
 
     slug: str
 
-    content: str
+    content: list[ServiceContentBlock]
 
     image_path: str | None
 

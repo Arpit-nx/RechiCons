@@ -1,18 +1,22 @@
-import React from "react"
-import { motion } from "framer-motion"
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   MapPin,
   Phone,
   Mail,
   Clock,
   ArrowUpRight,
-} from "lucide-react"
+} from "lucide-react";
+import { contactData } from "./data/projectfile.js";
 
-/* -------------------------------------------------------------------------- */
-/*                              ANIMATION VARIANTS                            */
-/* -------------------------------------------------------------------------- */
+const iconMap = {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+};
 
-const ease = [0.16, 1, 0.3, 1]
+const ease = [0.16, 1, 0.3, 1];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -25,7 +29,7 @@ const fadeUp = {
       ease,
     },
   }),
-}
+};
 
 const headingContainer = {
   hidden: {},
@@ -34,7 +38,7 @@ const headingContainer = {
       staggerChildren: 0.12,
     },
   },
-}
+};
 
 const headingItem = {
   hidden: {
@@ -49,11 +53,7 @@ const headingItem = {
       ease,
     },
   },
-}
-
-/* -------------------------------------------------------------------------- */
-/*                              HELPER COMPONENT                              */
-/* -------------------------------------------------------------------------- */
+};
 
 function SectionHeading({
   eyebrow,
@@ -63,16 +63,16 @@ function SectionHeading({
   tone = "light",
   className = "",
 }) {
-  const isCenter = align === "center"
+  const isCenter = align === "center";
 
   const heading =
-    tone === "dark" ? "text-amber-50" : "text-gray-900"
+    tone === "dark" ? "text-amber-50" : "text-gray-900";
 
   const body =
-    tone === "dark" ? "text-amber-100/75" : "text-gray-600"
+    tone === "dark" ? "text-amber-100/75" : "text-gray-600";
 
   const eyebrowColor =
-    tone === "dark" ? "text-amber-400" : "text-amber-600"
+    tone === "dark" ? "text-amber-400" : "text-amber-600";
 
   return (
     <motion.div
@@ -95,7 +95,6 @@ function SectionHeading({
       >
         <span className="h-px w-8 bg-current" />
         {eyebrow}
-        {/* Always show right line when centered for proper alignment */}
         <span className={`h-px w-8 bg-current ${isCenter ? "" : "md:hidden"}`} />
       </motion.span>
 
@@ -115,85 +114,36 @@ function SectionHeading({
         </motion.p>
       )}
     </motion.div>
-  )
+  );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                               MAIN COMPONENT                               */
-/* -------------------------------------------------------------------------- */
-
 export default function ContactUs() {
-  const googleMapUrl =
-    "https://www.google.com/maps/place/RECHI+CONSTRUCTION+PVT.+LTD./@22.61114,88.409087,16z/data=!4m6!3m5!1s0x3a0275f8631201d9:0xd020a079d47427e3!8m2!3d22.61114!4d88.4090872!16s%2Fg%2F11c2q0msn3?hl=en&entry=ttu"
-
-  const mapEmbedIframeSrc =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.473539129532!2d88.4090872!3d22.61114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275f8631201d9%3A0xd020a079d47427e3!2sRECHI%20CONSTRUCTION%20PVT.%20LTD.!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-
-  const contactCards = [
-    {
-      icon: MapPin,
-      title: "Our Address",
-      details: [
-        "220 (formerly 213), Dum Dum Park",
-        "Near Boys High School, Kolkata 700055",
-      ],
-      linkText: "View on Google Maps",
-      linkUrl: googleMapUrl,
-    },
-    {
-      icon: Phone,
-      title: "Phone Number",
-      details: [
-        "+91 90518 00151",
-        "+91 79802 94424",
-      ],
-      linkText: "Call Us Now",
-      linkUrl: "tel:+919051800151",
-    },
-    {
-      icon: Mail,
-      title: "Email Us",
-      details: [
-        "rechiconstruction@yahoo.in",
-        "info@rechiconstruction.in",
-      ],
-      linkText: "Send Mail",
-      linkUrl: "mailto:rechiconstruction@yahoo.in",
-    },
-    {
-      icon: Clock,
-      title: "Working Hours",
-      details: [
-        "Monday – Saturday: 10:00 AM – 7:30 PM",
-        "Sunday: By Appointment",
-      ],
-      linkText: null,
-      linkUrl: null,
-    },
-  ]
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <div className="contact-shell min-h-screen w-full overflow-x-hidden bg-[#fbf8f3] pb-12 pt-10 text-gray-900 sm:pb-16 sm:pt-12 lg:pb-20">
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#fff8ef] text-gray-900">
 
-      {/* HERO */}
-      <section className="relative overflow-hidden border-b border-gray-200/60 bg-[#fbf8f3] px-4 pb-10 pt-6 sm:px-6 sm:pb-14 sm:pt-8 md:pb-16 lg:px-8 lg:pb-20 lg:pt-10">
+      {/* HERO SECTION */}
+      <section className="relative overflow-hidden bg-[#fff8ef] px-4 pb-8 pt-28 sm:px-6 sm:pb-12 sm:pt-32 md:pt-36 lg:px-8 lg:pb-14">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(211,173,100,0.18),transparent)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(211,173,100,0.18),transparent)]"
         />
 
         <div className="relative mx-auto flex w-full max-w-7xl justify-center">
           <SectionHeading
-            eyebrow="Get In Touch"
-            title="Contact Us"
-            description="Have a question about our projects, interior solutions, or property services? Connect with our team today and let's bring your dream home to life."
+            eyebrow={contactData.hero.eyebrow}
+            title={contactData.hero.title}
+            description={contactData.hero.description}
             align="center"
           />
         </div>
       </section>
 
       {/* CONTACT DETAILS + MAP */}
-      <section className="relative px-4 py-10 sm:px-6 sm:py-16 md:py-20 lg:px-8 lg:py-24">
+      <section className="relative bg-[#fff8ef] px-4 pb-16 pt-4 sm:px-6 sm:pb-20 sm:pt-6 md:pb-24 lg:px-8 lg:pb-28">
         <div className="mx-auto w-full max-w-7xl">
           <div className="grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-12 lg:items-stretch lg:gap-12">
 
@@ -207,17 +157,17 @@ export default function ContactUs() {
                 className="mb-6 sm:mb-8"
               >
                 <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-amber-600">
-                  Contact Information
+                  {contactData.sectionHeader.eyebrow}
                 </p>
 
                 <h3 className="font-display text-2xl font-semibold leading-tight text-gray-900 sm:text-3xl">
-                  Reach Out Directly
+                  {contactData.sectionHeader.title}
                 </h3>
               </motion.div>
 
               <div className="space-y-4 sm:space-y-5">
-                {contactCards.map((card, i) => {
-                  const Icon = card.icon
+                {contactData.cards.map((card, i) => {
+                  const Icon = iconMap[card.iconKey];
 
                   return (
                     <motion.div
@@ -231,10 +181,12 @@ export default function ContactUs() {
                     >
                       <div className="flex items-start gap-3 sm:gap-4">
                         <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 transition-colors duration-500 group-hover:bg-amber-500 group-hover:text-white sm:h-12 sm:w-12">
-                          <Icon
-                            className="h-5 w-5 sm:h-6 sm:w-6"
-                            strokeWidth={1.75}
-                          />
+                          {Icon && (
+                            <Icon
+                              className="h-5 w-5 sm:h-6 sm:w-6"
+                              strokeWidth={1.75}
+                            />
+                          )}
                         </span>
 
                         <div className="min-w-0 flex-1">
@@ -270,7 +222,7 @@ export default function ContactUs() {
                         </div>
                       </div>
                     </motion.div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -287,7 +239,7 @@ export default function ContactUs() {
                 <div className="relative h-[340px] w-full overflow-hidden rounded-xl sm:h-[420px] sm:rounded-2xl md:h-[470px] lg:h-full lg:min-h-[520px]">
                   <iframe
                     title="RECHI CONSTRUCTION Location"
-                    src={mapEmbedIframeSrc}
+                    src={contactData.mapEmbedIframeSrc}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -304,5 +256,5 @@ export default function ContactUs() {
         </div>
       </section>
     </div>
-  )
+  );
 }

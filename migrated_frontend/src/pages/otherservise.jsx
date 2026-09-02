@@ -1,157 +1,144 @@
-import { useEffect } from "react"
-import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import { servicesHeader, servicesData } from "./data/projectfile.js";
 
-const ease = [0.16, 1, 0.3, 1]
+// Direct Image Imports
+import serviceImg1 from "../assets/project-imgs/otherservises.jpg";
+import serviceImg2 from "../assets/project-imgs/testing1.jpg";
+
+// Map image assets by service ID
+const serviceImages = {
+  1: serviceImg1,
+  2: serviceImg2,
+};
+
+const ease = [0.16, 1, 0.3, 1];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: (i = 0) => ({
+  hidden: { opacity: 0, y: 32 },
+  show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, delay: i * 0.12, ease },
-  }),
-}
+    transition: { duration: 0.7, ease },
+  },
+};
 
-export default function About() {
+const fadeLeft = {
+  hidden: { opacity: 0, x: -40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease },
+  },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease },
+  },
+};
+
+export default function OtherServices() {
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[#fbf8f3] text-gray-900 overflow-x-hidden">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28">
-        
-        {/* Top Header */}
-        <section className="pb-8 text-center">
+    <main className="min-h-screen bg-[#fff8ef] text-gray-900">
+      {/* Page Header with shorter side lines */}
+      <section className="pt-28 md:pt-36 pb-12 px-4">
+        <div className="max-w-[1080px] mx-auto text-center">
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             variants={fadeUp}
-            custom={0}
-            className="text-lg sm:text-xl font-semibold text-amber-600 mb-2"
+            className="flex items-center justify-center gap-3 sm:gap-5"
           >
-            About Us
+            <div className="h-[1.5px] w-8 sm:w-12 md:w-16 bg-amber-500" />
+            <h1 className="text-amber-600 text-sm sm:text-base md:text-lg font-bold tracking-[0.25em] uppercase select-none">
+              {servicesHeader.badge}
+            </h1>
+            <div className="h-[1.5px] w-8 sm:w-12 md:w-16 bg-amber-500" />
           </motion.div>
+        </div>
+      </section>
 
-          <motion.h1
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={1}
-            className="font-display text-3xl font-bold leading-tight text-gray-900 sm:text-4xl md:text-5xl"
-          >
-            Welcome to Rechi Construction
-          </motion.h1>
-        </section>
+      {/* Services List */}
+      <section className="px-4 pb-20">
+        <div className="max-w-[1080px] mx-auto">
+          {servicesData.map((service, index) => (
+            <React.Fragment key={service.id}>
+              <article className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start py-8 md:py-12">
+                
+                {/* Image Block */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  variants={fadeLeft}
+                >
+                  <div className="w-full h-[240px] md:h-[300px] overflow-hidden rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+                    <img
+                      src={serviceImages[service.id]}
+                      alt={service.imageAlt}
+                      className="w-full h-full object-cover block transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
+                </motion.div>
 
-        {/* Intro Paragraphs */}
-        <section className="pb-10 space-y-6">
-          <motion.p
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={0}
-            className="text-base leading-relaxed text-gray-800 sm:text-lg"
-          >
-            <strong className="font-bold text-gray-900">RECHI CONSTRUCTION PVT. LTD.</strong> are one of the most experienced and reputed real estate developer & Investment Concern, providing decent and affordable homes and apartment for different segments of the society with first class infrastructure and facilities at a very reasonable price and turning the customers dreams into reality. One of the Director of company, named by Mr. SAJJAN KUMAR MANDAL who has a proven track record in real estate development, investment, consultancy and renowned builder, having a successful track record of previous project as mentioned here with. <span className="font-bold underline underline-offset-2">We feel proud to be Govt. authorized contractor for Civil, Structural and Electrical works.</span>
-          </motion.p>
+                {/* Text Content Block */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  variants={fadeRight}
+                >
+                  <h2 className="text-3xl md:text-[2.2rem] font-bold tracking-tight text-gray-900 mb-5">
+                    {service.title}
+                  </h2>
 
-          <motion.p
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={1}
-            className="text-base leading-relaxed text-gray-800 sm:text-lg"
-          >
-            <strong className="font-bold text-gray-900">RECHI CONSTRUCTION PVT. LTD.</strong> is strongly committed to achieve pollution free excellence in Real Estate for the nation. It has developed first class infrastructure to cater the ever growing needs & offer first class amenities like Community hall, Multi-gym, Landscape, garden, Children's play space, sufficient car parking area etc. in the complexes. Thus, RECHI CONSTRUCTION (P) LTD. also proposes to give high quality performance and constantly upgrade itself with the latest technology and offer facilities as per the best standards available in India. RECHI CONSTRUCTION (P) LTD. is a company having Corporate Identity No. U45400WB2013PTC198594 - 2013-2014 incorporated under The Companies Act, 1956 having its place of business at 220, (Formerly 213) Dum Dum Park, P.S – Lake Town, 24 Parganas (N), Kolkata – 700 055.
-          </motion.p>
-        </section>
+                  <div className="text-[16px] md:text-[17px] leading-relaxed text-gray-800">
+                    {service.paragraphs?.map((paragraph, pIdx) => (
+                      <p key={pIdx} className="mb-5">
+                        {paragraph}
+                      </p>
+                    ))}
 
-        {/* Mission & Vision / Core Values 2-Column Grid */}
-        <section className="py-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
-            
-            {/* Mission & Vision Column */}
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              custom={0}
-            >
-              <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl mb-6">
-                Mission & Vision
-              </h2>
+                    {service.subheading && (
+                      <p className="mb-3 font-bold text-gray-900">
+                        {service.subheading}
+                      </p>
+                    )}
 
-              <p className="text-base leading-relaxed text-gray-800 sm:text-lg mb-6">
-                <strong className="font-bold text-gray-900">Rechi Construction Pvt. Ltd.</strong> motive is to provide high quality infrastructure and affordable homes and flats to the middle and higher income groups in society with luxurious life as well as fulfilling our client’s dream into reality.
-              </p>
+                    {service.subheadingText && (
+                      <p className="mb-5">
+                        {service.subheadingText}
+                      </p>
+                    )}
 
-              <div className="space-y-4 text-base leading-relaxed text-gray-800 sm:text-lg">
-                <p>Transparency in all our dealings to enhance customer value and quality</p>
-                <p>Honesty towards our clients and community through Ethical and professional service</p>
-                <p>Performance to meet expectations of our stakeholders</p>
-                <p>Discipline to be punctual each time and every time</p>
-              </div>
-            </motion.div>
+                    {service.bulletPoints && service.bulletPoints.length > 0 && (
+                      <ul className="list-disc pl-5 space-y-2">
+                        {service.bulletPoints.map((point, bIdx) => (
+                          <li key={bIdx}>{point}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </motion.div>
+              </article>
 
-            {/* Core Values Column */}
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              custom={1}
-            >
-              <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl mb-6">
-                Core Values
-              </h2>
-
-              <p className="text-base leading-relaxed text-gray-800 sm:text-lg">
-                Our core values represent the key principles upheld by each member of the entire organization. The values have been inculcated in our day-to-day business policies, our approach towards our clients and the way we work and co-ordinate with our fellow employees. Our Core Values is considered to be a guidebook for our employees and helps maintain the standards set by the company in the conduction of its daily operations. With the view to massive construction activity and prompt support of our clients demand we have a unit also name It <span className="font-bold underline underline-offset-2">RECHI NIRMAAN PVT. LTD.</span>
-              </p>
-            </motion.div>
-
-          </div>
-        </section>
-
-        {/* Bottom Paragraph */}
-        <section className="pt-6 pb-10">
-          <motion.p
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-base leading-relaxed text-gray-800 sm:text-lg"
-          >
-            Our core values represent the key principles upheld by each member of the entire organization. The values have been inculcated in our day-to-day business policies, our approach towards our clients and the way we work and co-ordinate with our fellow employees. Our Core Values is considered to be a guidebook for our employees and helps maintain the standards set by the company in the conduction of its daily operations. With the view to massive construction activity and prompt support of our clients demand we have a unit also name It <span className="font-bold underline underline-offset-2">RECHI NIRMAAN PVT. LTD.</span>
-          </motion.p>
-        </section>
-
-        {/* CTA Button */}
-        <section className="pt-2">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <a
-              href="/projects"
-              className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-900 transition-colors shadow-sm"
-            >
-              OUR PROJECTS
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </motion.div>
-        </section>
-
-      </div>
-    </div>
-  )
+              {/* Separator Divider */}
+              {index < servicesData.length - 1 && (
+                <div className="h-px bg-gray-200 my-6 md:my-10" />
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
 }

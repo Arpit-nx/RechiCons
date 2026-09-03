@@ -1,6 +1,6 @@
 # from sqlalchemy.orm import Session
 from app.repository.service_repository import ServiceRepository
-from app.models.service import Service
+# from app.models.service import Service
 from app.schemas.service import (
     ServiceCreate,
     ServiceUpdate,
@@ -30,28 +30,28 @@ class ServiceService:
 
         return self.repo.create_service(data)
 
-    def _generate_unique_slug(
-        self,
-        title: str,
-    ):
+    # def _generate_unique_slug(
+    #     self,
+    #     title: str,
+    # ):
 
-        base = generate_slug(title)
+    #     base = generate_slug(title)
 
-        slug = base
+    #     slug = base
 
-        counter = 1
+    #     counter = 1
 
-        while (
-            self.db.query(Service)
-            .filter(Service.slug == slug)
-            .first()
-        ):
+    #     while (
+    #         self.db.query(Service)
+    #         .filter(Service.slug == slug)
+    #         .first()
+    #     ):
 
-            counter += 1
+    #         counter += 1
 
-            slug = f"{base}-{counter}"
+    #         slug = f"{base}-{counter}"
 
-        return slug
+    #     return slug
 
     def update_service(
         self,
@@ -96,12 +96,12 @@ class ServiceService:
         service_id: int,
     ):
 
-        if self.repo.get_category(service_id) is None:
+        if self.repo.get_raw_service(service_id) is None:
             raise ValueError(
                 "Service not found."
             )
 
-        self.repo.delete_category(
+        self.repo.delete_service(
             service_id,
         )
 
@@ -127,9 +127,7 @@ class ServiceService:
     ):
 
         return (
-            self.db.query(Service)
-            .filter(Service.slug == slug)
-            .first()
+            self.repo.find_by_slug(slug)
         )
 
     def list_services(self):

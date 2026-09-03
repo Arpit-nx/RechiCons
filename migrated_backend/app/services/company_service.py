@@ -1,4 +1,4 @@
-from app.models.company import Company
+# from app.models.company import Company
 from app.schemas.company import (
     CompanyCreate,
     CompanyUpdate,
@@ -19,7 +19,7 @@ class CompanyService:
     # Get Company Details
     # ==========================================================
 
-    def get_company(self) -> Company | None:
+    def get_company(self):
         
         return self.repo.get_company()
 

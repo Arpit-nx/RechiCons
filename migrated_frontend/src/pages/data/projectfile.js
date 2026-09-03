@@ -394,7 +394,7 @@ export const contactData = {
       iconKey: "MapPin",
       title: "Our Address",
       details: [
-        "220 (formerly 213), Dum Dum Park",
+        "220 , Dum Dum Park",
         "Near Boys High School, Kolkata 700055",
       ],
       linkText: "View on Google Maps",
@@ -411,7 +411,7 @@ export const contactData = {
     {
       iconKey: "Mail",
       title: "Email Us",
-      details: ["rechiconstruction@yahoo.in", "info@rechiconstruction.in"],
+      details: ["rechiconstruction@yahoo.in"],
       linkText: "Send Mail",
       linkUrl: "mailto:rechiconstruction@yahoo.in",
     },

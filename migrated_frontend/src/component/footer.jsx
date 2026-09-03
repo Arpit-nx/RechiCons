@@ -53,7 +53,7 @@ export default function Footer() {
                   Rechi Construction Pvt. Ltd.
                 </p>
                 <p className="max-w-md text-[#d1c2b5] leading-relaxed">
-                  220 (formerly 213), Dum Dum Park, Near Boys High School, Kolkata 700055.
+                  220, Dum Dum Park, Near Boys High School, Kolkata 700055.
                 </p>
 
                 {/* Contact Info Table */}
@@ -89,14 +89,7 @@ export default function Footer() {
                         className="text-[#d1c2b5] hover:text-[#e5a652] transition-colors underline underline-offset-2 decoration-[#684128]"
                       >
                         rechiconstruction@yahoo.in
-                      </a>
-                      <span className="text-[#8c7463]">/</span>
-                      <a
-                        href="mailto:info@rechiconstruction.in"
-                        className="text-[#d1c2b5] hover:text-[#e5a652] transition-colors underline underline-offset-2 decoration-[#684128]"
-                      >
-                        info@rechiconstruction.in
-                      </a>
+                      </a>                      
                     </div>
                   </div>
                 </div>

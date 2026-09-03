@@ -108,7 +108,7 @@ export default function Navbar({ isVisible = true }) {
                   <Mail size={18} />
                 </div>
                 <div>
-                  <div className="font-bold text-[#6f3e14] group-hover:text-[#9a5b1a]">info@rechiconstruction.in</div>
+                  <div className="font-bold text-[#6f3e14] group-hover:text-[#9a5b1a]">rechiconstruction@yahoo.in</div>
                   <div className="text-[11px] text-gray-600">Drop us a line</div>
                 </div>
               </a>
@@ -120,7 +120,7 @@ export default function Navbar({ isVisible = true }) {
                   <MapPin size={18} />
                 </div>
                 <div>
-                  <div className="font-bold text-[#6f3e14]">213, Dum Dum Park, Kolkata 700055</div>
+                  <div className="font-bold text-[#6f3e14]">220, Dum Dum Park, Kolkata 700055</div>
                   <div className="text-[11px] text-gray-600">Get Direction</div>
                 </div>
               </div>

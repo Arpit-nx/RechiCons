@@ -1,256 +1,142 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import { servicesHeader, servicesData } from "./data/projectfile.js";
 
-import img1 from "../assets/project-imgs/rechi1.jpeg";
-import img2 from "../assets/project-imgs/rechi2.jpg";
+// Direct Image Imports
+import serviceImg1 from "../assets/project-imgs/otherservises.jpg";
+import serviceImg2 from "../assets/project-imgs/testing1.jpg";
+
+// Map image assets by service ID
+const serviceImages = {
+  1: serviceImg1,
+  2: serviceImg2,
+};
+
+const ease = [0.16, 1, 0.3, 1];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease },
+  },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease },
+  },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease },
+  },
+};
 
 export default function OtherServices() {
-  const rootRef = useRef(null);
-
   useEffect(() => {
-    const root = rootRef.current;
-
-    if (!root) return;
-
-    const items = root.querySelectorAll("[data-reveal]");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          entry.target.classList.remove(
-            "opacity-0",
-            "translate-y-8",
-            "-translate-x-10",
-            "translate-x-10"
-          );
-
-          entry.target.classList.add(
-            "opacity-100",
-            "translate-y-0",
-            "translate-x-0"
-          );
-
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.12,
-      }
-    );
-
-    items.forEach((item) => observer.observe(item));
-
-    return () => observer.disconnect();
+    window.scrollTo(0, 0);
   }, []);
 
   return (
-    <main
-      ref={rootRef}
-      className="min-h-screen bg-[#fff8ef] text-[#4f2b12]"
-    >
-      {/* =====================================================
-          PAGE HEADER
-      ====================================================== */}
-      <section className="pt-28 md:pt-32 pb-8 px-4">
+    <main className="min-h-screen bg-[#fff8ef] text-gray-900">
+      {/* Page Header with shorter side lines */}
+      <section className="pt-28 md:pt-36 pb-12 px-4">
         <div className="max-w-[1080px] mx-auto text-center">
-          <div
-            data-reveal
-            className="
-              opacity-0
-              translate-y-8
-              transition-all
-              duration-700
-              ease-out
-            "
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="flex items-center justify-center gap-3 sm:gap-5"
           >
-            <p className="text-[#7a3d10] text-sm font-semibold tracking-[3px] uppercase">
-              Other Services
-            </p>
-
-            <div className="w-14 h-1 mx-auto mt-3 rounded-full bg-gradient-to-r from-[#7a3d10] to-[#9a5b1a]" />
-          </div>
+            <div className="h-[1.5px] w-8 sm:w-12 md:w-16 bg-amber-500" />
+            <h1 className="text-amber-600 text-sm sm:text-base md:text-lg font-bold tracking-[0.25em] uppercase select-none">
+              {servicesHeader.badge}
+            </h1>
+            <div className="h-[1.5px] w-8 sm:w-12 md:w-16 bg-amber-500" />
+          </motion.div>
         </div>
       </section>
 
-      {/* =====================================================
-          SERVICES CONTENT
-      ====================================================== */}
+      {/* Services List */}
       <section className="px-4 pb-20">
         <div className="max-w-[1080px] mx-auto">
+          {servicesData.map((service, index) => (
+            <React.Fragment key={service.id}>
+              <article className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start py-8 md:py-12">
+                
+                {/* Image Block */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  variants={fadeLeft}
+                >
+                  <div className="w-full h-[240px] md:h-[300px] overflow-hidden rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+                    <img
+                      src={serviceImages[service.id]}
+                      alt={service.imageAlt}
+                      className="w-full h-full object-cover block transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
+                </motion.div>
 
-          {/* =================================================
-              SERVICE 1
-          ================================================== */}
-          <article className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start py-8 md:py-12">
+                {/* Text Content Block */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  variants={fadeRight}
+                >
+                  <h2 className="text-3xl md:text-[2.2rem] font-bold tracking-tight text-gray-900 mb-5">
+                    {service.title}
+                  </h2>
 
-            {/* Image */}
-            <div
-              data-reveal
-              className="
-                opacity-0
-                -translate-x-10
-                transition-all
-                duration-700
-                ease-out
-              "
-            >
-              <div
-                className="
-                  w-full
-                  h-[240px]
-                  md:h-[300px]
-                  overflow-hidden
-                  rounded-xl
-                  shadow-[0_8px_24px_rgba(79,43,18,0.10)]
-                "
-              >
-                <img
-                  src={img1}
-                  alt="Construction and other services"
-                  className="
-                    w-full
-                    h-full
-                    object-cover
-                    block
-                    transition-transform
-                    duration-700
-                    hover:scale-105
-                  "
-                />
-              </div>
-            </div>
+                  <div className="text-[16px] md:text-[17px] leading-relaxed text-gray-800">
+                    {service.paragraphs?.map((paragraph, pIdx) => (
+                      <p key={pIdx} className="mb-5">
+                        {paragraph}
+                      </p>
+                    ))}
 
-            {/* Content */}
-            <div
-              data-reveal
-              className="
-                opacity-0
-                translate-x-10
-                transition-all
-                duration-700
-                ease-out
-              "
-            >
-              <h1 className="font-serif text-3xl md:text-[2.2rem] font-normal tracking-tight mb-5">
-                Other Services
-              </h1>
+                    {service.subheading && (
+                      <p className="mb-3 font-bold text-gray-900">
+                        {service.subheading}
+                      </p>
+                    )}
 
-              <div className="font-sans text-[16px] md:text-[17px] leading-relaxed">
-                <p className="mb-5">
-                  Rechi Construction (P) Ltd., with its experience in the
-                  industry of homemaking, had to work over the years with
-                  different well known and knowledgeable stakeholders in the
-                  fields of Architecture, Designing, Planning and Law.
-                </p>
+                    {service.subheadingText && (
+                      <p className="mb-5">
+                        {service.subheadingText}
+                      </p>
+                    )}
 
-                <p className="mb-5">
-                  It has acquired immense knowledge and expertise not only in
-                  construction but also in other such fields. Hence, it has
-                  been providing other services in the following fields:
-                </p>
+                    {service.bulletPoints && service.bulletPoints.length > 0 && (
+                      <ul className="list-disc pl-5 space-y-2">
+                        {service.bulletPoints.map((point, bIdx) => (
+                          <li key={bIdx}>{point}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </motion.div>
+              </article>
 
-                <p className="mb-3">
-                  <strong>
-                    1. Interior Designing and Execution:
-                  </strong>
-                </p>
-
-                <p className="mb-5">
-                  Rechi Construction provides end-to-end solutions in terms of
-                  purchase of completed furnished flats. It has a strong
-                  liaison with designers, carpenters, decorators, etc. and can
-                  execute projects at a fraction of the cost of other solution
-                  providers.
-                </p>
-
-                <ul className="list-disc pl-5 space-y-2">
-                  <li>Assistance in mutation of names</li>
-
-                  <li>
-                    Assistance in transfer and sale of properties
-                  </li>
-
-                  <li>
-                    Assistance in legal matters related to land and property
-                  </li>
-
-                  <li>
-                    Assistance in Home Loan sanctioning
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          {/* =================================================
-              DIVIDER
-          ================================================== */}
-          <div className="h-px bg-[rgba(79,43,18,0.10)] my-6 md:my-10" />
-
-          {/* =================================================
-              SERVICE 2
-          ================================================== */}
-          <article className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start py-8 md:py-12">
-
-            {/* Image */}
-            <div
-              data-reveal
-              className="
-                opacity-0
-                -translate-x-10
-                transition-all
-                duration-700
-                ease-out
-              "
-            >
-              <div
-                className="
-                  w-full
-                  h-[240px]
-                  md:h-[300px]
-                  overflow-hidden
-                  rounded-xl
-                  shadow-[0_8px_24px_rgba(79,43,18,0.10)]
-                "
-              >
-                <img
-                  src={img2}
-                  alt="Testing service"
-                  className="
-                    w-full
-                    h-full
-                    object-cover
-                    block
-                    transition-transform
-                    duration-700
-                    hover:scale-105
-                  "
-                />
-              </div>
-            </div>
-
-            {/* Content */}
-            <div
-              data-reveal
-              className="
-                opacity-0
-                translate-x-10
-                transition-all
-                duration-700
-                ease-out
-              "
-            >
-              <h2 className="font-serif text-3xl md:text-[2.2rem] font-bold mb-4">
-                Testing 1
-              </h2>
-
-              <p className="font-sans text-[16px] md:text-[17px] leading-relaxed">
-                Testing service......
-              </p>
-            </div>
-          </article>
-
+              {/* Separator Divider */}
+              {index < servicesData.length - 1 && (
+                <div className="h-px bg-gray-200 my-6 md:my-10" />
+              )}
+            </React.Fragment>
+          ))}
         </div>
       </section>
     </main>

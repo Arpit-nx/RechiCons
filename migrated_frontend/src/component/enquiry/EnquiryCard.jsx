@@ -67,11 +67,11 @@ export const EnquiryCard = () => {
   return (
     <motion.div
       variants={cardVariants}
-      className="w-full max-w-[650px] rounded-2xl border border-beige bg-white p-8 shadow-card sm:p-12"
+      className="w-full max-w-[650px] rounded-2xl border border-white/70 bg-white/60 p-8 shadow-[0_20px_70px_rgba(79,43,18,0.16)] backdrop-blur-xl sm:p-12"
     >
       <motion.div variants={fieldVariants} className="mb-10 text-center">
         <h1 className="font-display text-3xl font-semibold text-neutral-900 sm:text-4xl">
-          Let&apos;s Build Something Together
+          Send us a Message
         </h1>
         <p className="mt-3 text-sm text-slate-500 sm:text-base">Our team will get back to you shortly.</p>
       </motion.div>

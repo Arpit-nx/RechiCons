@@ -1,8 +1,9 @@
-import { useEffect } from "react"
-import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { aboutData } from "./data/projectfile.js";
 
-const ease = [0.16, 1, 0.3, 1]
+const ease = [0.16, 1, 0.3, 1];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -11,18 +12,22 @@ const fadeUp = {
     y: 0,
     transition: { duration: 0.8, delay: i * 0.12, ease },
   }),
-}
+};
 
 export default function About() {
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[#fbf8f3] text-gray-900 overflow-x-hidden">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div className="min-h-screen bg-[#fff8ef] text-gray-900 overflow-x-hidden">
+      
+      {/* Spacer for fixed navbar */}
+      <div style={{ height: "160px" }}></div>
+
+      <div className="mx-auto max-w-5xl px-6 sm:px-8 pb-20">
         
-        {/* Top Header */}
+        {/* Header - About Us centered like "GET IN TOUCH" */}
         <section className="pb-8 text-center">
           <motion.div
             initial="hidden"
@@ -30,9 +35,13 @@ export default function About() {
             viewport={{ once: true }}
             variants={fadeUp}
             custom={0}
-            className="text-lg sm:text-xl font-semibold text-amber-600 mb-2"
+            className="flex items-center justify-center gap-4 mb-4"
           >
-            About Us
+            <span className="h-[1px] w-12 sm:w-16 bg-amber-600/70"></span>
+            <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.25em] uppercase text-amber-600">
+              {aboutData.header.badge}
+            </span>
+            <span className="h-[1px] w-12 sm:w-16 bg-amber-600/70"></span>
           </motion.div>
 
           <motion.h1
@@ -41,23 +50,29 @@ export default function About() {
             viewport={{ once: true }}
             variants={fadeUp}
             custom={1}
-            className="font-display text-3xl font-bold leading-tight text-gray-900 sm:text-4xl md:text-5xl"
+            className="text-[28px] sm:text-[32px] font-bold leading-tight text-gray-900"
           >
-            Welcome to Rechi Construction
+            {aboutData.header.title}
           </motion.h1>
         </section>
 
         {/* Intro Paragraphs */}
-        <section className="pb-10 space-y-6">
+        <section className="pb-8 space-y-5">
           <motion.p
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             variants={fadeUp}
             custom={0}
-            className="text-base leading-relaxed text-gray-800 sm:text-lg"
+            className="text-[15px] leading-[1.7] text-gray-800"
           >
-            <strong className="font-bold text-gray-900">RECHI CONSTRUCTION PVT. LTD.</strong> are one of the most experienced and reputed real estate developer & Investment Concern, providing decent and affordable homes and apartment for different segments of the society with first class infrastructure and facilities at a very reasonable price and turning the customers dreams into reality. One of the Director of company, named by Mr. SAJJAN KUMAR MANDAL who has a proven track record in real estate development, investment, consultancy and renowned builder, having a successful track record of previous project as mentioned here with. <span className="font-bold underline underline-offset-2">We feel proud to be Govt. authorized contractor for Civil, Structural and Electrical works.</span>
+            <strong className="font-bold">{aboutData.introParagraphs[0].company}</strong>
+            {aboutData.introParagraphs[0].textBeforeDirector}
+            {aboutData.introParagraphs[0].director}
+            {aboutData.introParagraphs[0].textAfterDirector}
+            <span className="font-bold underline underline-offset-2">
+              {aboutData.introParagraphs[0].highlight}
+            </span>
           </motion.p>
 
           <motion.p
@@ -66,75 +81,76 @@ export default function About() {
             viewport={{ once: true }}
             variants={fadeUp}
             custom={1}
-            className="text-base leading-relaxed text-gray-800 sm:text-lg"
+            className="text-[15px] leading-[1.7] text-gray-800"
           >
-            <strong className="font-bold text-gray-900">RECHI CONSTRUCTION PVT. LTD.</strong> is strongly committed to achieve pollution free excellence in Real Estate for the nation. It has developed first class infrastructure to cater the ever growing needs & offer first class amenities like Community hall, Multi-gym, Landscape, garden, Children's play space, sufficient car parking area etc. in the complexes. Thus, RECHI CONSTRUCTION (P) LTD. also proposes to give high quality performance and constantly upgrade itself with the latest technology and offer facilities as per the best standards available in India. RECHI CONSTRUCTION (P) LTD. is a company having Corporate Identity No. U45400WB2013PTC198594 - 2013-2014 incorporated under The Companies Act, 1956 having its place of business at 220, (Formerly 213) Dum Dum Park, P.S – Lake Town, 24 Parganas (N), Kolkata – 700 055.
+            <strong className="font-bold">{aboutData.introParagraphs[1].company}</strong>
+            {aboutData.introParagraphs[1].text}
           </motion.p>
         </section>
 
-        {/* Mission & Vision / Core Values 2-Column Grid */}
-        <section className="py-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
-            
-            {/* Mission & Vision Column */}
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              custom={0}
-            >
-              <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl mb-6">
-                Mission & Vision
-              </h2>
+        {/* Mission & Vision */}
+        <section className="py-4">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={0}
+          >
+            <h2 className="text-[22px] font-bold text-gray-900 mb-4">
+              {aboutData.missionVision.title}
+            </h2>
 
-              <p className="text-base leading-relaxed text-gray-800 sm:text-lg mb-6">
-                <strong className="font-bold text-gray-900">Rechi Construction Pvt. Ltd.</strong> motive is to provide high quality infrastructure and affordable homes and flats to the middle and higher income groups in society with luxurious life as well as fulfilling our client’s dream into reality.
-              </p>
+            <p className="text-[15px] leading-[1.7] text-gray-800 mb-5">
+              <strong className="font-bold">{aboutData.missionVision.company}</strong>
+              {aboutData.missionVision.description}
+            </p>
 
-              <div className="space-y-4 text-base leading-relaxed text-gray-800 sm:text-lg">
-                <p>Transparency in all our dealings to enhance customer value and quality</p>
-                <p>Honesty towards our clients and community through Ethical and professional service</p>
-                <p>Performance to meet expectations of our stakeholders</p>
-                <p>Discipline to be punctual each time and every time</p>
-              </div>
-            </motion.div>
-
-            {/* Core Values Column */}
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              custom={1}
-            >
-              <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl mb-6">
-                Core Values
-              </h2>
-
-              <p className="text-base leading-relaxed text-gray-800 sm:text-lg">
-                Our core values represent the key principles upheld by each member of the entire organization. The values have been inculcated in our day-to-day business policies, our approach towards our clients and the way we work and co-ordinate with our fellow employees. Our Core Values is considered to be a guidebook for our employees and helps maintain the standards set by the company in the conduction of its daily operations. With the view to massive construction activity and prompt support of our clients demand we have a unit also name It <span className="font-bold underline underline-offset-2">RECHI NIRMAAN PVT. LTD.</span>
-              </p>
-            </motion.div>
-
-          </div>
+            <ul className="space-y-2.5 text-[15px] leading-[1.65] text-gray-800">
+              {aboutData.missionVision.points.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+          </motion.div>
         </section>
 
-        {/* Bottom Paragraph */}
-        <section className="pt-6 pb-10">
+        {/* Core Values */}
+        <section className="py-6">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={1}
+          >
+            <h2 className="text-[22px] font-bold text-gray-900 mb-4">
+              {aboutData.coreValues.title}
+            </h2>
+
+            <p className="text-[15px] leading-[1.7] text-gray-800">
+              {aboutData.coreValues.textBeforeUnit}
+              <span className="font-bold underline underline-offset-2">
+                {aboutData.coreValues.unitName}
+              </span>
+            </p>
+          </motion.div>
+        </section>
+
+        {/* Duplicated Core Values */}
+        <section className="pt-2 pb-2">
           <motion.p
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="text-base leading-relaxed text-gray-800 sm:text-lg"
+            className="text-[15px] leading-[1.7] text-gray-800"
           >
-            Our core values represent the key principles upheld by each member of the entire organization. The values have been inculcated in our day-to-day business policies, our approach towards our clients and the way we work and co-ordinate with our fellow employees. Our Core Values is considered to be a guidebook for our employees and helps maintain the standards set by the company in the conduction of its daily operations. With the view to massive construction activity and prompt support of our clients demand we have a unit also name It <span className="font-bold underline underline-offset-2">RECHI NIRMAAN PVT. LTD.</span>
+            {aboutData.coreValuesDuplicate}
           </motion.p>
         </section>
 
-        {/* CTA Button */}
-        <section className="pt-2">
+        {/* CTA */}
+        <section className="pt-6">
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -142,17 +158,16 @@ export default function About() {
             variants={fadeUp}
           >
             <a
-              href="/project" //Incorrect route name was given.... 
-              className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-900 transition-colors shadow-sm"
+              href={aboutData.cta.href}
+              className="inline-flex items-center gap-1.5 bg-[#f5a623] hover:bg-[#e09415] px-5 py-2.5 text-[12px] font-bold uppercase tracking-wide text-gray-900 transition-colors rounded-sm"
             >
-              OUR PROJECTS
-              <ArrowRight className="h-4 w-4" />
+              {aboutData.cta.label}
+              <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </motion.div>
         </section>
 
       </div>
     </div>
-  )
+  );
 }
-

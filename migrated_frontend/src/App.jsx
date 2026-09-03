@@ -9,9 +9,11 @@
 // import SantiBhawan from "./pages/santi_bhawan.jsx";
 // import AnandiSunrise from "./pages/anandi_sunrise.jsx";
 // import AnandiPalace from "./pages/anandi_palace.jsx";
-// import Anandvista from "./pages/anadi_vista.jsx";
+// import Anandivista from "./pages/anadi_vista.jsx";
 // import AnandiGarden from "./pages/anandi_garden.jsx";
 // import AnandiGreenView from "./pages/anandi_green_view.jsx";
+// import Anandiview from "./pages/anandi_view.jsx";
+// import AnandiEnclave from "./pages/anandi_enclave.jsx";
 
 // export default function App() {
 //   return (
@@ -22,7 +24,7 @@
 //         </div>
 
 //         <main className="pt-20">
-//           <AnandiGreenView />
+//           <AnandiEnclave />
 //         </main>
 
 //         <Footer />
@@ -42,6 +44,7 @@ import Home from "./pages/home.jsx";
 import About from "./pages/about.jsx";
 import OtherServices from "./pages/otherservise.jsx";
 import Contect from "./pages/contect.jsx";
+import Enquiry from "./pages/EnquiryPage.jsx"; // <--- Added Enquiry component
 import Projects from "./pages/projects.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
 
@@ -50,7 +53,7 @@ function AppContent() {
   const isHomePage = location.pathname === "/";
   const [showNav, setShowNav] = useState(!isHomePage);
 
-  // Scroll to top automatically on route or URL parameter changes
+  // Scroll to top automatically on route changes
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
@@ -61,7 +64,6 @@ function AppContent() {
 
   const handleSplashEnd = () => {
     setShowNav(true);
-    // Triggers Navbar's internal scroll calculations instantly
     window.dispatchEvent(new Event("scroll"));
     setTimeout(() => {
       window.dispatchEvent(new Event("scroll"));
@@ -72,11 +74,9 @@ function AppContent() {
     <div className="min-h-screen bg-[#fff8ef]">
 
       {/* =========================
-          NAVBAR
+          NAVBAR (Normal flow)
       ========================== */}
-      <div className="fixed left-0 right-0 top-0 z-[9999]">
-        <Navbar isVisible={showNav} />
-      </div>
+      <Navbar isVisible={showNav} />
 
       {/* =========================
           PAGE CONTENT
@@ -117,6 +117,12 @@ function AppContent() {
           {/* Enquiry */}
           <Route
             path="/enquire"
+            element={<Enquiry />}
+          />
+
+          {/* Contact Us */}
+          <Route
+            path="/contact"
             element={<Contect />}
           />
 

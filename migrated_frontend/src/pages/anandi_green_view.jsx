@@ -1,59 +1,43 @@
 import React from "react";
-import HeroSection from "../component/individual_project_source/HeroSection.jsx";
-import VisionSection from "../component/individual_project_source/VisionSection.jsx";
-import AmenitiesSection from "../component/individual_project_source/AmenitiesSection.jsx";
-import ProjectViewSection from "../component/individual_project_source/ProjectViewSection.jsx";
-import ComingSoonSection from "../component/individual_project_source/ComingSoonSection.jsx";
 
-// Import your asset images
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
-import visionImg from "../assets/project-imgs/rechi2.jpg";
+import ProjectHeader from "../component/project_template_code/ProjectHeader.jsx";
+import OverviewSection from "../component/project_template_code/OverviewSection.jsx";
+import ProjectDetailsSection from "../component/project_template_code/ProjectDetailsSection.jsx";
+import MediaGallerySection from "../component/project_template_code/MediaGallerySection.jsx";
 
-const projectData = {
-  hero: {
-    badge: "BY RECHI CONSTRUCTION PVT. LTD.",
-    title: "ANANDI GREEN VIEW",
-    subtitle: "Rajarhat, Kalikapur, Patharghata, Kolkata - 700135",
-    primaryCta: "Residences",
-    secondaryCta: "Amenities",
-    images: [heroImg],
-  },
-  vision: {
-    title: "The Vision",
-    specs: [
-      { value: "G+7", label: "Storied Structure" },
-      { value: "91", label: "Total Units" },
-      { value: "2 & 3", label: "BHK Configurations" },
-      { value: "Affordable", label: "Pricing Range" },
-    ],
-  },
-  amenities: {
-    title: "Amenities",
-    subtitle: "Ultimate convenience for residents",
-    items: [
-      "Automatic Lift",
-      "AC Community Hall",
-      "AC Gym",
-      "Connected Roof",
-      "Water Treatment Plant",
-      "Fire Fighting System",
-    ],
-  },
-  projectView: {
-    title: "Project View",
-    subtitle: "Visual renders and layout highlights",
-    images: [heroImg, visionImg],
-  },
-};
+// Asset Imports
+import mainImg from "../assets/project-imgs/anandigargenviewmain.jpg";
+import visionImg from "../assets/project-imgs/anandigardenviewpic.jpg";
 
-export default function AnandiGreenView() {
+// Data Import
+import { anandiGreenViewData } from "./data/projectfile.js";
+
+export default function AnandiGreenViewPage() {
   return (
-    <main className="home-shell !m-0 !w-full !max-w-none !p-0 overflow-x-hidden bg-[#fbf8f3] text-gray-900 scroll-smooth snap-y snap-mandatory">
-      <HeroSection hero={projectData.hero} showCtas={false} />
-      <VisionSection data={projectData.vision} />
-      <AmenitiesSection data={projectData.amenities} />
-      <ProjectViewSection data={projectData.projectView} />
-      <ComingSoonSection title="Floor Plans & Specifications" />
+    <main className="w-full min-h-screen bg-[#fbf8f3] text-gray-900 font-sans">
+      <ProjectHeader title={anandiGreenViewData.header.title} />
+
+      <OverviewSection
+        mainImage={mainImg}
+        developer={anandiGreenViewData.overview.developer}
+        location={anandiGreenViewData.overview.location}
+      />
+
+      <ProjectDetailsSection
+        title={anandiGreenViewData.details.title}
+        paragraphs={anandiGreenViewData.details.paragraphs}
+      />
+
+      <MediaGallerySection
+        projectView={{
+          title: anandiGreenViewData.mediaGallery.projectView.title,
+          images: [visionImg],
+        }}
+        floorPlan={{
+          title: anandiGreenViewData.mediaGallery.floorPlan.title,
+          images: [],
+        }}
+      />
     </main>
   );
 }

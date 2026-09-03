@@ -1,241 +1,107 @@
-import { useEffect, useCallback } from "react";
-import { X, ChevronRight } from "lucide-react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { X, Phone, Mail, MapPin } from "lucide-react";
 
-const menuItems = [
-  { title: "Home", link: "/" },
-  { title: "About Us", link: "/about" },
-  { title: "Project", link: "/project" },
-  { title: "Other Services", link: "/other-services" },
-  { title: "Enquiry", link: "/enquire" },
-  { title: "Admin login", link: "/admin/login" },
-];
-
-export default function SideBar({
-  menuOpen,
-  setMenuOpen,
-}) {
+export default function SideBar({ menuOpen, setMenuOpen }) {
   const location = useLocation();
 
-  const closeMenu = useCallback(() => {
-    setMenuOpen(false);
-  }, [setMenuOpen]);
-
-  const isCurrentPage = (link) => {
-    return location.pathname === link;
-  };
-
-  // Lock body scroll when sidebar is open
-  useEffect(() => {
-    if (!menuOpen) {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-      document.body.classList.remove("sidebar-open");
-      return;
-    }
-
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
-    document.body.classList.add("sidebar-open");
-
-    return () => {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-      document.body.classList.remove("sidebar-open");
-    };
-  }, [menuOpen]);
-
-  // Escape key closes sidebar
-  useEffect(() => {
-    if (!menuOpen) return;
-
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        closeMenu();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [menuOpen, closeMenu]);
+  const navLinks = [
+    { title: "Home", link: "/" },
+    { title: "About Us", link: "/about" },
+    { title: "Project", link: "/project" },
+    { title: "Other Services", link: "/other-services" },
+    { title: "Enquiry", link: "/enquire" },
+    { title: "Contact Us", link: "/contact" },
+    { title: "Admin Login", link: "/admin" },
+  ];
 
   return (
-    <>
-      {/* =========================
-          OVERLAY
-      ========================== */}
+    <div
+      className={`fixed inset-0 z-[9999] flex justify-end transition-all duration-300 ease-in-out ${
+        menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      }`}
+    >
+      {/* Background Overlay */}
       <div
-        onClick={closeMenu}
-        className={`fixed inset-0 z-40 transition-all duration-700 ${
-          menuOpen
-            ? "visible bg-black/40 opacity-100 backdrop-blur-[6px]"
-            : "invisible pointer-events-none opacity-0"
+        className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+          menuOpen ? "opacity-100" : "opacity-0"
         }`}
+        onClick={() => setMenuOpen(false)}
       />
 
-      {/* =========================
-          SIDEBAR
-      ========================== */}
+      {/* Sidebar Panel */}
       <aside
-        role="dialog"
-        aria-modal="true"
-        aria-label="Main navigation"
-        className={`fixed right-0 top-0 z-50 h-screen
-          w-full max-w-[280px]
-          overflow-hidden
-          border-l border-white/[0.08]
-          bg-[#0c0c0c]/75
-          backdrop-blur-3xl
-          backdrop-saturate-150
-          shadow-[-20px_0_60px_rgba(0,0,0,0.45)]
-          transition-transform duration-700
-          ease-[cubic-bezier(0.22,1,0.36,1)]
-          ${
-            menuOpen
-              ? "translate-x-0"
-              : "translate-x-full"
-          }
-        `}
+        className={`relative w-[300px] sm:w-[340px] h-full bg-[#1e2229]/95 backdrop-blur-xl text-white border-l border-white/10 shadow-[-15px_0_35px_rgba(0,0,0,0.8)] flex flex-col justify-between p-6 sm:p-8 transform transition-transform duration-300 ease-in-out ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
       >
-        {/* =========================
-            NOISE TEXTURE
-        ========================== */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.035]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          }}
-        />
-
-        {/* Soft top light */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/[0.04] to-transparent" />
-
-        {/* =========================
-            HEADER
-        ========================== */}
-        <div className="relative flex h-[88px] items-center border-b border-white/[0.07] px-8">
+        {/* Top Header & Close Button */}
+        <div className="pb-6 border-b border-white/10 flex items-center justify-between">
+          <span className="text-xs font-bold tracking-[0.2em] text-[#c9a227] uppercase">
+            Menu
+          </span>
           <button
-            onClick={closeMenu}
-            className="group flex items-center gap-3.5 transition-all duration-300"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close Sidebar"
+            className="flex items-center gap-2 text-gray-300 hover:text-white transition-all group"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] transition-all duration-300 group-hover:border-[#c9a227]/40 group-hover:bg-[#c9a227]/10">
-              <X
-                size={16}
-                strokeWidth={1.75}
-                className="text-white/80 transition-all duration-500 group-hover:rotate-90 group-hover:text-[#e8d48b]"
-              />
-            </span>
-
-            <span className="text-[15px] font-light tracking-[0.15em] text-white/70 transition-colors duration-300 group-hover:text-white">
-              CLOSE
-            </span>
+            <div className="flex items-center justify-center h-9 w-9 rounded-full bg-white/5 border border-white/15 text-gray-300 shadow-[0_4px_12px_rgba(0,0,0,0.4)] group-hover:bg-[#c9a227]/20 group-hover:border-[#c9a227] group-hover:text-[#c9a227] group-hover:scale-105 transition-all">
+              <X size={18} strokeWidth={2.2} />
+            </div>
           </button>
         </div>
 
-        {/* =========================
-            CONTENT
-        ========================== */}
-        <div className="relative flex h-[calc(100%-88px)]">
-          {/* LEFT COLUMN */}
-          <div className="w-full shrink-0 px-6 py-10">
-            <nav aria-label="Primary" className="space-y-1.5">
-              {menuItems.map((item, index) => {
-                const active = isCurrentPage(item.link);
+        {/* Navigation Links */}
+        <nav className="flex-1 my-6 space-y-2 overflow-y-auto no-scrollbar">
+          {navLinks.map((item) => {
+            const active = location.pathname === item.link;
+            return (
+              <Link
+                key={item.title}
+                to={item.link}
+                onClick={() => setMenuOpen(false)}
+                className={`flex items-center gap-3.5 px-4 py-3 rounded-2xl font-medium text-base transition-all duration-200 ${
+                  active
+                    ? "bg-[#2d333f]/90 text-white shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-white/5"
+                    : "text-gray-300 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                {/* Gold Indicator */}
+                <span
+                  className={`w-1 h-5 rounded-full transition-all duration-300 ${
+                    active
+                      ? "bg-[#c9a227] shadow-[0_0_10px_#c9a227]"
+                      : "bg-transparent"
+                  }`}
+                />
+                {item.title}
+              </Link>
+            );
+          })}
+        </nav>
 
-                return (
-                  <Link
-                    key={item.title}
-                    to={item.link}
-                    onClick={closeMenu}
-                    style={{
-                      transitionDelay: menuOpen
-                        ? `${index * 40}ms`
-                        : "0ms",
-                    }}
-                    className={`group relative flex w-full items-center rounded-2xl px-5 py-3.5 transition-all duration-400 ${
-                      active
-                        ? "bg-white/[0.07]"
-                        : "hover:bg-white/[0.04]"
-                    }`}
-                  >
-                    {/* Gold accent bar */}
-                    <span
-                      className={`absolute left-0 top-1/2 h-6 w-[2px] -translate-y-1/2 rounded-full bg-[#c9a227] transition-all duration-400 ${
-                        active
-                          ? "scale-y-100 opacity-100"
-                          : "scale-y-50 opacity-0"
-                      }`}
-                    />
+        {/* Mobile Contact Quick Details */}
+        <div className="pt-6 border-t border-white/10 space-y-3 text-xs text-gray-300">
+          <a href="tel:+919051800151" className="flex items-center gap-3 hover:text-[#c9a227] transition-colors">
+            <Phone size={14} className="text-[#c9a227]" />
+            <span>+91 9051800151</span>
+          </a>
+          <a href="mailto:info@rechiconstruction.in" className="flex items-center gap-3 hover:text-[#c9a227] transition-colors">
+            <Mail size={14} className="text-[#c9a227]" />
+            <span className="truncate">info@rechiconstruction.in</span>
+          </a>
+          <div className="flex items-center gap-3 text-gray-400">
+            <MapPin size={14} className="text-[#c9a227] shrink-0" />
+            <span>213, Dum Dum Park, Kolkata</span>
+          </div>
 
-                    {/* Menu title */}
-                    <span
-                      className={`text-[17px] font-light tracking-wide transition-all duration-300 ${
-                        active
-                          ? "translate-x-1 text-white"
-                          : "text-white/75 group-hover:translate-x-1 group-hover:text-white"
-                      }`}
-                    >
-                      {item.title}
-                    </span>
-
-                    {/* Arrow */}
-                    {!active && (
-                      <ChevronRight
-                        size={14}
-                        className="ml-auto -translate-x-1 text-white/30 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-                      />
-                    )}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* =========================
-                BOTTOM BRANDING
-            ========================== */}
-            <div className="absolute bottom-10 left-0 right-0 px-8">
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-              <p className="mt-5 text-center text-[11px] font-light uppercase tracking-[0.25em] text-white/25">
-                Rechi Construction
-              </p>
-            </div>
+          <div className="pt-4 text-center">
+            <p className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase">
+              RECHI CONSTRUCTION PVT. LTD.
+            </p>
           </div>
         </div>
       </aside>
-
-      {/* =========================
-          CUSTOM SCROLLBAR
-      ========================== */}
-      <style>{`
-        aside *::-webkit-scrollbar {
-          width: 3px;
-        }
-
-        aside *::-webkit-scrollbar-track {
-          background: transparent;
-        }
-
-        aside *::-webkit-scrollbar-thumb {
-          background: rgba(201, 162, 39, 0.25);
-          border-radius: 999px;
-        }
-
-        aside *::-webkit-scrollbar-thumb:hover {
-          background: rgba(201, 162, 39, 0.45);
-        }
-
-        aside {
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
-      `}</style>
-    </>
+    </div>
   );
 }

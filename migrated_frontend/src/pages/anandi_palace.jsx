@@ -1,27 +1,33 @@
 import React from "react";
-import HeroSection from "../component/individual_project_source/HeroSection.jsx";
-import ConnectivitySection from "../component/individual_project_source/ConnectivitySection.jsx";
-import ComingSoonSection from "../component/individual_project_source/ComingSoonSection.jsx";
 
-// Import your asset image
-import heroImg from "../assets/project-imgs/rechi3.jpeg";
+import ProjectHeader from "../component/project_template_code/ProjectHeader.jsx";
+import OverviewSection from "../component/project_template_code/OverviewSection.jsx";
+import ProjectDetailsSection from "../component/project_template_code/ProjectDetailsSection.jsx";
+import MediaGallerySection from "../component/project_template_code/MediaGallerySection.jsx";
 
-const projectData = {
-  hero: {
-    title: "ANANDI PALACE",
-    subtitle: "Rajarhat, Khamar, Kolkata - 700135",
-    badge: "Rechi Construction (P) Ltd.",
-    image: heroImg,
-  },
-  
-};
+// Asset Imports
+import mainImg from "../assets/project-imgs/anandipalacemain.jpg";
 
-export default function AnandiPalace() {
+// Data Import
+import { anandiPalaceData } from "./data/projectfile.js";
+
+export default function AnandiPalacePage() {
   return (
-    <main className="home-shell !m-0 !w-full !max-w-none !p-0 overflow-x-hidden bg-[#fbf8f3] text-gray-900 scroll-smooth snap-y snap-mandatory">
-      <HeroSection hero={projectData.hero} showCtas={false} />
-       <ConnectivitySection data={projectData.connectivity} />
-        <ComingSoonSection title="Project Details" />
+    <main className="w-full min-h-screen bg-[#fbf8f3] text-gray-900 font-sans">
+      <ProjectHeader title={anandiPalaceData.header.title} />
+
+      <OverviewSection
+        mainImage={mainImg}
+        developer={anandiPalaceData.overview.developer}
+        location={anandiPalaceData.overview.location}
+      />
+
+      <ProjectDetailsSection
+        title={anandiPalaceData.details.title}
+        paragraphs={anandiPalaceData.details.paragraphs}
+      />
+
+      
     </main>
   );
 }

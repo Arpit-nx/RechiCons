@@ -1,5 +1,6 @@
 # Creating a basic FastAPI project with a health check route.
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.auth import router as auth_router
 from app.api.v1.categories import router as categories_router
 from app.api.v1.company import router as company_router
@@ -15,12 +16,12 @@ from app.api.v1.public.categories import router as public_categories_router
 from app.api.v1.public.services import router as public_services_router
 from app.api.v1.public.enquiries import router as public_enquiries_router
 from contextlib import asynccontextmanager
-from app.db.init_db import init_db
+# from app.db.init_db import init_db
 
 @asynccontextmanager
 async def lifespan(app):
 
-    init_db()
+    # init_db()
 
     yield
 
@@ -28,6 +29,17 @@ app = FastAPI(
     title="Rechi Construction API",
     version="1.0.0",
     lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "https://rechiconstruction.in",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(auth_router, prefix="/api/v1")

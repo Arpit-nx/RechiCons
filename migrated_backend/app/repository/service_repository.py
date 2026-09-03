@@ -5,6 +5,9 @@ class ServiceRepository(BaseRepository):
 
     SHEET_NAME = "services"
     RESPONSE_MODEL = ServiceResponse
+    JSON_FIELDS = {
+        "content",
+    }
 
     def active_services(self):
 
@@ -14,11 +17,11 @@ class ServiceRepository(BaseRepository):
         )
 
         return sorted(
-
             services,
-
-            key=lambda x: x.display_order or 0,
-
+            key=lambda x: self._get_value(
+                x,
+                "display_order"
+            ) or 0,
         )
 
     def find_by_slug(
@@ -46,5 +49,8 @@ class ServiceRepository(BaseRepository):
     def update_service(self, service_id: int, data):
         return self.update(service_id, data)
 
+    def get_raw_service(self, service_id: int):
+        return self.find_raw_by_id(service_id)
+    
     def delete_service(self, service_id: int):
         return self.delete(service_id)

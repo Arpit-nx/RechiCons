@@ -1,38 +1,3 @@
-// import { BrowserRouter } from "react-router-dom";
-// import Navbar from "./component/nav_bar.jsx";
-// import Footer from "./component/footer.jsx";
-// import AnandiApartment from "./pages/anandi_appartment.jsx";
-// import AnandiVilla from "./pages/anandi_villa.jsx";
-// import AnandiPark from "./pages/anandi_park.jsx";
-// import Anandiresidency from "./pages/anandi_residency.jsx";
-// import AnandiVillaPhase2 from "./pages/anandi_villa2.jsx";
-// import SantiBhawan from "./pages/santi_bhawan.jsx";
-// import AnandiSunrise from "./pages/anandi_sunrise.jsx";
-// import AnandiPalace from "./pages/anandi_palace.jsx";
-// import Anandivista from "./pages/anadi_vista.jsx";
-// import AnandiGarden from "./pages/anandi_garden.jsx";
-// import AnandiGreenView from "./pages/anandi_green_view.jsx";
-// import Anandiview from "./pages/anandi_view.jsx";
-// import AnandiEnclave from "./pages/anandi_enclave.jsx";
-
-// export default function App() {
-//   return (
-//     <BrowserRouter>
-//       <div className="min-h-screen bg-[#fff8ef]">
-//         <div className="fixed left-0 right-0 top-0 z-[9999]">
-//           <Navbar isVisible={true} />
-//         </div>
-
-//         <main className="pt-20">
-//           <AnandiEnclave />
-//         </main>
-
-//         <Footer />
-//       </div>
-//     </BrowserRouter>
-//   );
-// }
-
 
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
@@ -44,9 +9,14 @@ import Home from "./pages/home.jsx";
 import About from "./pages/about.jsx";
 import OtherServices from "./pages/otherservise.jsx";
 import Contect from "./pages/contect.jsx";
-import Enquiry from "./pages/EnquiryPage.jsx"; // <--- Added Enquiry component
-import Projects from "./pages/projects.jsx";
+import Enquiry from "./pages/EnquiryPage.jsx";
+
+import CompletedProjects from "./pages/CompletedProjects.jsx";
+import OngoingProjects from "./pages/OngoingProjects.jsx";
+import UpcomingProjects from "./pages/UpcomingProjects.jsx";
+
 import ProjectPage from "./pages/ProjectPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -55,7 +25,11 @@ function AppContent() {
 
   // Scroll to top automatically on route changes
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
 
     if (!isHomePage) {
       setShowNav(true);
@@ -64,7 +38,9 @@ function AppContent() {
 
   const handleSplashEnd = () => {
     setShowNav(true);
+
     window.dispatchEvent(new Event("scroll"));
+
     setTimeout(() => {
       window.dispatchEvent(new Event("scroll"));
     }, 100);
@@ -74,7 +50,7 @@ function AppContent() {
     <div className="min-h-screen bg-[#fff8ef]">
 
       {/* =========================
-          NAVBAR (Normal flow)
+          NAVBAR
       ========================== */}
       <Navbar isVisible={showNav} />
 
@@ -96,18 +72,34 @@ function AppContent() {
             element={<About />}
           />
 
-          {/* Projects */}
+          {/* =========================
+              PROJECT CATEGORIES
+          ========================== */}
+
+          {/* Completed Projects */}
           <Route
-            path="/project"
-            element={<Projects />}
+            path="/projects/completed"
+            element={<CompletedProjects />}
           />
 
-          {/* Individual project */}
+          {/* Ongoing Projects */}
+          <Route
+            path="/projects/ongoing"
+            element={<OngoingProjects />}
+          />
+
+          {/* Upcoming Projects */}
+          <Route
+            path="/projects/upcoming"
+            element={<UpcomingProjects />}
+          />
+
+          {/* Individual Project */}
           <Route
             path="/project/:slug"
             element={<ProjectPage />}
           />
-          
+
           {/* Other Services */}
           <Route
             path="/other-services"
@@ -125,6 +117,8 @@ function AppContent() {
             path="/contact"
             element={<Contect />}
           />
+
+          <Route path="*" element={<NotFound />} />
 
         </Routes>
       </main>
@@ -145,3 +139,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

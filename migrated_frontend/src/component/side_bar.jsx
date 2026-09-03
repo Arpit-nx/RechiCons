@@ -13,6 +13,7 @@ export default function SideBar({ menuOpen, setMenuOpen }) {
     { title: "Enquiry", link: "/enquire" },
     { title: "Contact Us", link: "/contact" },
     { title: "Admin Login", link: "/admin" },
+    { title: "Admin Dashboard", link: "/admin/dashboard" },
   ];
 
   return (

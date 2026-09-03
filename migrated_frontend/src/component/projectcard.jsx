@@ -5,7 +5,17 @@ export default function ProjectCard({ project, index }) {
   return (
     <Link
       to={`/project/${project.slug}`}
-      className="group relative block h-full w-full overflow-hidden rounded-[28px]"
+      className="
+        group
+        relative
+        block
+        h-[420px]
+        w-full
+        overflow-hidden
+        rounded-[28px]
+        sm:h-[440px]
+        lg:h-[460px]
+      "
     >
       {/* =========================
           IMAGE
@@ -16,6 +26,8 @@ export default function ProjectCard({ project, index }) {
           src={project.image}
           alt={project.title}
           className="
+            absolute
+            inset-0
             h-full
             w-full
             object-cover
@@ -48,7 +60,7 @@ export default function ProjectCard({ project, index }) {
             absolute
             inset-0
             bg-gradient-to-t
-            from-black/80
+            from-black/90
             via-black/20
             to-transparent
           "
@@ -82,34 +94,7 @@ export default function ProjectCard({ project, index }) {
         {/* =========================
             ARROW
         ========================== */}
-        <div
-          className="
-            absolute
-            right-6
-            top-6
-            flex
-            h-12
-            w-12
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-white/30
-            bg-white/10
-            text-white
-            backdrop-blur-md
-            transition-all
-            duration-500
-            group-hover:rotate-45
-            group-hover:bg-white
-            group-hover:text-black
-          "
-        >
-          <ArrowUpRight
-            size={20}
-            strokeWidth={1.5}
-          />
-        </div>
+        
 
         {/* =========================
             PROJECT CONTENT
@@ -122,7 +107,7 @@ export default function ProjectCard({ project, index }) {
             right-0
             p-7
             text-white
-            md:p-10
+            md:p-8
           "
         >
 
@@ -142,28 +127,53 @@ export default function ProjectCard({ project, index }) {
           {/* Title */}
           <h3
             className="
-              text-4xl
+              text-2xl
               font-semibold
               tracking-tight
               transition-transform
               duration-500
               group-hover:-translate-y-1
-              md:text-5xl
+              sm:text-3xl
+              lg:text-4xl
             "
           >
             {project.title}
           </h3>
 
           {/* Location */}
-          <p
+          {project.location && (
+            <p
+              className="
+                mt-3
+                text-sm
+                text-white/60
+              "
+            >
+              {project.location}
+            </p>
+          )}
+
+          {/* View More */}
+          <div
             className="
-              mt-3
+              mt-5
+              flex
+              items-center
+              gap-2
               text-sm
-              text-white/60
+              font-medium
+              text-yellow-400
+              transition-all
+              duration-300
+              group-hover:gap-3
             "
           >
-            {project.location}
-          </p>
+            View Project
+            <ArrowUpRight
+              size={17}
+              strokeWidth={1.8}
+            />
+          </div>
 
         </div>
 

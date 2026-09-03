@@ -2,11 +2,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
+  Building2,
+  Calendar,
   CalendarDays,
+  Construction,
   MessageCircle,
   Plus,
   Share2,
   X,
+  Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -332,6 +336,75 @@ export default function Home({ onSplashEnd }) {
                 }`}
             />
           ))}
+        </div>
+      </section>
+
+      {/* 2.5 Rectangular Navigation Grid */}
+      <section className="relative bg-transparent py-12 sm:py-16 px-4 sm:px-6">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            
+            {/* Top Left: Completed Projects */}
+            <a
+              href="/projects"
+              className="flex flex-col justify-between p-6 sm:p-8 bg-[#7c93e0] text-white aspect-[16/10] rounded-xl shadow-sm transition-transform duration-300 hover:scale-[1.02]"
+            >
+              <div>
+                <Building2 className="h-10 w-10 sm:h-14 sm:w-14 stroke-[1.5] text-white" />
+              </div>
+              <div>
+                <h3 className="font-display text-lg sm:text-2xl font-bold tracking-wide text-white leading-tight">
+                  Completed<br />Projects
+                </h3>
+              </div>
+            </a>
+
+            {/* Top Right: Ongoing Projects */}
+            <a
+              href="/projects"
+              className="flex flex-col justify-between p-6 sm:p-8 bg-[#fbb034] text-white aspect-[16/10] rounded-xl shadow-sm transition-transform duration-300 hover:scale-[1.02]"
+            >
+              <div>
+                <Construction className="h-10 w-10 sm:h-14 sm:w-14 stroke-[1.5] text-white" />
+              </div>
+              <div>
+                <h3 className="font-display text-lg sm:text-2xl font-bold tracking-wide text-white leading-tight">
+                  Ongoing<br />Projects
+                </h3>
+              </div>
+            </a>
+
+            {/* Bottom Left: Upcoming Projects */}
+            <a
+              href="/projects"
+              className="flex flex-col justify-between p-6 sm:p-8 bg-[#f08a8a] text-white aspect-[16/10] rounded-xl shadow-sm transition-transform duration-300 hover:scale-[1.02]"
+            >
+              <div>
+                <Calendar className="h-10 w-10 sm:h-14 sm:w-14 stroke-[1.5] text-white" />
+              </div>
+              <div>
+                <h3 className="font-display text-lg sm:text-2xl font-bold tracking-wide text-white leading-tight">
+                  Upcoming<br />Projects
+                </h3>
+              </div>
+            </a>
+
+            {/* Bottom Right: Other Services */}
+            <a
+              href="/other-services"
+              className="flex flex-col justify-between p-6 sm:p-8 bg-[#52b7b5] text-white aspect-[16/10] rounded-xl shadow-sm transition-transform duration-300 hover:scale-[1.02]"
+            >
+              <div>
+                <Zap className="h-10 w-10 sm:h-14 sm:w-14 stroke-[1.5] text-white" />
+              </div>
+              <div>
+                <h3 className="font-display text-lg sm:text-2xl font-bold tracking-wide text-white leading-tight">
+                  Other<br />Services
+                </h3>
+              </div>
+            </a>
+
+          </div>
         </div>
       </section>
 

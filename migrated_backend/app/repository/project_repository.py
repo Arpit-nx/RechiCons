@@ -5,7 +5,12 @@ from app.schemas.project import ProjectResponse
 class ProjectRepository(BaseRepository):
 
     SHEET_NAME = "projects"
+
     RESPONSE_MODEL = ProjectResponse
+
+    JSON_FIELDS = {
+        "description"
+    }
 
     # -----------------------------
     # Admin

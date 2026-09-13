@@ -261,6 +261,10 @@ from app.schemas.project import (
     ProjectUpdate,
     PublicProjectCard,
     PublicProjectDetail,
+    ProjectHeader,
+    ProjectOverview,
+    ProjectDetails,
+    ProjectMediaGallery,
 )
 from app.utils.slug import generate_slug
 from app.utils.media import media_url
@@ -421,20 +425,27 @@ class ProjectService:
 
         return PublicProjectDetail(
             id=project.id,
-            title=project.title,
             slug=project.slug,
-            short_description=project.short_description,
-            description=project.description,
-            location=project.location,
-            builder=project.builder,
-            status=project.status,
-            price=project.price,
-            rera_number=project.rera_number,
-            thumbnail=media_url(
-                project.thumbnail
+
+            header=ProjectHeader(
+                title=project.title
             ),
-            gallery=[],
-            floorplans=[],
-            siteplans=[],
-            amenities=[],
+
+            overview=ProjectOverview(
+                developer=project.builder,
+                location=project.location
+            ),
+
+            details=ProjectDetails(
+                title="Project Details",
+                content=project.description or []
+            ),
+
+            mediaGallery=ProjectMediaGallery(
+                projectView=[],
+                floorPlan=[],
+                underConstruction=[]
+            ),
+
+            amenities=[]
         )

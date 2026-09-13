@@ -1,5 +1,14 @@
 from app.repository.base_repository import BaseRepository
-from app.schemas.project import ProjectResponse
+from app.schemas.project import (
+    ProjectCreate,
+    ProjectUpdate,
+    ProjectResponse,
+    ProjectDetailResponse,
+    ProjectHeader,
+    ProjectOverview,
+    ProjectDetails,
+    ProjectMediaGallery,
+)
 
 
 class ProjectRepository(BaseRepository):
@@ -23,15 +32,39 @@ class ProjectRepository(BaseRepository):
             key=lambda x: x.display_order or 0,
         )
 
-    def get_project(
-        self,
-        project_id: int,
-    ):
+    def get_project(self, project_id: int):
+        project = self.repo.get_project(project_id)
 
-        return self.find_by_id(
-            project_id,
+        if project is None:
+            raise ValueError("Project not found.")
+
+        return ProjectDetailResponse(
+            id=project.id,
+            slug=project.slug,
+
+            header={
+                "title": project.title
+            },
+
+            overview={
+                "developer": project.builder,
+                "location": project.location
+            },
+
+            details={
+                "title": "Project Details",
+                "paragraphs": project.description or []
+            },
+
+            mediaGallery={
+                "projectView": [],
+                "floorPlan": [],
+                "underConstruction": []
+            },
+
+            amenities=[]
         )
-
+    
     def create_project(
         self,
         data,

@@ -134,6 +134,7 @@ from app.schemas.project import (
     ProjectCreate,
     ProjectUpdate,
     ProjectResponse,
+    ProjectDetailResponse,
 )
 
 from app.services.project_service import ProjectService
@@ -157,7 +158,7 @@ def list_projects():
 
 @router.get(
     "/{project_id}",
-    response_model=ProjectResponse,
+    response_model=ProjectDetailResponse,
 )
 def get_project(
     project_id: int,

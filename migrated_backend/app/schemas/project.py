@@ -49,6 +49,15 @@ class ProjectDetailsUpdate(BaseModel):
         default_factory=list
     )
 
+class ProjectDetailResponse(BaseModel):
+    id: int
+    slug: str
+    header: ProjectHeader
+    overview: ProjectOverview
+    details: ProjectDetails
+    mediaGallery: ProjectMediaGallery
+    amenities: list[AmenityResponse] = Field(default_factory=list)
+    
 class ProjectDetailsResponse(ProjectDetails):
     pass
 

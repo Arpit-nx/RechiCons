@@ -1,9 +1,65 @@
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.schemas.project_amenity import AmenityResponse
 from app.schemas.project_image import ProjectImageResponse
+from app.schemas.project_amenity import AmenityResponse
 
+
+class ContentBlock(BaseModel):
+    type: str
+    text: str | None = None
+    items: list[str] | None = None
+
+
+class ProjectHeader(BaseModel):
+    title: str
+
+
+class ProjectOverview(BaseModel):
+    developer: str | None = None
+    location: str | None = None
+
+
+class ProjectDetails(BaseModel):
+    title: str = "Project Details"
+
+    content: list[ContentBlock] = Field(
+        default_factory=list
+    )
+
+
+class ProjectMediaGallery(BaseModel):
+    projectView: list[ProjectImageResponse] = Field(
+        default_factory=list
+    )
+
+    floorPlan: list[ProjectImageResponse] = Field(
+        default_factory=list
+    )
+
+    underConstruction: list[ProjectImageResponse] = Field(
+        default_factory=list
+    )
+
+class ProjectDetailsUpdate(BaseModel):
+
+    title: str = "Project Details"
+
+    content: list[ContentBlock] = Field(
+        default_factory=list
+    )
+
+class ProjectDetailResponse(BaseModel):
+    id: int
+    slug: str
+    header: ProjectHeader
+    overview: ProjectOverview
+    details: ProjectDetails
+    mediaGallery: ProjectMediaGallery
+    amenities: list[AmenityResponse] = Field(default_factory=list)
+    
+class ProjectDetailsResponse(ProjectDetails):
+    pass
 
 class ProjectBase(BaseModel):
 
@@ -13,8 +69,9 @@ class ProjectBase(BaseModel):
 
     short_description: str | None = None
 
-    description: str | None = None
-
+    description: list[ContentBlock] = Field(
+        default_factory=list
+    )
     location: str | None = None
 
     builder: str | None = None
@@ -29,8 +86,10 @@ class ProjectBase(BaseModel):
 
     display_order: int = 0
 
+
 class ProjectCreate(ProjectBase):
     pass
+
 
 class ProjectUpdate(BaseModel):
 
@@ -40,7 +99,7 @@ class ProjectUpdate(BaseModel):
 
     short_description: str | None = None
 
-    description: str | None = None
+    description: list[ContentBlock] | None = None
 
     location: str | None = None
 
@@ -56,14 +115,14 @@ class ProjectUpdate(BaseModel):
 
     display_order: int | None = None
 
-#Admin Response Schema
+
 class ProjectResponse(ProjectBase):
 
     id: int
 
     slug: str
 
-    thumbnail: str | None
+    thumbnail: str | None = None
 
     created_at: datetime
 
@@ -73,59 +132,35 @@ class ProjectResponse(ProjectBase):
         from_attributes=True
     )
 
-#Public Response Schema i.e /public/projects <- for showing all the available projects.
+
 class PublicProjectCard(BaseModel):
 
     id: int
-
     title: str
-
     slug: str
-
-    thumbnail: str | None
-
-    location: str | None
-
-    short_description: str | None
+    thumbnail: str | None = None
+    location: str | None = None
+    short_description: str | None = None
 
     model_config = ConfigDict(
         from_attributes=True
     )
 
-#Public Response Schema i.e /public/projects/{slug} <- for showing a particular project detail.
-#Schema in accordance to the frontend i.e PUBLIC URLs
+
 class PublicProjectDetail(BaseModel):
 
     id: int
 
-    title: str
-
     slug: str
 
-    short_description: str | None
+    header: ProjectHeader
 
-    description: str | None
+    overview: ProjectOverview
 
-    location: str | None
+    details: ProjectDetails
 
-    builder: str | None
+    mediaGallery: ProjectMediaGallery
 
-    status: str | None
-
-    price: str | None
-
-    rera_number: str | None
-
-    thumbnail: str | None
-
-    gallery: list[ProjectImageResponse] = Field(default_factory=list)
-
-    floorplans: list[ProjectImageResponse] = Field(default_factory=list)
-
-    siteplans: list[ProjectImageResponse] = Field(default_factory=list)
-
-    amenities: list[AmenityResponse] = Field(default_factory=list)
-
-    model_config = ConfigDict(
-        from_attributes=True
+    amenities: list[AmenityResponse] = Field(
+        default_factory=list
     )

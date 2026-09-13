@@ -261,6 +261,7 @@ from app.schemas.project import (
     ProjectUpdate,
     PublicProjectCard,
     PublicProjectDetail,
+    ProjectDetailResponse,
     ProjectHeader,
     ProjectOverview,
     ProjectDetails,
@@ -333,22 +334,38 @@ class ProjectService:
             data,
         )
 
-    def get_project(
-        self,
-        project_id: int,
-    ):
-
-        project = self.repo.get_project(
-            project_id
-        )
+    def get_project(self, project_id: int):
+        project = self.repo.get_project(project_id)
 
         if project is None:
+            raise ValueError("Project not found.")
 
-            raise ValueError(
-                "Project not found."
-            )
+        return ProjectDetailResponse(
+            id=project.id,
+            slug=project.slug,
 
-        return project
+            header=ProjectHeader(
+                title=project.title
+            ),
+
+            overview=ProjectOverview(
+                developer=project.builder,
+                location=project.location
+            ),
+
+            details=ProjectDetails(
+                title="Project Details",
+                content=project.description or []
+            ),
+
+            mediaGallery=ProjectMediaGallery(
+                projectView=[],
+                floorPlan=[],
+                underConstruction=[]
+            ),
+
+            amenities=[]
+        )
 
     def list_projects(self):
 

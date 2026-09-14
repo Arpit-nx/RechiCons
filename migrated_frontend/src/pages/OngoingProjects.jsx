@@ -1,10 +1,55 @@
+import { useEffect, useState } from "react";
 import ProjectCard from "../component/projectcard";
-import { projectsData } from "./data/projectfile";
+import { getProjects } from "../api/projects";
 
 export default function OngoingProjects() {
-  const ongoingProjects = projectsData.filter(
-    (project) => project.category === "Ongoing"
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const data = await getProjects();
+
+        setProjects(data);
+      } catch (error) {
+        console.error("Projects fetch error:", error);
+
+        setError(
+          error?.response?.data?.detail ||
+            "Failed to load projects."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  const ongoingProjects = projects.filter(
+    (project) => project.category_id === 4
   );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen px-6 py-20 text-center">
+        Loading ongoing projects...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen px-6 py-20 text-center text-red-500">
+        {error}
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen px-6 py-20">

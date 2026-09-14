@@ -1,10 +1,17 @@
+
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
+import { projectImages } from "../data/projectImages";
+
 export default function ProjectCard({ project, index }) {
+
+  // Get image from frontend using backend project slug
+  const image = projectImages[project.slug];
+
   return (
     <Link
-      to={`/project/${project.slug}`}
+      to={`/project?id=${project.id}&from=${project.category_id}`}
       className="
         group
         relative
@@ -22,21 +29,37 @@ export default function ProjectCard({ project, index }) {
       ========================== */}
       <div className="relative h-full w-full overflow-hidden">
 
-        <img
-          src={project.image}
-          alt={project.title}
-          className="
-            absolute
-            inset-0
-            h-full
-            w-full
-            object-cover
-            transition-transform
-            duration-1000
-            ease-out
-            group-hover:scale-105
-          "
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={project.title}
+            className="
+              absolute
+              inset-0
+              h-full
+              w-full
+              object-cover
+              transition-transform
+              duration-1000
+              ease-out
+              group-hover:scale-105
+            "
+          />
+        ) : (
+          <div
+            className="
+              absolute
+              inset-0
+              flex
+              items-center
+              justify-center
+              bg-gray-300
+              text-gray-600
+            "
+          >
+            No image available
+          </div>
+        )}
 
         {/* =========================
             DARK OVERLAY
@@ -92,11 +115,6 @@ export default function ProjectCard({ project, index }) {
         </div>
 
         {/* =========================
-            ARROW
-        ========================== */}
-        
-
-        {/* =========================
             PROJECT CONTENT
         ========================== */}
         <div
@@ -111,7 +129,9 @@ export default function ProjectCard({ project, index }) {
           "
         >
 
-          {/* Category */}
+          {/* =========================
+              CATEGORY
+          ========================== */}
           <p
             className="
               mb-3
@@ -121,10 +141,18 @@ export default function ProjectCard({ project, index }) {
               text-white/60
             "
           >
-            {project.category}
+            {project.category_id === 3
+              ? "Completed"
+              : project.category_id === 4
+              ? "Ongoing"
+              : project.category_id === 5
+              ? "Upcoming"
+              : ""}
           </p>
 
-          {/* Title */}
+          {/* =========================
+              TITLE
+          ========================== */}
           <h3
             className="
               text-2xl
@@ -140,7 +168,9 @@ export default function ProjectCard({ project, index }) {
             {project.title}
           </h3>
 
-          {/* Location */}
+          {/* =========================
+              LOCATION
+          ========================== */}
           {project.location && (
             <p
               className="
@@ -153,7 +183,9 @@ export default function ProjectCard({ project, index }) {
             </p>
           )}
 
-          {/* View More */}
+          {/* =========================
+              VIEW MORE
+          ========================== */}
           <div
             className="
               mt-5
@@ -169,6 +201,7 @@ export default function ProjectCard({ project, index }) {
             "
           >
             View Project
+
             <ArrowUpRight
               size={17}
               strokeWidth={1.8}
@@ -176,8 +209,8 @@ export default function ProjectCard({ project, index }) {
           </div>
 
         </div>
-
       </div>
     </Link>
   );
 }
+

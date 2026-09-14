@@ -17,7 +17,7 @@ import UpcomingProjects from "./pages/UpcomingProjects.jsx";
 
 import ProjectPage from "./pages/ProjectPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
-
+import Admin from "./pages/adminLogin.jsx";
 function AppContent() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -96,7 +96,7 @@ function AppContent() {
 
           {/* Individual Project */}
           <Route
-            path="/project/:slug"
+            path="/project"
             element={<ProjectPage />}
           />
 
@@ -116,6 +116,11 @@ function AppContent() {
           <Route
             path="/contact"
             element={<Contect />}
+          />
+          {/* Admin */}
+          <Route
+            path="/admin"
+            element={<Admin />}
           />
 
           <Route path="*" element={<NotFound />} />

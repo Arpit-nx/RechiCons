@@ -96,7 +96,7 @@ function AppContent() {
 
           {/* Individual Project */}
           <Route
-            path="/project/:slug"
+            path="/project"
             element={<ProjectPage />}
           />
 

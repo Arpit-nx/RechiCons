@@ -36,6 +36,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "https://rechiconstruction.in",
+        "https://www.rechiconstruction.in"
     ],
     allow_credentials=True,
     allow_methods=["*"],

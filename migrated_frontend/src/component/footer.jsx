@@ -13,7 +13,7 @@ export default function Footer() {
           {/* ================= LEFT SECTION: LOGO & LOCATE US ================= */}
           <div className="lg:col-span-6 flex flex-col gap-6">
             
-            {/* Logo + Brand Name (KEPT EXACTLY AS BEFORE) */}
+            {/* Logo + Brand Name */}
             <a href="/" className="group flex items-center gap-1.5 select-none w-fit">
               <div className="relative flex h-12 w-11 items-center justify-center overflow-hidden shrink-0">
                 <img
@@ -89,7 +89,7 @@ export default function Footer() {
                         className="text-[#d1c2b5] hover:text-[#e5a652] transition-colors underline underline-offset-2 decoration-[#684128]"
                       >
                         rechiconstruction@yahoo.in
-                      </a>                      
+                      </a>      
                     </div>
                   </div>
                 </div>
@@ -141,6 +141,7 @@ export default function Footer() {
                   { label: "Completed Projects", href: "/projects/completed" },
                   { label: "Ongoing Projects", href: "/projects/ongoing" },
                   { label: "Upcoming Projects", href: "/projects/upcoming" },
+                  { label: "Privacy Policy", href: "/privacy-policy" },
                 ].map((item) => (
                   <li key={item.label}>
                     <a
@@ -170,6 +171,8 @@ export default function Footer() {
       {/* ================= COPYRIGHT / BOTTOM BAR ================= */}
       <div className="border-t border-[#522d17] bg-[#27140a] px-6 py-3.5">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 md:flex-row">
+          
+          {/* Copyright Info */}
           <p className="text-xs text-[#a89485] text-center md:text-left leading-relaxed">
             Copyright © {currentYear} and All Rights Reserved by{" "}
             <span className="text-white font-medium">Rechi Construction Pvt. Ltd.</span>{" "}
@@ -177,8 +180,16 @@ export default function Footer() {
             <span className="text-[#e5a652] font-semibold tracking-wide">TEAM LOGIC</span>
           </p>
 
+          {/* Privacy Policy Link - Centered in middle space */}
+          <a
+            href="/privacy-policy"
+            className="text-xs text-[#a89485] hover:text-[#e5a652] font-medium tracking-wide transition-colors underline-offset-4 hover:underline"
+          >
+            Privacy Policy
+          </a>
+
           {/* Social Icons */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 shrink-0">
             <a
               href="https://facebook.com"
               target="_blank"
@@ -202,6 +213,7 @@ export default function Footer() {
               </svg>
             </a>
           </div>
+
         </div>
       </div>
     </footer>

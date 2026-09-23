@@ -547,10 +547,12 @@ import anandiView from "../../assets/project-imgs/anandiviewmain.jpg";
 import anandiVilla from "../../assets/project-imgs/anandivillamain.jpg";
 import anandiVilla2 from "../../assets/project-imgs/anandivilla2main.jpg";
 import santiBhawan from "../../assets/project-imgs/santibhawanmain.jpg";
+import anandiEnclave2  from "../../assets/project-imgs/anandienclavemain2.JPEG";
 
 export {
   anandiApartment,
   anandiEnclave,
+  anandiEnclave2,
   anandiResidency,
   santiBhawan,
   anandiVista,

@@ -2,20 +2,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
-  Building2,
-  Calendar,
-  CalendarDays,
-  Construction,
   MessageCircle,
   Plus,
   Share2,
   X,
-  Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import rechiLogo from "../assets/rechi_logo.png";
-import homeAboutImg from "../assets/project-imgs/homeabout.jpg";
 
 // Import data + needed images from projectfile.js
 import {
@@ -27,11 +21,109 @@ import {
   // Hero slider images
   anandiApartment,
   anandiEnclave,
+  anandiEnclave2,
   anandiResidency,
   santiBhawan,
   anandiVista,
   anandiView,
 } from "./data/projectfile.js";
+
+// Custom SVG Icons matched from image reference
+function CompletedProjectsIcon({ className = "", strokeWidth = 1.5 }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M2 21h20" />
+      <path d="M6 12V3h2v9" />
+      <path d="M6 6h2M6 8.5h2" />
+      <path d="M11 12V2h2v10" />
+      <path d="M11 5h2M11 7.5h2" />
+      <path d="M16 12V3h2v9" />
+      <path d="M16 6h2M16 8.5h2" />
+      <rect x="3" y="12" width="8" height="9" />
+      <path d="M7 12v9M3 15h8M3 18h8" />
+      <rect x="13" y="12" width="8" height="9" />
+      <path d="M17 12v9M13 15h8M13 18h8" />
+    </svg>
+  );
+}
+
+function OngoingProjectsIcon({ className = "", strokeWidth = 1.5 }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M2 21h20" />
+      <path d="M7 21l5-12 5 12" />
+      <path d="M8.5 17.5h7" />
+      <path d="M10 14h4" />
+      <path d="M3.5 8l13-4" />
+      <path d="M3.5 8c-1.5 1-1.5 3 0 4" />
+      <path d="M3.5 12v9" />
+      <path d="M16.5 4v9" />
+      <circle cx="16.5" cy="15.5" r="2" />
+      <path d="M16.5 17.5v3.5" />
+      <path d="M19 21v-3h2.5v3" />
+    </svg>
+  );
+}
+
+function UpcomingProjectsIcon({ className = "", strokeWidth = 1.5 }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M2 21h20" />
+      <path d="M5 21V7h3v14" />
+      <path d="M4 7h5" />
+      <path d="M5 11h3M5 14h3" />
+      <path d="M8 21V13l4-4v4l4-4v4l5-4v12" />
+      <rect x="10" y="15" width="3" height="3" />
+      <rect x="15" y="15" width="3" height="3" />
+    </svg>
+  );
+}
+
+function OtherServicesIcon({ className = "", strokeWidth = 1.5 }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="8" />
+      <path d="M13 6l-4.5 6.5h3.5L11 18l4.5-6.5h-3.5z" />
+    </svg>
+  );
+}
 
 const categoryTabs = ["All Projects", "Completed", "Ongoing", "Upcoming"];
 const ease = [0.16, 1, 0.3, 1];
@@ -101,7 +193,7 @@ export default function Home({ onSplashEnd }) {
     anandiApartment,
     anandiEnclave,
     anandiResidency,
-    santiBhawan,
+    anandiEnclave2,
     anandiVista,
     anandiView,
   ];
@@ -287,7 +379,7 @@ export default function Home({ onSplashEnd }) {
                 <span className="text-[14px] font-medium tracking-wide text-white">
                   Schedule a Visit
                 </span>
-                <CalendarDays size={18} strokeWidth={2} className="text-white" />
+                <ArrowUpRight size={18} strokeWidth={2} className="text-white" />
               </a>
 
               <a
@@ -340,71 +432,109 @@ export default function Home({ onSplashEnd }) {
       </section>
 
       {/* 2.5 Rectangular Navigation Grid */}
-      <section className="relative bg-transparent py-12 sm:py-16 px-4 sm:px-6">
-        <div className="mx-auto max-w-5xl">
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+      <section className="relative bg-transparent py-10 sm:py-16 px-4 sm:px-8 lg:px-12 w-full max-w-[1600px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+          
+          {/* Top Left: Completed Projects */}
+          <a
+            href="/projects/completed"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#6b7cdd] to-[#4c5ebd] p-8 sm:p-10 lg:p-12 text-white min-h-[260px] sm:min-h-[320px] lg:min-h-[360px] flex flex-col justify-between shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1.5 border border-white/10"
+          >
+            <CompletedProjectsIcon strokeWidth={1} className="absolute -bottom-8 -right-8 h-48 w-48 sm:h-64 sm:w-64 lg:h-80 lg:w-80 text-white/10 transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-6" />
             
-            {/* Top Left: Completed Projects */}
-            <a
-              href="/projects"
-              className="flex flex-col justify-between p-6 sm:p-8 bg-[#7c93e0] text-white aspect-[16/10] rounded-xl shadow-sm transition-transform duration-300 hover:scale-[1.02]"
-            >
-              <div>
-                <Building2 className="h-10 w-10 sm:h-14 sm:w-14 stroke-[1.5] text-white" />
+            <div className="flex items-center z-10">
+              <div className="flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-white/20 backdrop-blur-md shadow-inner border border-white/30 transition-transform duration-500 group-hover:scale-105">
+                <CompletedProjectsIcon strokeWidth={1.8} className="h-7 w-7 sm:h-9 sm:w-9 text-white" />
               </div>
+            </div>
+
+            <div className="z-10 mt-8 sm:mt-12 flex items-end justify-between">
               <div>
-                <h3 className="font-display text-lg sm:text-2xl font-bold tracking-wide text-white leading-tight">
-                  Completed<br />Projects
+                <h3 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-white leading-[1.08]">
+                  Completed <span className="font-bold block">Projects</span>
                 </h3>
               </div>
-            </a>
-
-            {/* Top Right: Ongoing Projects */}
-            <a
-              href="/projects"
-              className="flex flex-col justify-between p-6 sm:p-8 bg-[#fbb034] text-white aspect-[16/10] rounded-xl shadow-sm transition-transform duration-300 hover:scale-[1.02]"
-            >
-              <div>
-                <Construction className="h-10 w-10 sm:h-14 sm:w-14 stroke-[1.5] text-white" />
+              <div className="flex items-center justify-center h-12 w-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 group-hover:bg-white group-hover:text-stone-900 text-white shadow-md">
+                <ArrowUpRight className="h-6 w-6 stroke-[2]" />
               </div>
+            </div>
+          </a>
+
+          {/* Top Right: Ongoing Projects */}
+          <a
+            href="/projects/ongoing"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#fbb034] to-[#d98a12] p-8 sm:p-10 lg:p-12 text-white min-h-[260px] sm:min-h-[320px] lg:min-h-[360px] flex flex-col justify-between shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1.5 border border-white/10"
+          >
+            <OngoingProjectsIcon strokeWidth={1} className="absolute -bottom-8 -right-8 h-48 w-48 sm:h-64 sm:w-64 lg:h-80 lg:w-80 text-white/10 transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-6" />
+            
+            <div className="flex items-center z-10">
+              <div className="flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-white/20 backdrop-blur-md shadow-inner border border-white/30 transition-transform duration-500 group-hover:scale-105">
+                <OngoingProjectsIcon strokeWidth={1.8} className="h-7 w-7 sm:h-9 sm:w-9 text-white" />
+              </div>
+            </div>
+
+            <div className="z-10 mt-8 sm:mt-12 flex items-end justify-between">
               <div>
-                <h3 className="font-display text-lg sm:text-2xl font-bold tracking-wide text-white leading-tight">
-                  Ongoing<br />Projects
+                <h3 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-white leading-[1.08]">
+                  Ongoing <span className="font-bold block">Projects</span>
                 </h3>
               </div>
-            </a>
-
-            {/* Bottom Left: Upcoming Projects */}
-            <a
-              href="/projects"
-              className="flex flex-col justify-between p-6 sm:p-8 bg-[#f08a8a] text-white aspect-[16/10] rounded-xl shadow-sm transition-transform duration-300 hover:scale-[1.02]"
-            >
-              <div>
-                <Calendar className="h-10 w-10 sm:h-14 sm:w-14 stroke-[1.5] text-white" />
+              <div className="flex items-center justify-center h-12 w-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 group-hover:bg-white group-hover:text-stone-900 text-white shadow-md">
+                <ArrowUpRight className="h-6 w-6 stroke-[2]" />
               </div>
+            </div>
+          </a>
+
+          {/* Bottom Left: Upcoming Projects */}
+          <a
+            href="/projects/upcoming"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#f08a8a] to-[#c95353] p-8 sm:p-10 lg:p-12 text-white min-h-[260px] sm:min-h-[320px] lg:min-h-[360px] flex flex-col justify-between shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1.5 border border-white/10"
+          >
+            <UpcomingProjectsIcon strokeWidth={1} className="absolute -bottom-8 -right-8 h-48 w-48 sm:h-64 sm:w-64 lg:h-80 lg:w-80 text-white/10 transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-6" />
+            
+            <div className="flex items-center z-10">
+              <div className="flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-white/20 backdrop-blur-md shadow-inner border border-white/30 transition-transform duration-500 group-hover:scale-105">
+                <UpcomingProjectsIcon strokeWidth={1.8} className="h-7 w-7 sm:h-9 sm:w-9 text-white" />
+              </div>
+            </div>
+
+            <div className="z-10 mt-8 sm:mt-12 flex items-end justify-between">
               <div>
-                <h3 className="font-display text-lg sm:text-2xl font-bold tracking-wide text-white leading-tight">
-                  Upcoming<br />Projects
+                <h3 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-white leading-[1.08]">
+                  Upcoming <span className="font-bold block">Projects</span>
                 </h3>
               </div>
-            </a>
-
-            {/* Bottom Right: Other Services */}
-            <a
-              href="/other-services"
-              className="flex flex-col justify-between p-6 sm:p-8 bg-[#52b7b5] text-white aspect-[16/10] rounded-xl shadow-sm transition-transform duration-300 hover:scale-[1.02]"
-            >
-              <div>
-                <Zap className="h-10 w-10 sm:h-14 sm:w-14 stroke-[1.5] text-white" />
+              <div className="flex items-center justify-center h-12 w-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 group-hover:bg-white group-hover:text-stone-900 text-white shadow-md">
+                <ArrowUpRight className="h-6 w-6 stroke-[2]" />
               </div>
+            </div>
+          </a>
+
+          {/* Bottom Right: Other Services */}
+          <a
+            href="/other-services"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#52b7b5] to-[#2c8381] p-8 sm:p-10 lg:p-12 text-white min-h-[260px] sm:min-h-[320px] lg:min-h-[360px] flex flex-col justify-between shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1.5 border border-white/10"
+          >
+            <OtherServicesIcon strokeWidth={1} className="absolute -bottom-8 -right-8 h-48 w-48 sm:h-64 sm:w-64 lg:h-80 lg:w-80 text-white/10 transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-6" />
+            
+            <div className="flex items-center z-10">
+              <div className="flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-white/20 backdrop-blur-md shadow-inner border border-white/30 transition-transform duration-500 group-hover:scale-105">
+                <OtherServicesIcon strokeWidth={1.8} className="h-7 w-7 sm:h-9 sm:w-9 text-white" />
+              </div>
+            </div>
+
+            <div className="z-10 mt-8 sm:mt-12 flex items-end justify-between">
               <div>
-                <h3 className="font-display text-lg sm:text-2xl font-bold tracking-wide text-white leading-tight">
-                  Other<br />Services
+                <h3 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-white leading-[1.08]">
+                  Other <span className="font-bold block">Services</span>
                 </h3>
               </div>
-            </a>
+              <div className="flex items-center justify-center h-12 w-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 group-hover:bg-white group-hover:text-stone-900 text-white shadow-md">
+                <ArrowUpRight className="h-6 w-6 stroke-[2]" />
+              </div>
+            </div>
+          </a>
 
-          </div>
         </div>
       </section>
 
@@ -472,8 +602,8 @@ export default function Home({ onSplashEnd }) {
           >
             <div className="relative overflow-hidden rounded-[1.75rem] border border-white/60 shadow-[0_28px_60px_-20px_rgba(0,0,0,0.12)]">
               <img
-                src={homeAboutImg}
-                alt="A Rechi Construction residential development"
+                src={santiBhawan}
+                alt="Santi Bhawan - Rechi Construction"
                 className="h-[420px] w-full object-cover sm:h-[480px]"
               />
             </div>

@@ -9,7 +9,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 
 import rechiLogo from "../assets/rechi_logo.png";
 
@@ -193,54 +193,7 @@ const fadeUp = {
 // PROJECT CARD
 // ============================================================
 
-function ProjectCard({ project, index }) {
-  const image = projectImages[project.slug];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.08,
-      }}
-      className="group"
-    >
-      <Link
-        to={`/project?id=${project.id}&from=${project.category_id}`}
-        className="block"
-      >
-        <div className="relative overflow-hidden rounded-2xl bg-neutral-900">
-          {image ? (
-            <img
-              src={image}
-              alt={project.title}
-              className="h-[280px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          ) : (
-            <div className="flex h-[280px] items-center justify-center bg-neutral-800 text-white/50">
-              No image available
-            </div>
-          )}
-
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/60 to-transparent p-6 pt-20">
-            <h3 className="text-xl font-semibold text-white">
-              {project.title}
-            </h3>
-
-            {project.location && (
-              <p className="mt-1 text-sm text-white/70">
-                {project.location}
-              </p>
-            )}
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
-
+function ProjectCard({ project, index }) { const location = useLocation(); const image = projectImages[project.slug]; return ( <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.08, }} className="group" > <Link to={`/project?id=${project.id}`} state={{ from: location.pathname, scrollY: window.scrollY, }} className="block" > <div className="relative overflow-hidden rounded-2xl bg-neutral-900"> {image ? ( <img src={image} alt={project.title} className="h-[280px] w-full object-cover transition-transform duration-700 group-hover:scale-105" /> ) : ( <div className="flex h-[280px] items-center justify-center bg-neutral-800 text-white/50"> No image available </div> )} <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/60 to-transparent p-6 pt-20"> <h3 className="text-xl font-semibold text-white"> {project.title} </h3> {project.location && ( <p className="mt-1 text-sm text-white/70"> {project.location} </p> )} </div> </div> </Link> </motion.div> ); }
 
 // ============================================================
 // HOME

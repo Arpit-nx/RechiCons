@@ -1,6 +1,11 @@
 
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 import Navbar from "./component/nav_bar.jsx";
 import Footer from "./component/footer.jsx";
@@ -18,23 +23,39 @@ import UpcomingProjects from "./pages/UpcomingProjects.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Admin from "./pages/adminLogin.jsx";
+
 function AppContent() {
   const location = useLocation();
+
   const isHomePage = location.pathname === "/";
+
   const [showNav, setShowNav] = useState(!isHomePage);
 
-  // Scroll to top automatically on route changes
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
+    const restoreScrollY = location.state?.restoreScrollY;
+
+    if (typeof restoreScrollY === "number") {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          window.scrollTo({
+            top: restoreScrollY,
+            left: 0,
+            behavior: "instant",
+          });
+        });
+      });
+    } else {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant",
+      });
+    }
 
     if (!isHomePage) {
       setShowNav(true);
     }
-  }, [location.pathname, isHomePage]);
+  }, [location.key, isHomePage]);
 
   const handleSplashEnd = () => {
     setShowNav(true);
@@ -48,91 +69,68 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-[#fff8ef]">
-
-      {/* =========================
-          NAVBAR
-      ========================== */}
       <Navbar isVisible={showNav} />
 
-      {/* =========================
-          PAGE CONTENT
-      ========================== */}
       <main>
         <Routes>
-
-          {/* Home */}
           <Route
             path="/"
             element={<Home onSplashEnd={handleSplashEnd} />}
           />
 
-          {/* About */}
           <Route
             path="/about"
             element={<About />}
           />
 
-          {/* =========================
-              PROJECT CATEGORIES
-          ========================== */}
-
-          {/* Completed Projects */}
           <Route
             path="/projects/completed"
             element={<CompletedProjects />}
           />
 
-          {/* Ongoing Projects */}
           <Route
             path="/projects/ongoing"
             element={<OngoingProjects />}
           />
 
-          {/* Upcoming Projects */}
           <Route
             path="/projects/upcoming"
             element={<UpcomingProjects />}
           />
 
-          {/* Individual Project */}
           <Route
             path="/project"
             element={<ProjectPage />}
           />
 
-          {/* Other Services */}
           <Route
             path="/other-services"
             element={<OtherServices />}
           />
 
-          {/* Enquiry */}
           <Route
             path="/enquire"
             element={<Enquiry />}
           />
 
-          {/* Contact Us */}
           <Route
             path="/contact"
             element={<Contect />}
           />
-          {/* Admin */}
+
           <Route
             path="/admin"
             element={<Admin />}
           />
 
-          <Route path="*" element={<NotFound />} />
-
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
         </Routes>
       </main>
 
-      {/* =========================
-          FOOTER
-      ========================== */}
       <Footer />
-
     </div>
   );
 }

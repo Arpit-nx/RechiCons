@@ -1,17 +1,42 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 import { projectImages } from "../data/projectImages";
 
 export default function ProjectCard({ project, index }) {
+  const location = useLocation();
 
   // Get image from frontend using backend project slug
   const image = projectImages[project.slug];
 
+  /*
+   * Save the exact page and scroll position
+   * from which the user opened the project.
+   */
+  const handleProjectClick = () => {
+    sessionStorage.setItem(
+      "projectNavigation",
+      JSON.stringify({
+        from: location.pathname,
+        scrollY: window.scrollY,
+      })
+    );
+
+    console.log("Project navigation saved:", {
+      from: location.pathname,
+      scrollY: window.scrollY,
+    });
+  };
+
   return (
     <Link
-      to={`/project?id=${project.id}&from=${project.category_id}`}
+      to={`/project?id=${project.id}`}
+      state={{
+        from: location.pathname,
+        scrollY: window.scrollY,
+      }}
+      onClick={handleProjectClick}
       className="
         group
         relative

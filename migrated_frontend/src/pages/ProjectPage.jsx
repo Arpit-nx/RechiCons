@@ -1,6 +1,10 @@
 
 import { useEffect, useState } from "react";
-import {Link, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 
 import ProjectHeader from "../component/project_template_code/ProjectHeader.jsx";
 import OverviewSection from "../component/project_template_code/OverviewSection.jsx";
@@ -14,9 +18,21 @@ import { projectImages } from "../data/projectImages";
 
 export default function ProjectPage() {
   const [searchParams] = useSearchParams();
+  const location = useLocation();
 
   const projectId = searchParams.get("id");
-  const fromCategory = searchParams.get("from");
+
+  /*
+   * Store the page from which the user opened the project
+   * and the exact scroll position on that page.
+   */
+  const previousPath =
+    location.state?.from || "/";
+
+  const previousScrollY =
+    typeof location.state?.scrollY === "number"
+      ? location.state.scrollY
+      : 0;
 
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -54,10 +70,6 @@ export default function ProjectPage() {
     fetchProject();
   }, [projectId]);
 
-  /* ================================
-     LOADING
-  ================================= */
-
   if (loading) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-[#fbf8f3]">
@@ -67,10 +79,6 @@ export default function ProjectPage() {
       </main>
     );
   }
-
-  /* ================================
-     ERROR
-  ================================= */
 
   if (error) {
     return (
@@ -82,10 +90,6 @@ export default function ProjectPage() {
     );
   }
 
-  /* ================================
-     PROJECT NOT FOUND
-  ================================= */
-
   if (!project) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-[#fbf8f3]">
@@ -96,104 +100,76 @@ export default function ProjectPage() {
     );
   }
 
-  /* ================================
-     FRONTEND IMAGE
-  ================================= */
-
   const mainImage = projectImages[project.slug];
 
-  /* ================================
-     BACKEND CONTENT
-  ================================= */
+  const header = project.header || {};
+  const overview = project.overview || {};
+  const details = project.details || {};
+  const mediaGallery = project.mediaGallery || {};
 
- const header = project.header || {};
-
-const overview = project.overview || {};
-
-const details = project.details || {};
-
-const mediaGallery = project.mediaGallery || {};
-
-const detailContent = Array.isArray(details.content)
-  ? details.content.map((item) => item.text).filter(Boolean)
-  : [];
-
-const backPage =
-  fromCategory === "3"
-    ? {
-        label: "Back to Completed Projects",
-        path: "/projects/completed",
-      }
-    : fromCategory === "4"
-      ? {
-          label: "Back to Ongoing Projects",
-          path: "/projects/ongoing",
-        }
-      : fromCategory === "5"
-        ? {
-            label: "Back to Upcoming Projects",
-            path: "/projects/upcoming",
-          }
-        : {
-            label: "Back to Projects",
-            path: "/projects/completed",
-          };
+  const detailContent = Array.isArray(details.content)
+    ? details.content
+        .map((item) => item.text)
+        .filter(Boolean)
+    : [];
 
   return (
     <main className="w-full min-h-screen bg-[#fbf8f3] text-gray-900 font-sans">
-      
-  <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-  <Link
-    to={backPage.path}
-    aria-label={backPage.label}
-    className="group inline-block text-gray-500 transition-colors duration-300 hover:text-yellow-500"
-  >
-    <span className="inline-block text-lg transition-transform duration-300 mt-15 group-hover:-translate-x-1 sm:text-xl md:text-2xl">
-      ←
-    </span>
-  </Link>
-</div>
 
-      {/* =====================================
-          HEADER
-      ====================================== */}
+      {/* ================================
+          BACK BUTTON
+      ================================= */}
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Link
+          to={previousPath}
+          state={{
+            restoreScrollY: previousScrollY,
+          }}
+          aria-label="Back"
+          className="group inline-block text-gray-500 transition-colors duration-300 hover:text-yellow-500"
+        >
+          <span className="mt-15 inline-block text-lg transition-transform duration-300 group-hover:-translate-x-1 sm:text-xl md:text-2xl">
+            ←
+          </span>
+        </Link>
+      </div>
 
+      {/* ================================
+          PROJECT HEADER
+      ================================= */}
       <ProjectHeader
         title={header.title}
       />
 
-      {/* =====================================
-          OVERVIEW
-      ====================================== */}
-
+      {/* ================================
+          PROJECT OVERVIEW
+      ================================= */}
       <OverviewSection
         mainImage={mainImage}
         developer={overview.developer}
         location={overview.location}
       />
 
-      {/* =====================================
-          DETAILS
-      ====================================== */}
-
+      {/* ================================
+          PROJECT DETAILS
+      ================================= */}
       <ProjectDetailsSection
         title={details.title}
         paragraphs={detailContent}
       />
 
-      {/* =====================================
+      {/* ================================
           MEDIA GALLERY
-      ====================================== */}
-
+      ================================= */}
       <MediaGallerySection
-  projectView={{
-    title: "Project View",
-    images: [
-      mainImage,
-      ...(mediaGallery.projectView || []),
-    ].filter(Boolean),
-  }}
-/>
+        projectView={{
+          title: "Project View",
+          images: [
+            mainImage,
+            ...(mediaGallery.projectView || []),
+          ].filter(Boolean),
+        }}
+      />
 
     </main>
   );

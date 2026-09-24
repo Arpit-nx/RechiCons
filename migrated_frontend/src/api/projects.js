@@ -12,3 +12,9 @@ export const getProjects = async () => {
 
   return response.data;
 };
+
+export const getServices = async () => {
+  const response = await api.get("/services");
+
+  return response.data;
+}

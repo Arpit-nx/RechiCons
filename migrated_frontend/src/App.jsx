@@ -23,6 +23,7 @@ import UpcomingProjects from "./pages/UpcomingProjects.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Admin from "./pages/adminLogin.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -127,6 +128,9 @@ function AppContent() {
             path="*"
             element={<NotFound />}
           />
+          <Route
+          path="/privacy-policy"
+          element={<PrivacyPolicy />}/>
         </Routes>
       </main>
 

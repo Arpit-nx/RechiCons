@@ -368,12 +368,6 @@ export const aboutData = {
       "Our core values represent the key principles upheld by each member of the entire organization. The values have been inculcated in our day-to-day business policies, our approach towards our clients and the way we work and co-ordinate with our fellow employees. Our Core Values is considered to be a guidebook for our employees and helps maintain the standards set by the company in the conduction of its daily operations. With the view to massive construction activity and prompt support of our clients demand we have a unit also name It ",
     unitName: "RECHI NIRMAAN PVT. LTD.",
   },
-  coreValuesDuplicate:
-    "Our core values represent the key principles upheld by each member of the entire organization. The values have been inculcated in our day-to-day business policies, our approach towards our clients and the way we work and co-ordinate with our fellow employees. Our Core Values is considered to be a guidebook for our employees and helps maintain the standards set by the company in the conduction of its daily operations. With the view to massive construction activity and prompt support of our clients demand we have a unit also name It RECHI NIRMAAN PVT. LTD.",
-  cta: {
-    label: "OUR PROJECTS",
-    href: "/projects",
-  },
 };
 
 export const contactData = {
@@ -451,14 +445,7 @@ export const servicesData = [
       "Assistance in legal matters related to land and property",
       "Assistance in Home Loan sanctioning",
     ],
-  },
-  {
-    id: 2,
-    title: "Testing 1",
-    imageAlt: "Testing service",
-    paragraphs: ["Testing service......"],
-    bulletPoints: [],
-  },
+  }
 ];
 
 // Add these exports to your existing projectfile.js

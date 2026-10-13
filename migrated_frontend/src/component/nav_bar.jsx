@@ -178,19 +178,6 @@ export default function Navbar({ isVisible = true }) {
             </span>
           </div>
 
-          {/* Ongoing Projects */}
-          <Link
-            to="/projects/ongoing"
-            onClick={() => setIsOpen(false)}
-            className={`block px-5 py-3.5 text-sm font-medium transition-all ${
-              location.pathname === "/projects/ongoing"
-                ? "bg-white/10 text-[#c9a227]"
-                : "text-white/80 hover:bg-white/5 hover:text-[#c9a227]"
-            }`}
-          >
-            Ongoing Projects
-          </Link>
-
           {/* Completed Projects */}
           <Link
             to="/projects/completed"
@@ -202,6 +189,19 @@ export default function Navbar({ isVisible = true }) {
             }`}
           >
             Completed Projects
+          </Link>
+          
+          {/* Ongoing Projects */}
+          <Link
+            to="/projects/ongoing"
+            onClick={() => setIsOpen(false)}
+            className={`block px-5 py-3.5 text-sm font-medium transition-all ${
+              location.pathname === "/projects/ongoing"
+                ? "bg-white/10 text-[#c9a227]"
+                : "text-white/80 hover:bg-white/5 hover:text-[#c9a227]"
+            }`}
+          >
+            Ongoing Projects
           </Link>
 
           {/* Upcoming Projects */}

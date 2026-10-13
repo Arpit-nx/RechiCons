@@ -157,13 +157,6 @@ export default function About() {
             viewport={{ once: true }}
             variants={fadeUp}
           >
-            <a
-              href={aboutData.cta.href}
-              className="inline-flex items-center gap-1.5 bg-[#f5a623] hover:bg-[#e09415] px-5 py-2.5 text-[12px] font-bold uppercase tracking-wide text-gray-900 transition-colors rounded-sm"
-            >
-              {aboutData.cta.label}
-              <ArrowRight className="h-3.5 w-3.5" />
-            </a>
           </motion.div>
         </section>
 

@@ -413,7 +413,7 @@ export const contactData = {
       iconKey: "Clock",
       title: "Working Hours",
       details: [
-        "Monday – Saturday: 10:00 AM – 7:30 PM",
+        "Monday – Saturday: 10:00 AM – 6:00 PM",
         "Sunday: By Appointment",
       ],
       linkText: null,

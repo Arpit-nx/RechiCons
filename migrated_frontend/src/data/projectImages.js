@@ -14,7 +14,7 @@ import anandiVilla2 from "../assets/project-imgs/anandivilla2main.jpg";
 import santiBhawan from "../assets/project-imgs/santibhawanmain.jpg";
 import orchidview from "../assets/project-imgs/Orchid_view_front.jpg.jpeg";
 import orchidvalley from "../assets/project-imgs/Orchid_valley_front.jpg.jpeg";
-import jayaApartments from "../assets/project-imgs/jaya_Apartment_front_view.avif";
+import jayaApartments from "../assets/project-imgs/Jaya_Apartment_front_view.avif";
 
 /*
 |--------------------------------------------------------------------------

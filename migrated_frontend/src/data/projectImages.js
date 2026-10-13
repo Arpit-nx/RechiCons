@@ -12,6 +12,8 @@ import anandiView from "../assets/project-imgs/anandiviewmain.jpg";
 import anandiVilla from "../assets/project-imgs/anandivillamain.jpg";
 import anandiVilla2 from "../assets/project-imgs/anandivilla2main.jpg";
 import santiBhawan from "../assets/project-imgs/santibhawanmain.jpg";
+import orchidview from "../assets/project-imgs/Orchid_view_front.jpg";
+import orchidvalley from "../assets/project-imgs/Orchid_valley_front.jpg";
 
 /*
 |--------------------------------------------------------------------------
@@ -55,5 +57,9 @@ export const projectImages = {
   "anandi-villa-phase-2": anandiVilla2,
 
   "santi-bhawan": santiBhawan,
+
+  "orchid-view": orchidview,
+
+  "orchid-valley": orchidvalley
 };
 

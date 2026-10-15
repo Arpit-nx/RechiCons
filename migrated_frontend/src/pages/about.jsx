@@ -1,6 +1,6 @@
+
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { aboutData } from "./data/projectfile.js";
 
 const ease = [0.16, 1, 0.3, 1];
@@ -14,99 +14,94 @@ const fadeUp = {
   }),
 };
 
+const animationProps = (index = 0) => ({
+  initial: "hidden",
+  whileInView: "show",
+  viewport: { once: true },
+  variants: fadeUp,
+  custom: index,
+});
+
+const paragraphClass = "text-[15px] leading-[1.7] text-gray-800";
+const headingClass = "text-[22px] font-bold leading-tight text-gray-900 mb-4";
+const sectionClass = "mb-8";
+
 export default function About() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  return (
-    <div className="min-h-screen bg-[#fff8ef] text-gray-900 overflow-x-hidden">
-      
-      {/* Spacer for fixed navbar */}
-      <div style={{ height: "160px" }}></div>
+  const first = aboutData.introParagraphs[0];
+  const second = aboutData.introParagraphs[1];
 
-      <div className="mx-auto max-w-5xl px-6 sm:px-8 pb-20">
-        
-        {/* Header - About Us centered like "GET IN TOUCH" */}
-        <section className="pb-8 text-center">
+  return (
+    <div className="min-h-screen overflow-x-hidden bg-[#fff8ef] text-gray-900">
+      {/* Fixed navbar spacing */}
+      <div className="h-40" />
+
+      <main className="mx-auto max-w-5xl px-6 pb-20 sm:px-8">
+        {/* Header */}
+        <header className="mb-8 text-center">
           <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={0}
-            className="flex items-center justify-center gap-4 mb-4"
+            {...animationProps(0)}
+            className="mb-4 flex items-center justify-center gap-4"
           >
-            <span className="h-[1px] w-12 sm:w-16 bg-amber-600/70"></span>
-            <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.25em] uppercase text-amber-600">
+            <span className="h-px w-12 bg-amber-600/70 sm:w-16" />
+            <span className="text-[13px] font-semibold uppercase tracking-[0.25em] text-amber-600 sm:text-sm">
               {aboutData.header.badge}
             </span>
-            <span className="h-[1px] w-12 sm:w-16 bg-amber-600/70"></span>
+            <span className="h-px w-12 bg-amber-600/70 sm:w-16" />
           </motion.div>
 
           <motion.h1
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={1}
-            className="text-[28px] sm:text-[32px] font-bold leading-tight text-gray-900"
+            {...animationProps(1)}
+            className="text-[28px] font-bold leading-tight text-gray-900 sm:text-[32px]"
           >
             {aboutData.header.title}
           </motion.h1>
-        </section>
+        </header>
 
-        {/* Intro Paragraphs */}
-        <section className="pb-8 space-y-5">
-          <motion.p
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={0}
-            className="text-[15px] leading-[1.7] text-gray-800"
-          >
-            <strong className="font-bold">{aboutData.introParagraphs[0].company}</strong>
-            {aboutData.introParagraphs[0].textBeforeDirector}
-            {aboutData.introParagraphs[0].director}
-            {aboutData.introParagraphs[0].textAfterDirector}
-            <span className="font-bold underline underline-offset-2">
-              {aboutData.introParagraphs[0].highlight}
-            </span>
-          </motion.p>
+        
+{/* Introduction */}
+<section className="mb-8 space-y-5">
+  <motion.p
+    {...animationProps(0)}
+    className="text-[15px] leading-[1.7] text-gray-800"
+  >
+    <strong className="font-bold">{first.company}</strong>{" "}
+    {first.textBeforeDirector}
+    {first.director}
+    {first.textAfterDirector}{" "}
+    <span className="font-bold underline underline-offset-2">
+      {first.highlight}
+    </span>
+  </motion.p>
 
-          <motion.p
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={1}
-            className="text-[15px] leading-[1.7] text-gray-800"
-          >
-            <strong className="font-bold">{aboutData.introParagraphs[1].company}</strong>
-            {aboutData.introParagraphs[1].text}
-          </motion.p>
-        </section>
+  <motion.p
+    {...animationProps(1)}
+    className="text-[15px] leading-[1.7] text-gray-800"
+  >
+    <strong className="font-bold">{second.company}</strong>{" "}
+    {second.text}
+  </motion.p>
+</section>
+
 
         {/* Mission & Vision */}
-        <section className="py-4">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={0}
-          >
-            <h2 className="text-[22px] font-bold text-gray-900 mb-4">
+        <section className={sectionClass}>
+          <motion.div {...animationProps(0)}>
+            <h2 className={headingClass}>
               {aboutData.missionVision.title}
             </h2>
 
-            <p className="text-[15px] leading-[1.7] text-gray-800 mb-5">
-              <strong className="font-bold">{aboutData.missionVision.company}</strong>
+            <p className={`${paragraphClass} mb-5`}>
+              <strong className="font-bold">
+                {aboutData.missionVision.company}
+              </strong>{" "}
               {aboutData.missionVision.description}
             </p>
 
-            <ul className="space-y-2.5 text-[15px] leading-[1.65] text-gray-800">
+            <ul className="space-y-2.5 text-[15px] leading-[1.7] text-gray-800">
               {aboutData.missionVision.points.map((point, index) => (
                 <li key={index}>{point}</li>
               ))}
@@ -115,20 +110,14 @@ export default function About() {
         </section>
 
         {/* Core Values */}
-        <section className="py-6">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={1}
-          >
-            <h2 className="text-[22px] font-bold text-gray-900 mb-4">
+        <section className={sectionClass}>
+          <motion.div {...animationProps(1)}>
+            <h2 className={headingClass}>
               {aboutData.coreValues.title}
             </h2>
 
-            <p className="text-[15px] leading-[1.7] text-gray-800">
-              {aboutData.coreValues.textBeforeUnit}
+            <p className={paragraphClass}>
+              {aboutData.coreValues.textBeforeUnit}{" "}
               <span className="font-bold underline underline-offset-2">
                 {aboutData.coreValues.unitName}
               </span>
@@ -136,31 +125,16 @@ export default function About() {
           </motion.div>
         </section>
 
-        {/* Duplicated Core Values */}
-        <section className="pt-2 pb-2">
+        {/* Additional Content */}
+        <section className={sectionClass}>
           <motion.p
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-[15px] leading-[1.7] text-gray-800"
+            {...animationProps(0)}
+            className={paragraphClass}
           >
             {aboutData.coreValuesDuplicate}
           </motion.p>
         </section>
-
-        {/* CTA */}
-        <section className="pt-6">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-          </motion.div>
-        </section>
-
-      </div>
+      </main>
     </div>
   );
 }

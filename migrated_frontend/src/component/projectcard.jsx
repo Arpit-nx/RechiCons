@@ -10,6 +10,10 @@ export default function ProjectCard({ project, index }) {
   // Get image from frontend using backend project slug
   const image = projectImages[project.slug];
 
+
+console.log("Project title:", project.title);
+console.log("Project slug:", project.slug);
+console.log("Matched image:", image);
   /*
    * Save the exact page and scroll position
    * from which the user opened the project.

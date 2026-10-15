@@ -168,7 +168,7 @@ export default function AdminDialog({
 
             <button
               type="button"
-              onClick={onClose}
+               onClick={() => navigate("/")}
               disabled={loading}
               className="rounded-md p-1 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
             >

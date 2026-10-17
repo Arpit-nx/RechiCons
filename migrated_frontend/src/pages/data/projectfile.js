@@ -360,6 +360,7 @@ export const aboutData = {
       "Honesty towards our clients and community through Ethical and professional service",
       "Performance to meet expectations of our stakeholders",
       "Discipline to be punctual each time and every time",
+      'Committed to Quality, Committed to You.',
     ],
   },
   coreValues: {

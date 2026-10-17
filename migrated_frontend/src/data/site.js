@@ -22,6 +22,7 @@ export const about = {
     'To become the most trusted residential builder in Eastern India.',
     'To set new standards for quality and transparency in real estate.',
     'To create communities, not just addresses.',
+    'Committed to Quality, Committed to you.',
   ],
   coreValues: 'Integrity in materials and methodology. Transparency in dealings. Quality without compromise. Community beyond transaction.',
 }
